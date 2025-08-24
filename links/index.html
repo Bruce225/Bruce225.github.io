@@ -13,7 +13,15 @@
     
 
     
-        <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in "/>
+        <meta name="description" content=".links-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.link-item {
+ "/>
     
 
     <!--Author-->
@@ -23,12 +31,20 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Hello World"/>
+        <meta property="og:title" content="links"/>
     
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in "/>
+        <meta property="og:description" content=".links-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.link-item {
+ "/>
     
 
     <!--Open Graph Site Name-->
@@ -55,7 +71,7 @@
 
     <!-- Title -->
     
-    <title>Hello World - Actinium&#39;s Blog</title>
+    <title>links - Actinium&#39;s Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -167,7 +183,11 @@
 </nav>
 
     <!-- Main Content -->
-    <!-- Page Header -->
+    
+
+
+    <section class="main">
+        <!-- Page Header -->
 <!-- Set your background image for this header in your post front-matter: cover -->
 
 <header class="intro-header" style="background-image: url('/img/vista2.jpg')">
@@ -175,13 +195,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>Hello World</h1>
+                    <h1>links</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
                         
-                            2025-08-22
+                            2025-08-24
                         
                     </span>
                 </div>
@@ -203,20 +223,97 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+                <style>
+.links-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+.link-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+.link-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+.link-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 8px;
+}
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+.link-card:hover {
+  background-color: #f5f5f5;
+}
 
+.link-icon img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.link-info h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.link-info p {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* 增加响应式设计 */
+@media (max-width: 768px) {
+  .links-container {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<div class="links-container">
+  <div class="link-item">
+    <a href="https://www.tongji.edu.cn" target="_blank" class="link-card">
+      <div class="link-icon">
+        <img src="/images/tongji.png" alt="Tongji University" />
+      </div>
+      <div class="link-info">
+        <h3>Tongji University</h3>
+        <p>同济大学</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="links-container">
+  <div class="link-item">
+    <a href="https://www.ucla.edu" target="_blank" class="link-card">
+      <div class="link-icon">
+        <img src="/images/UCLA.png" alt="UCLA" />
+      </div>
+      <div class="link-info">
+        <h3>University of California, Los Angeles</h3>
+        <p>同济大学</p>
+      </div>
+    </a>
+  </div>
+</div>
 
                 
             </div>
@@ -232,6 +329,12 @@
         </div>
     </div>
 </article>
+    </section>
+
+
+
+
+
 
     <!-- Footer -->
     <hr />
