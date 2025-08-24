@@ -274,6 +274,161 @@
 
 
 
-</body>
+<!-- hexo injector body_end start -->
+<script>
+window.addEventListener("DOMContentLoaded", function () {
+  const audio = document.createElement("audio");
+  audio.src = "/music/music1.mp3";
+  audio.loop = true;
+
+  const container = document.createElement("div");
+  container.style.position = "fixed";
+  container.style.top = "20px";
+  container.style.right = "20px";
+  container.style.display = "flex";
+  container.style.flexDirection = "column";
+  container.style.alignItems = "center";
+  container.style.zIndex = "9999";
+  container.style.userSelect = "none";
+
+  const btn = document.createElement("button");
+  btn.innerHTML = "▶";
+  btn.style.width = "60px";
+  btn.style.height = "60px";
+  btn.style.borderRadius = "50%";
+  btn.style.border = "1px solid rgba(255, 255, 255, 0.4)";
+  btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(150,180,255,0.4))";
+  btn.style.color = "white";
+  btn.style.fontSize = "28px";
+  btn.style.fontWeight = "bold";
+  btn.style.cursor = "pointer";
+  btn.style.boxShadow = "0 6px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(255,255,255,0.7)";
+  btn.style.backdropFilter = "blur(10px)";
+  btn.style.webkitBackdropFilter = "blur(10px)";
+  btn.style.textShadow = "0 1px 2px rgba(0,0,0,0.7)";
+  btn.style.transition = "all 0.3s ease";
+  btn.style.marginBottom = "10px";
+
+  const label = document.createElement("div");
+  label.innerText = "点击播放测试音乐";
+  label.style.padding = "10px 20px";
+  label.style.borderRadius = "20px";
+  label.style.background = "rgba(200,220,255,0.25)";
+  label.style.color = "white";
+  label.style.fontSize = "16px";
+  label.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2), inset 0 1px 3px rgba(255,255,255,0.6)";
+  label.style.backdropFilter = "blur(8px)";
+  label.style.webkitBackdropFilter = "blur(8px)";
+  label.style.textShadow = "0 1px 2px rgba(0,0,0,0.6)";
+  label.style.transition = "all 0.3s ease";
+  label.style.width = "200px";
+  label.style.textAlign = "center";
+  label.style.cursor = "move";
+
+  const progressContainer = document.createElement("div");
+  progressContainer.style.width = "220px";
+  progressContainer.style.height = "8px";
+  progressContainer.style.borderRadius = "4px";
+  progressContainer.style.background = "rgba(255,255,255,0.2)";
+  progressContainer.style.marginTop = "8px";
+  progressContainer.style.overflow = "hidden";
+  progressContainer.style.backdropFilter = "blur(6px)";
+  progressContainer.style.webkitBackdropFilter = "blur(6px)";
+  progressContainer.style.cursor = "pointer";
+
+  const progressBar = document.createElement("div");
+  progressBar.style.width = "0%";
+  progressBar.style.height = "100%";
+  progressBar.style.background = "linear-gradient(to right, rgba(100,150,255,0.7), rgba(150,200,255,0.8))";
+  progressBar.style.transition = "width 0.1s linear, box-shadow 0.5s ease-in-out";
+  progressContainer.appendChild(progressBar);
+
+  container.appendChild(btn);
+  container.appendChild(label);
+  container.appendChild(progressContainer);
+  document.body.appendChild(container);
+
+  // 按钮悬停
+  btn.onmouseover = () => {
+    btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(120,160,255,0.5))";
+    btn.style.boxShadow = "0 8px 18px rgba(0,0,0,0.4), inset 0 2px 6px rgba(255,255,255,0.8)";
+    btn.style.transform = "translateY(-2px)";
+    label.style.boxShadow = "0 4px 16px rgba(100,150,255,0.6), 0 0 12px rgba(100,150,255,0.8)";
+    label.style.textShadow = "0 0 6px rgba(255,255,255,0.8)";
+  };
+  btn.onmouseout = () => {
+    btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(150,180,255,0.4))";
+    btn.style.boxShadow = "0 6px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(255,255,255,0.7)";
+    btn.style.transform = "translateY(0)";
+    label.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2), inset 0 1px 3px rgba(255,255,255,0.6)";
+    label.style.textShadow = "0 1px 2px rgba(0,0,0,0.6)";
+  };
+
+  let isPlaying = false;
+  btn.addEventListener("click", () => {
+    if (!isPlaying) {
+      audio.play().then(() => {
+        isPlaying = true;
+        btn.innerHTML = "⏸";
+        label.innerText = "Now Playing";
+      });
+    } else {
+      audio.pause();
+      isPlaying = false;
+      btn.innerHTML = "▶";
+      label.innerText = "点击播放测试音乐";
+    }
+  });
+
+  // 播放进度 + 脉冲光
+  function updateProgress() {
+    if(audio.duration && !isNaN(audio.duration)) {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = percent + "%";
+      progressBar.style.boxShadow = isPlaying ? "0 0 8px rgba(100,150,255,0.8), 0 0 16px rgba(100,150,255,0.5)" : "none";
+    }
+    requestAnimationFrame(updateProgress);
+  }
+  updateProgress();
+
+  // 点击进度条跳转
+  progressContainer.addEventListener("click", (e) => {
+    if(!audio.duration || isNaN(audio.duration)) return;
+    const rect = progressContainer.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const ratio = clickX / rect.width;
+    audio.currentTime = ratio * audio.duration;
+    if(!isPlaying) audio.play().then(() => {
+      isPlaying = true;
+      btn.innerHTML = "⏸";
+      label.innerText = "Now Playing";
+    });
+  });
+
+  // 拖拽（仅文字条）
+  let isDragging = false, offsetX, offsetY;
+  label.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - container.getBoundingClientRect().left;
+    offsetY = e.clientY - container.getBoundingClientRect().top;
+    container.style.transition = "none";
+  });
+  document.addEventListener("mousemove", (e) => {
+    if (isDragging) {
+      container.style.left = (e.clientX - offsetX) + "px";
+      container.style.top = (e.clientY - offsetY) + "px";
+      container.style.right = "auto";
+    }
+  });
+  document.addEventListener("mouseup", () => {
+    if (isDragging) {
+      isDragging = false;
+      container.style.transition = "all 0.3s ease";
+    }
+  });
+
+});
+</script>
+<!-- hexo injector body_end end --></body>
 
 </html>
