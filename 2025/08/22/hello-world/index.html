@@ -288,6 +288,7 @@
 
 
 <!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   // 创建 audio
@@ -295,18 +296,19 @@ window.addEventListener("DOMContentLoaded", function () {
   audio.src = "/music/music1.mp3";
   audio.loop = true;
 
-  // 创建容器
+  // 播放器容器
   const container = document.createElement("div");
   container.style.position = "fixed";
-  container.style.top = "20px";
+  container.style.top = "75px";
   container.style.right = "20px";
   container.style.display = "flex";
   container.style.flexDirection = "column";
   container.style.alignItems = "center";
   container.style.zIndex = "9999";
   container.style.userSelect = "none";
+  document.body.appendChild(container);
 
-  // 播放按钮
+  // ============ Vista Aero 风格按钮 ============
   const btn = document.createElement("button");
   btn.innerHTML = "▶";
   btn.style.width = "60px";
@@ -324,8 +326,9 @@ window.addEventListener("DOMContentLoaded", function () {
   btn.style.textShadow = "0 1px 2px rgba(0,0,0,0.7)";
   btn.style.transition = "all 0.3s ease";
   btn.style.marginBottom = "10px";
+  container.appendChild(btn);
 
-  // 文字条（拖拽区域）
+  // 文字条（拖拽区）
   const label = document.createElement("div");
   label.innerText = "点击播放测试音乐";
   label.style.padding = "10px 20px";
@@ -341,6 +344,7 @@ window.addEventListener("DOMContentLoaded", function () {
   label.style.width = "200px";
   label.style.textAlign = "center";
   label.style.cursor = "move";
+  container.appendChild(label);
 
   // 进度条
   const progressContainer = document.createElement("div");
@@ -360,12 +364,7 @@ window.addEventListener("DOMContentLoaded", function () {
   progressBar.style.background = "linear-gradient(to right, rgba(100,150,255,0.7), rgba(150,200,255,0.8))";
   progressBar.style.transition = "width 0.1s linear, box-shadow 0.5s ease-in-out";
   progressContainer.appendChild(progressBar);
-
-  // 挂载
-  container.appendChild(btn);
-  container.appendChild(label);
   container.appendChild(progressContainer);
-  document.body.appendChild(container);
 
   // 悬停效果
   btn.onmouseover = () => {
@@ -383,7 +382,8 @@ window.addEventListener("DOMContentLoaded", function () {
     label.style.textShadow = "0 1px 2px rgba(0,0,0,0.6)";
   };
 
-  // 恢复跨页面播放状态
+  // 恢复跨页面状态
+  let isPlaying = false;
   const savedTime = parseFloat(localStorage.getItem("bgm_time") || "0");
   const savedPlaying = localStorage.getItem("bgm_playing") === "true";
 
@@ -395,8 +395,6 @@ window.addEventListener("DOMContentLoaded", function () {
       label.innerText = "Now Playing";
     });
   });
-
-  let isPlaying = false;
 
   // 播放/暂停
   btn.addEventListener("click", () => {
@@ -416,20 +414,19 @@ window.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 更新进度条 + 脉冲光
+  // 更新进度
   function updateProgress() {
     if(audio.duration && !isNaN(audio.duration)) {
       const percent = (audio.currentTime / audio.duration) * 100;
       progressBar.style.width = percent + "%";
       progressBar.style.boxShadow = isPlaying ? "0 0 8px rgba(100,150,255,0.8), 0 0 16px rgba(100,150,255,0.5)" : "none";
-      // 保存进度
       localStorage.setItem("bgm_time", audio.currentTime);
     }
     requestAnimationFrame(updateProgress);
   }
   updateProgress();
 
-  // 点击进度条跳转
+  // 点击跳转进度
   progressContainer.addEventListener("click", (e) => {
     if(!audio.duration || isNaN(audio.duration)) return;
     const rect = progressContainer.getBoundingClientRect();
@@ -444,7 +441,7 @@ window.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // 拖拽（仅文字条）
+  // 拖拽
   let isDragging = false, offsetX, offsetY;
   label.addEventListener("mousedown", (e) => {
     isDragging = true;
@@ -466,6 +463,11 @@ window.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // ============ PJAX ============
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#'])",
+    selectors: ["title", ".container"]
+  });
 });
 </script>
 <!-- hexo injector body_end end --></body>
