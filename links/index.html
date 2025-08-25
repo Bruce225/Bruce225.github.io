@@ -15,9 +15,10 @@
     
         <meta name="description" content=".links-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 最小250px，最大自适应 */
+  grid-template-columns: repeat(4, minmax(280px, 1fr));
   gap: 20px;
-  margin-top: 40px"/>
+  margin-top: 40px;
+  justify-content: center"/>
     
 
     <!--Author-->
@@ -34,9 +35,10 @@
     
         <meta property="og:description" content=".links-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 最小250px，最大自适应 */
+  grid-template-columns: repeat(4, minmax(280px, 1fr));
   gap: 20px;
-  margin-top: 40px"/>
+  margin-top: 40px;
+  justify-content: center"/>
     
 
     <!--Open Graph Site Name-->
@@ -222,14 +224,15 @@
 <style>
 .links-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 最小250px，最大自适应 */
+  grid-template-columns: repeat(4, minmax(280px, 1fr));
   gap: 20px;
   margin-top: 40px;
-  justify-content: center; /* 网格居中 */
+  justify-content: center;
 }
 
+
 .link-item {
-  width: 250px; 
+  /* width: 250px; */
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -292,22 +295,19 @@
 /* 响应式 */
 @media (max-width: 1024px) {
   .links-container {
-    grid-template-columns: repeat(auto-fit, 200px);
+    grid-template-columns: repeat(2, 1fr); /* 中屏显示2列 */
   }
 }
 
 @media (max-width: 768px) {
   .links-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* 小屏显示1列 */
   }
 }
-
-
 </style>
 
 <div class="links-container">
-    
-    <div class="link-item">
+  <div class="link-item">
     <a href="https://www.tongji.edu.cn" target="_blank" class="link-card">
       <div class="link-icon">
         <img src="/images/tanp.jpg" alt="tanp" />
@@ -319,7 +319,7 @@
     </a>
   </div>
 
-    <div class="link-item">
+  <div class="link-item">
     <a href="https://www.tongji.edu.cn" target="_blank" class="link-card">
       <div class="link-icon">
         <img src="/images/kisechan.png" alt="kisechan" />
@@ -330,7 +330,7 @@
       </div>
     </a>
   </div>
-  
+
   <div class="link-item">
     <a href="https://www.tongji.edu.cn" target="_blank" class="link-card">
       <div class="link-icon">
@@ -342,7 +342,6 @@
       </div>
     </a>
   </div>
-
 
   <div class="link-item">
     <a href="https://www.tongji.edu.cn" target="_blank" class="link-card">
@@ -367,8 +366,8 @@
       </div>
     </a>
   </div>
-
 </div>
+
 
 
                 
