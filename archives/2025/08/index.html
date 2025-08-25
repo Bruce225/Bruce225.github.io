@@ -298,25 +298,26 @@ window.addEventListener("DOMContentLoaded", function () {
   container.style.userSelect = "none";
   document.body.appendChild(container);
 
-  // ============ Vista Aero 风格按钮 ============
-  const btn = document.createElement("button");
-  btn.innerHTML = "▶";
-  btn.style.width = "60px";
-  btn.style.height = "60px";
-  btn.style.borderRadius = "50%";
-  btn.style.border = "1px solid rgba(255,255,255,0.4)";
-  btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(150,180,255,0.4))";
-  btn.style.color = "white";
-  btn.style.fontSize = "28px";
-  btn.style.fontWeight = "bold";
-  btn.style.cursor = "pointer";
-  btn.style.boxShadow = "0 6px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(255,255,255,0.7)";
-  btn.style.backdropFilter = "blur(10px)";
-  btn.style.webkitBackdropFilter = "blur(10px)";
-  btn.style.textShadow = "0 1px 2px rgba(0,0,0,0.7)";
-  btn.style.transition = "all 0.3s ease";
-  btn.style.marginBottom = "10px";
-  container.appendChild(btn);
+  //按钮
+const btn = document.createElement("button");
+btn.innerHTML = "▶";
+btn.style.width = "60px";
+btn.style.height = "60px";
+btn.style.borderRadius = "50%";
+btn.style.border = "1px solid rgba(255,255,255,0.25)"; // 边框
+btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(150,180,255,0.2))"; 
+btn.style.color = "white";
+btn.style.fontSize = "28px";
+btn.style.fontWeight = "bold";
+btn.style.cursor = "pointer";
+btn.style.boxShadow = "0 6px 12px rgba(0,0,0,0.2), inset 0 1px 4px rgba(255,255,255,0.5)"; // 光影
+btn.style.backdropFilter = "blur(12px)";
+btn.style.webkitBackdropFilter = "blur(12px)";
+btn.style.textShadow = "0 1px 2px rgba(0,0,0,0.5)";
+btn.style.transition = "all 0.3s ease";
+btn.style.marginBottom = "10px";
+container.appendChild(btn);
+
   
   // Vista 按钮按下凹陷效果
   btn.addEventListener("mousedown", () => {
@@ -373,20 +374,22 @@ window.addEventListener("DOMContentLoaded", function () {
   container.appendChild(progressContainer);
 
   // 悬停效果
-  btn.onmouseover = () => {
-    btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(120,160,255,0.5))";
-    btn.style.boxShadow = "0 8px 18px rgba(0,0,0,0.4), inset 0 2px 6px rgba(255,255,255,0.8)";
-    btn.style.transform = "translateY(-2px)";
-    label.style.boxShadow = "0 4px 16px rgba(100,150,255,0.6), 0 0 12px rgba(100,150,255,0.8)";
-    label.style.textShadow = "0 0 6px rgba(255,255,255,0.8)";
-  };
-  btn.onmouseout = () => {
-    btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(150,180,255,0.4))";
-    btn.style.boxShadow = "0 6px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(255,255,255,0.7)";
-    btn.style.transform = "translateY(0)";
-    label.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2), inset 0 1px 3px rgba(255,255,255,0.6)";
-    label.style.textShadow = "0 1px 2px rgba(0,0,0,0.6)";
-  };
+btn.onmouseover = () => {
+  btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(120,160,255,0.3))"; // 半透明
+  btn.style.boxShadow = "0 8px 18px rgba(0,0,0,0.3), inset 0 2px 6px rgba(255,255,255,0.6)"; // 光晕
+  btn.style.transform = "translateY(-2px)";
+  label.style.boxShadow = "0 4px 16px rgba(100,150,255,0.5), 0 0 12px rgba(100,150,255,0.6)";
+  label.style.textShadow = "0 0 6px rgba(255,255,255,0.7)";
+};
+
+btn.onmouseout = () => {
+  btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(150,180,255,0.2))"; // 透明度
+  btn.style.boxShadow = "0 6px 12px rgba(0,0,0,0.2), inset 0 1px 4px rgba(255,255,255,0.5)";
+  btn.style.transform = "translateY(0)";
+  label.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2), inset 0 1px 3px rgba(255,255,255,0.6)";
+  label.style.textShadow = "0 1px 2px rgba(0,0,0,0.6)";
+};
+
 
   // 恢复跨页面状态
   let isPlaying = false;
@@ -469,7 +472,7 @@ window.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // ============ PJAX ============
+  // PJAX 插件
   new Pjax({
     elements: "a:not([target='_blank']):not([href^='#'])",
     selectors: ["title", ".container"]

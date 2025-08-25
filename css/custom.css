@@ -1,6 +1,6 @@
 
 /* 导航按钮（脉冲 + 光边）*/
- /* */
+
 
 /* 基础样式 */
 .navbar-nav > li > a {
@@ -79,36 +79,35 @@
   }
 }
 
-
-/* 标题 + 背景渐变 */
-/* */
+/*
+   标题  玻璃感
+*/
 
 .post-preview a h2.post-title {
   position: relative;
   display: inline-block;
   overflow: hidden;
-  padding: 12px 24px;
-  border-radius: 14px;
+  padding: 14px 26px;
+  border-radius: 16px;
 
-  /* 半透明背景渐变 */
-  background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(0,191,255,0.15));
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  /* 半透明背景渐变玻璃 */
+  background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(0,191,255,0.12));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
-  /* 半透明边框和内外阴影 */
-  border: 2px solid rgba(0,191,255,0.3);
+  /* 边框和内外阴影 */
+  border: 2px solid rgba(0,191,255,0.35);
   box-shadow:
-    inset 0 2px 8px rgba(255,255,255,0.25),
-    inset 0 -2px 6px rgba(0,0,50,0.15),
-    0 0 10px rgba(0,191,255,0.2),
-    0 0 20px rgba(0,191,255,0.1);
+    inset 0 2px 10px rgba(255,255,255,0.3),
+    inset 0 -2px 8px rgba(0,0,50,0.15),
+    0 0 12px rgba(0,191,255,0.2),
+    0 0 25px rgba(0,191,255,0.15),
+    0 0 40px rgba(0,191,255,0.08);
 
-  transition: all 0.35s ease;
+  transition: all 0.4s ease;
   font-weight: 600;
   color: #1e90ff;
-
-  /* 微光呼吸动画 */
-  animation: breatheGlass 3s infinite alternate;
+  animation: breatheGlass 4s infinite alternate;
 }
 
 /* 悬停效果 */
@@ -116,15 +115,15 @@
   color: #00bfff;
   transform: scale(1.08);
   text-shadow:
-    0 0 10px rgba(0,191,255,0.6),
-    0 0 20px rgba(0,191,255,0.4),
-    0 0 30px rgba(0,191,255,0.25);
+    0 0 10px rgba(0,191,255,0.65),
+    0 0 22px rgba(0,191,255,0.45),
+    0 0 35px rgba(0,191,255,0.3);
   box-shadow:
-    inset 0 3px 10px rgba(255,255,255,0.4),
-    inset 0 -3px 8px rgba(0,0,60,0.25),
-    0 0 15px rgba(0,191,255,0.45),
-    0 0 30px rgba(0,191,255,0.3),
-    0 0 45px rgba(0,191,255,0.15);
+    inset 0 3px 12px rgba(255,255,255,0.4),
+    inset 0 -3px 10px rgba(0,0,60,0.25),
+    0 0 18px rgba(0,191,255,0.5),
+    0 0 35px rgba(0,191,255,0.35),
+    0 0 50px rgba(0,191,255,0.2);
   animation: none;
 }
 
@@ -133,48 +132,52 @@
   content: "";
   position: absolute;
   top: 0;
-  left: -80%;
-  width: 60%;
+  left: -90%;
+  width: 70%;
   height: 100%;
   background: linear-gradient(
     120deg,
     rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.6) 50%,
+    rgba(255,255,255,0.4) 40%,
+    rgba(255,255,255,0.7) 50%,
+    rgba(255,255,255,0.4) 60%,
     rgba(255,255,255,0) 100%
   );
   transform: skewX(-25deg);
   pointer-events: none;
-  animation: shine 1.5s infinite;
+  animation: shine 2.5s linear infinite;
 }
 
 /* 流光动画 */
 @keyframes shine {
-  0% { left: -80%; }
-  50% { left: 100%; }
-  100% { left: 100%; }
+  0% { left: -90%; }
+  100% { left: 110%; }
 }
 
 /* 微光呼吸动画 */
 @keyframes breatheGlass {
   0% {
     box-shadow:
-      inset 0 2px 8px rgba(255,255,255,0.25),
-      inset 0 -2px 6px rgba(0,0,50,0.15),
-      0 0 8px rgba(0,191,255,0.15),
-      0 0 16px rgba(0,191,255,0.1);
+      inset 0 2px 10px rgba(255,255,255,0.3),
+      inset 0 -2px 8px rgba(0,0,50,0.15),
+      0 0 10px rgba(0,191,255,0.2),
+      0 0 20px rgba(0,191,255,0.12),
+      0 0 35px rgba(0,191,255,0.08);
   }
   50% {
     box-shadow:
-      inset 0 3px 10px rgba(255,255,255,0.3),
-      inset 0 -3px 8px rgba(0,0,50,0.2),
-      0 0 12px rgba(0,191,255,0.25),
-      0 0 24px rgba(0,191,255,0.15);
+      inset 0 3px 12px rgba(255,255,255,0.35),
+      inset 0 -3px 10px rgba(0,0,50,0.2),
+      0 0 14px rgba(0,191,255,0.25),
+      0 0 28px rgba(0,191,255,0.18),
+      0 0 45px rgba(0,191,255,0.12);
   }
   100% {
     box-shadow:
-      inset 0 2px 8px rgba(255,255,255,0.25),
-      inset 0 -2px 6px rgba(0,0,50,0.15),
-      0 0 10px rgba(0,191,255,0.2),
-      0 0 20px rgba(0,191,255,0.12);
+      inset 0 2px 10px rgba(255,255,255,0.3),
+      inset 0 -2px 8px rgba(0,0,50,0.15),
+      0 0 12px rgba(0,191,255,0.2),
+      0 0 25px rgba(0,191,255,0.15),
+      0 0 40px rgba(0,191,255,0.1);
   }
 }
