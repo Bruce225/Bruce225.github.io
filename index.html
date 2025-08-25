@@ -282,10 +282,12 @@
 <!-- hexo injector body_end start -->
 <script>
 window.addEventListener("DOMContentLoaded", function () {
+  // 创建 audio
   const audio = document.createElement("audio");
   audio.src = "/music/music1.mp3";
   audio.loop = true;
 
+  // 创建容器
   const container = document.createElement("div");
   container.style.position = "fixed";
   container.style.top = "20px";
@@ -296,12 +298,13 @@ window.addEventListener("DOMContentLoaded", function () {
   container.style.zIndex = "9999";
   container.style.userSelect = "none";
 
+  // 播放按钮
   const btn = document.createElement("button");
   btn.innerHTML = "▶";
   btn.style.width = "60px";
   btn.style.height = "60px";
   btn.style.borderRadius = "50%";
-  btn.style.border = "1px solid rgba(255, 255, 255, 0.4)";
+  btn.style.border = "1px solid rgba(255,255,255,0.4)";
   btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(150,180,255,0.4))";
   btn.style.color = "white";
   btn.style.fontSize = "28px";
@@ -314,6 +317,7 @@ window.addEventListener("DOMContentLoaded", function () {
   btn.style.transition = "all 0.3s ease";
   btn.style.marginBottom = "10px";
 
+  // 文字条（拖拽区域）
   const label = document.createElement("div");
   label.innerText = "点击播放测试音乐";
   label.style.padding = "10px 20px";
@@ -330,6 +334,7 @@ window.addEventListener("DOMContentLoaded", function () {
   label.style.textAlign = "center";
   label.style.cursor = "move";
 
+  // 进度条
   const progressContainer = document.createElement("div");
   progressContainer.style.width = "220px";
   progressContainer.style.height = "8px";
@@ -348,12 +353,13 @@ window.addEventListener("DOMContentLoaded", function () {
   progressBar.style.transition = "width 0.1s linear, box-shadow 0.5s ease-in-out";
   progressContainer.appendChild(progressBar);
 
+  // 挂载
   container.appendChild(btn);
   container.appendChild(label);
   container.appendChild(progressContainer);
   document.body.appendChild(container);
 
-  // 按钮悬停
+  // 悬停效果
   btn.onmouseover = () => {
     btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(120,160,255,0.5))";
     btn.style.boxShadow = "0 8px 18px rgba(0,0,0,0.4), inset 0 2px 6px rgba(255,255,255,0.8)";
@@ -369,28 +375,47 @@ window.addEventListener("DOMContentLoaded", function () {
     label.style.textShadow = "0 1px 2px rgba(0,0,0,0.6)";
   };
 
+  // 恢复跨页面播放状态
+  const savedTime = parseFloat(localStorage.getItem("bgm_time") || "0");
+  const savedPlaying = localStorage.getItem("bgm_playing") === "true";
+
+  audio.addEventListener("loadedmetadata", () => {
+    if(savedTime && savedTime < audio.duration) audio.currentTime = savedTime;
+    if(savedPlaying) audio.play().then(() => {
+      isPlaying = true;
+      btn.innerHTML = "⏸";
+      label.innerText = "Now Playing";
+    });
+  });
+
   let isPlaying = false;
+
+  // 播放/暂停
   btn.addEventListener("click", () => {
-    if (!isPlaying) {
+    if(audio.paused) {
       audio.play().then(() => {
         isPlaying = true;
         btn.innerHTML = "⏸";
         label.innerText = "Now Playing";
+        localStorage.setItem("bgm_playing", "true");
       });
     } else {
       audio.pause();
       isPlaying = false;
       btn.innerHTML = "▶";
       label.innerText = "点击播放测试音乐";
+      localStorage.setItem("bgm_playing", "false");
     }
   });
 
-  // 播放进度 + 脉冲光
+  // 更新进度条 + 脉冲光
   function updateProgress() {
     if(audio.duration && !isNaN(audio.duration)) {
       const percent = (audio.currentTime / audio.duration) * 100;
       progressBar.style.width = percent + "%";
       progressBar.style.boxShadow = isPlaying ? "0 0 8px rgba(100,150,255,0.8), 0 0 16px rgba(100,150,255,0.5)" : "none";
+      // 保存进度
+      localStorage.setItem("bgm_time", audio.currentTime);
     }
     requestAnimationFrame(updateProgress);
   }
@@ -400,13 +425,14 @@ window.addEventListener("DOMContentLoaded", function () {
   progressContainer.addEventListener("click", (e) => {
     if(!audio.duration || isNaN(audio.duration)) return;
     const rect = progressContainer.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const ratio = clickX / rect.width;
+    const ratio = (e.clientX - rect.left) / rect.width;
     audio.currentTime = ratio * audio.duration;
+    localStorage.setItem("bgm_time", audio.currentTime);
     if(!isPlaying) audio.play().then(() => {
       isPlaying = true;
       btn.innerHTML = "⏸";
       label.innerText = "Now Playing";
+      localStorage.setItem("bgm_playing", "true");
     });
   });
 
