@@ -324,7 +324,7 @@ btn.style.marginBottom = "10px";
 container.appendChild(btn);
 
   
-  // Vista 按钮按下凹陷效果
+  // 按钮按下凹陷效果
   btn.addEventListener("mousedown", () => {
     btn.style.transform = "translateY(2px) scale(0.95)";
     btn.style.boxShadow = "inset 0 3px 6px rgba(0,0,0,0.5), inset 0 -1px 3px rgba(255,255,255,0.6)";
@@ -341,22 +341,76 @@ container.appendChild(btn);
   });
 
   // 文字条（拖拽区）
-  const label = document.createElement("div");
-  label.innerText = "点击播放测试音乐";
-  label.style.padding = "10px 20px";
-  label.style.borderRadius = "20px";
-  label.style.background = "rgba(200,220,255,0.25)";
-  label.style.color = "white";
-  label.style.fontSize = "16px";
-  label.style.boxShadow = "0 4px 8px rgba(0,0,0,0.2), inset 0 1px 3px rgba(255,255,255,0.6)";
-  label.style.backdropFilter = "blur(8px)";
-  label.style.webkitBackdropFilter = "blur(8px)";
-  label.style.textShadow = "0 1px 2px rgba(0,0,0,0.6)";
-  label.style.transition = "all 0.3s ease";
-  label.style.width = "200px";
-  label.style.textAlign = "center";
-  label.style.cursor = "move";
-  container.appendChild(label);
+const label = document.createElement("div");
+label.innerText = "点击播放测试音乐";
+label.style.padding = "10px 20px";
+label.style.borderRadius = "20px";
+label.style.background = "rgba(200,220,255,0.25)";
+label.style.color = "white";
+label.style.fontSize = "17px"; // 字体
+label.style.fontFamily = "'Microsoft YaHei UI', 'Microsoft YaHei', sans-serif";
+label.style.fontWeight = "500"; // 笔画宽
+label.style.letterSpacing = "0.8px"; // 字距
+label.style.boxShadow =
+  "0 4px 12px rgba(0,0,0,0.25), " +
+  "inset 0 2px 6px rgba(255,255,255,0.45), " +
+  "inset 0 -2px 6px rgba(0,120,255,0.25)";
+label.style.backdropFilter = "blur(8px)";
+label.style.webkitBackdropFilter = "blur(8px)";
+label.style.textShadow =
+  "0 0 3px rgba(180,220,255,0.9), " +
+  "0 0 6px rgba(140,200,255,0.7)";
+label.style.transition = "all 0.4s ease";
+label.style.width = "220px"; // 宽度
+label.style.textAlign = "center";
+label.style.cursor = "move";
+
+// 渐变文字
+label.style.backgroundImage = "linear-gradient(to top, #dff6ff, #ffffff)";
+label.style.webkitBackgroundClip = "text";
+label.style.backgroundClip = "text";
+label.style.webkitTextFillColor = "transparent";
+
+// 初始淡入效果
+label.style.opacity = "0";
+label.style.transform = "scale(0.9)";
+setTimeout(() => {
+  label.style.opacity = "1";
+  label.style.transform = "scale(1)";
+}, 100);
+
+container.appendChild(label);
+
+// 悬停效果
+label.addEventListener("mouseenter", () => {
+  label.style.transform = "scale(1.08)";
+  label.style.textShadow =
+    "0 0 6px rgba(200,230,255,1), " +
+    "0 0 12px rgba(140,200,255,0.9)";
+});
+
+label.addEventListener("mouseleave", () => {
+  label.style.transform = "scale(1)";
+  label.style.textShadow =
+    "0 0 3px rgba(180,220,255,0.9), " +
+    "0 0 6px rgba(140,200,255,0.7)";
+});
+
+// 呼吸动画（循环亮暗变化）
+label.animate(
+  [
+    { textShadow: "0 0 3px rgba(180,220,255,0.9), 0 0 6px rgba(140,200,255,0.7)" },
+    { textShadow: "0 0 8px rgba(200,240,255,1), 0 0 14px rgba(140,200,255,0.9)" },
+    { textShadow: "0 0 3px rgba(180,220,255,0.9), 0 0 6px rgba(140,200,255,0.7)" }
+  ],
+  {
+    duration: 4000,
+    iterations: Infinity
+  }
+);
+
+
+
 
   // 进度条
   const progressContainer = document.createElement("div");
