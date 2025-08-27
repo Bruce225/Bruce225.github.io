@@ -286,9 +286,9 @@
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 <script>
 window.addEventListener("DOMContentLoaded", function () {
-  // 创建 audio
+  
   const audio = document.createElement("audio");
-  audio.src = "/music/music1.mp3";
+  audio.src = "/music/music1.wav";
   audio.loop = true;
 
   // 播放器容器
@@ -432,6 +432,68 @@ label.animate(
   progressContainer.appendChild(progressBar);
   container.appendChild(progressContainer);
 
+  // 音量条容器
+  const volumeContainer = document.createElement("div");
+  volumeContainer.style.width = "220px";
+  volumeContainer.style.height = "8px";
+  volumeContainer.style.borderRadius = "4px";
+  volumeContainer.style.background = "rgba(255,255,255,0.25)";
+  volumeContainer.style.marginTop = "8px";
+  volumeContainer.style.display = "flex";
+  volumeContainer.style.alignItems = "center";
+  volumeContainer.style.padding = "4px 8px";
+  volumeContainer.style.backdropFilter = "blur(6px)";
+  volumeContainer.style.webkitBackdropFilter = "blur(6px)";
+  container.appendChild(volumeContainer);
+
+  // 音量条
+  const volumeSlider = document.createElement("input");
+  volumeSlider.type = "range";
+  volumeSlider.min = 0;
+  volumeSlider.max = 1;
+  volumeSlider.step = 0.01;
+  volumeSlider.value = localStorage.getItem("bgm_volume") || 0.6;
+  audio.volume = volumeSlider.value;
+
+  volumeSlider.style.appearance = "none";
+  volumeSlider.style.width = "100%";
+  volumeSlider.style.height = "6px";
+  volumeSlider.style.borderRadius = "3px";
+  volumeSlider.style.background = "linear-gradient(to right, rgba(120,180,255,0.6), rgba(180,220,255,0.9))";
+  volumeSlider.style.outline = "none";
+  volumeSlider.style.boxShadow = "0 0 6px rgba(120,180,255,0.6), inset 0 1px 3px rgba(255,255,255,0.5)";
+  volumeSlider.style.cursor = "pointer";
+  volumeSlider.style.transition = "all 0.3s ease";
+  volumeSlider.style.webkitAppearance = "none";
+
+  volumeSlider.addEventListener("input", () => {
+    audio.volume = volumeSlider.value;
+    localStorage.setItem("bgm_volume", volumeSlider.value);
+  });
+
+  const style = document.createElement("style");
+  style.innerHTML = `
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 0 6px rgba(120,180,255,0.8), inset 0 1px 2px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      background: rgba(200,230,255,1);
+    }
+  `;
+  document.head.appendChild(style);
+
+  volumeContainer.appendChild(volumeSlider);
+
+
   // 悬停效果
 btn.onmouseover = () => {
   btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(120,160,255,0.3))"; // 半透明
@@ -450,7 +512,7 @@ btn.onmouseout = () => {
 };
 
 
-  // 恢复跨页面状态
+  // 跨页面状态
   let isPlaying = false;
   const savedTime = parseFloat(localStorage.getItem("bgm_time") || "0");
   const savedPlaying = localStorage.getItem("bgm_playing") === "true";
