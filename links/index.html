@@ -470,7 +470,7 @@ window.addEventListener("DOMContentLoaded", function () {
   
 const playlist = [
   "/music/music1.wav",
-  "/music/music2.wav",
+  "/music/music2.mp3",
   "/music/music3.wav"
 ];
 let currentIndex = parseInt(localStorage.getItem("bgm_index") || "0", 10);
@@ -556,7 +556,7 @@ container.appendChild(nextBtn);
     btn.style.boxShadow = "0 6px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(255,255,255,0.7)";
   });
 
-  // 文字条（拖拽区）
+  // 文字条）
 const label = document.createElement("div");
 label.innerText = "点击播放测试音乐";
 label.style.padding = "10px 20px";
@@ -612,7 +612,7 @@ label.addEventListener("mouseleave", () => {
     "0 0 6px rgba(140,200,255,0.7)";
 });
 
-// 呼吸动画（循环亮暗变化）
+// 循环亮暗
 label.animate(
   [
     { textShadow: "0 0 3px rgba(180,220,255,0.9), 0 0 6px rgba(140,200,255,0.7)" },
@@ -809,6 +809,7 @@ btn.onmouseout = () => {
     }
   });
 
+// 切歌逻辑
 function loadTrack(index, autoplay = true) {
   if (index < 0) index = playlist.length - 1;
   if (index >= playlist.length) index = 0;
