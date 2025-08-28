@@ -16,7 +16,7 @@
 
     <!--Author-->
     
-        <meta name="author" content="Ακτίνος Οξυφλώρος"/>
+        <meta name="author" content="Actinium"/>
     
 
     <!--Open Graph Title-->
@@ -38,7 +38,7 @@
     <!--Page Cover-->
     
     
-        <meta property="og:image" content="https://blog.actinium233.comimg/vista2.jpg"/>
+        <meta property="og:image" content="https://blog.actinium233.comimg/vista.jpg"/>
     
 
         <meta name="twitter:card" content="summary_large_image"/>
@@ -46,7 +46,7 @@
     
 
     
-        <meta name="twitter:image" content="https://blog.actinium233.comimg/vista2.jpg"/>
+        <meta name="twitter:image" content="https://blog.actinium233.comimg/vista.jpg"/>
     
 
     <!-- Title -->
@@ -170,7 +170,7 @@
 
 <!-- Page Header -->
 <!-- Set your background image for this header in the theme's configuration: index_cover -->
-<header class="intro-header" style="background-image: url('/img/vista2.jpg')">
+<header class="intro-header" style="background-image: url('/img/vista.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -253,7 +253,7 @@
 
                     
                 </ul>
-                <p class="copyright text-muted">&copy; 2025 Ακτίνος Οξυφλώρος<br></p>
+                <p class="copyright text-muted">&copy; 2025 Actinium<br></p>
                 <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
                 <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
             </div>
@@ -275,6 +275,18 @@
 
 <!-- Disqus Comments -->
 
+<script type="text/javascript">
+    var disqus_shortname = 'shortname';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
 
 
 <!-- hexo injector body_end start -->
@@ -282,9 +294,17 @@
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
+const playlist = [
+  "/music/music1.wav",
+  "/music/music2.wav",
+  "/music/music3.wav"
+];
+let currentIndex = parseInt(localStorage.getItem("bgm_index") || "0", 10);
+if (currentIndex >= playlist.length) currentIndex = 0;
+
   const audio = document.createElement("audio");
-  audio.src = "/music/music1.wav";
-  audio.loop = true;
+  audio.src = playlist[currentIndex];
+  audio.loop = false;
 
   // 播放器容器
   const container = document.createElement("div");
@@ -317,6 +337,33 @@ btn.style.textShadow = "0 1px 2px rgba(0,0,0,0.5)";
 btn.style.transition = "all 0.3s ease";
 btn.style.marginBottom = "10px";
 container.appendChild(btn);
+
+const prevBtn = document.createElement("button");
+prevBtn.innerHTML = "⏮";
+prevBtn.style.width = "40px";
+prevBtn.style.height = "40px";
+prevBtn.style.marginBottom = "6px";
+prevBtn.style.borderRadius = "50%";
+prevBtn.style.border = "1px solid rgba(255,255,255,0.25)";
+prevBtn.style.background = btn.style.background;
+prevBtn.style.color = "white";
+prevBtn.style.fontSize = "20px";
+prevBtn.style.cursor = "pointer";
+container.appendChild(prevBtn);
+
+// 下一首
+const nextBtn = document.createElement("button");
+nextBtn.innerHTML = "⏭";
+nextBtn.style.width = "40px";
+nextBtn.style.height = "40px";
+nextBtn.style.marginBottom = "6px";
+nextBtn.style.borderRadius = "50%";
+nextBtn.style.border = "1px solid rgba(255,255,255,0.25)";
+nextBtn.style.background = btn.style.background;
+nextBtn.style.color = "white";
+nextBtn.style.fontSize = "20px";
+nextBtn.style.cursor = "pointer";
+container.appendChild(nextBtn);
 
   
   // 按钮按下凹陷效果
@@ -587,6 +634,37 @@ btn.onmouseout = () => {
       container.style.transition = "all 0.3s ease";
     }
   });
+
+function loadTrack(index, autoplay = true) {
+  if (index < 0) index = playlist.length - 1;
+  if (index >= playlist.length) index = 0;
+  currentIndex = index;
+  audio.src = playlist[currentIndex];
+  localStorage.setItem("bgm_index", currentIndex);
+  audio.currentTime = 0;
+  if (autoplay) {
+    audio.play().then(() => {
+      isPlaying = true;
+      btn.innerHTML = "⏸";
+      label.innerText = "Now Playing";
+      localStorage.setItem("bgm_playing", "true");
+    });
+  }
+}
+
+prevBtn.addEventListener("click", () => {
+  loadTrack(currentIndex - 1);
+});
+
+nextBtn.addEventListener("click", () => {
+  loadTrack(currentIndex + 1);
+});
+
+// 自动播放下一首
+audio.addEventListener("ended", () => {
+  loadTrack(currentIndex + 1);
+});
+
 
   // PJAX 插件
   new Pjax({
