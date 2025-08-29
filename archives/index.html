@@ -294,11 +294,19 @@
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
-const playlist = [
-  "/music/music1.wav",
-  "/music/music2.mp3",
-  "/music/music3.wav"
-];
+let playlist = []; 
+
+// 加载 playlist.json
+fetch("/music/playlist.json")
+  .then(res => res.json())
+  .then(data => {
+        playlist.push(...data.songs.map(name => "/music/" + name));
+  })        // playlist.json 格式 { "songs": ["music1.wav","music2.mp3","music3.wav"] }
+  .catch(err => {
+    console.warn("无法加载 playlist.json，使用默认列表");
+    playlist.push("/music/music1.wav", "/music/music2.mp3", "/music/music3.wav"); // 默认列表
+  });
+
 let currentIndex = parseInt(localStorage.getItem("bgm_index") || "0", 10);
 if (currentIndex >= playlist.length) currentIndex = 0;
 
