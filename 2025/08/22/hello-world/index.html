@@ -338,68 +338,99 @@ if (currentIndex >= playlist.length) currentIndex = 0;
   document.body.appendChild(container);
 
   //按钮
-const btn = document.createElement("button");
-btn.innerHTML = "▶";
-btn.style.width = "60px";
-btn.style.height = "60px";
-btn.style.borderRadius = "50%";
-btn.style.border = "1px solid rgba(255,255,255,0.25)"; // 边框
-btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(150,180,255,0.2))"; 
-btn.style.color = "white";
-btn.style.fontSize = "28px";
-btn.style.fontWeight = "bold";
-btn.style.cursor = "pointer";
-btn.style.boxShadow = "0 6px 12px rgba(0,0,0,0.2), inset 0 1px 4px rgba(255,255,255,0.5)"; // 光影
-btn.style.backdropFilter = "blur(12px)";
-btn.style.webkitBackdropFilter = "blur(12px)";
-btn.style.textShadow = "0 1px 2px rgba(0,0,0,0.5)";
-btn.style.transition = "all 0.3s ease";
-btn.style.marginBottom = "10px";
-container.appendChild(btn);
+const btnContainer = document.createElement("div");
+  btnContainer.style.display = "flex";
+  btnContainer.style.alignItems = "center";
+  btnContainer.style.justifyContent = "center";
+  btnContainer.style.gap = "12px";
+  btnContainer.style.marginBottom = "8px";
+  container.appendChild(btnContainer);
 
-const prevBtn = document.createElement("button");
-prevBtn.innerHTML = "⏮";
-prevBtn.style.width = "40px";
-prevBtn.style.height = "40px";
-prevBtn.style.marginBottom = "6px";
-prevBtn.style.borderRadius = "50%";
-prevBtn.style.border = "1px solid rgba(255,255,255,0.25)";
-prevBtn.style.background = btn.style.background;
-prevBtn.style.color = "white";
-prevBtn.style.fontSize = "20px";
-prevBtn.style.cursor = "pointer";
-container.appendChild(prevBtn);
+  function styleAeroButton(b) {
+    b.style.width = "52px";
+    b.style.height = "52px";
+    b.style.borderRadius = "50%";
+    b.style.border = "1px solid rgba(255,255,255,0.25)";
+    b.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(150,180,255,0.2))";
+    b.style.color = "white";
+    b.style.fontSize = "28px"; 
+    b.style.cursor = "pointer";
+    b.style.boxShadow = "0 6px 12px rgba(0,0,0,0.2), inset 0 1px 4px rgba(255,255,255,0.5)";
+    b.style.backdropFilter = "blur(12px)";
+    b.style.webkitBackdropFilter = "blur(12px)";
+    b.style.textShadow = "0 1px 2px rgba(0,0,0,0.5)";
+    b.style.transition = "all 0.25s ease";
 
-// 下一首
-const nextBtn = document.createElement("button");
-nextBtn.innerHTML = "⏭";
-nextBtn.style.width = "40px";
-nextBtn.style.height = "40px";
-nextBtn.style.marginBottom = "6px";
-nextBtn.style.borderRadius = "50%";
-nextBtn.style.border = "1px solid rgba(255,255,255,0.25)";
-nextBtn.style.background = btn.style.background;
-nextBtn.style.color = "white";
-nextBtn.style.fontSize = "20px";
-nextBtn.style.cursor = "pointer";
-container.appendChild(nextBtn);
+    b.addEventListener("mouseenter", () => {
+      b.style.transform = "translateY(-3px)";
+      b.style.boxShadow = "0 8px 18px rgba(0,0,0,0.3), inset 0 2px 6px rgba(255,255,255,0.6)";
+    });
+    b.addEventListener("mouseleave", () => {
+      b.style.transform = "translateY(0)";
+      b.style.boxShadow = "0 6px 12px rgba(0,0,0,0.2), inset 0 1px 4px rgba(255,255,255,0.5)";
+    });
+    b.addEventListener("mousedown", () => {
+      b.style.transform = "translateY(2px) scale(0.95)";
+      b.style.boxShadow = "inset 0 3px 6px rgba(0,0,0,0.5), inset 0 -1px 3px rgba(255,255,255,0.6)";
+    });
+    b.addEventListener("mouseup", () => {
+      b.style.transform = "translateY(-2px)";
+      b.style.boxShadow = "0 6px 12px rgba(0,0,0,0.2), inset 0 1px 4px rgba(255,255,255,0.5)";
+    });
+  }
 
-  
-  // 按钮按下凹陷效果
-  btn.addEventListener("mousedown", () => {
-    btn.style.transform = "translateY(2px) scale(0.95)";
-    btn.style.boxShadow = "inset 0 3px 6px rgba(0,0,0,0.5), inset 0 -1px 3px rgba(255,255,255,0.6)";
+// 上一首按钮
+  const prevBtn = document.createElement("button");
+  prevBtn.innerHTML = "⏮";
+  styleAeroButton(prevBtn);
+
+  // 播放按钮
+  const btn = document.createElement("button");
+  btn.innerHTML = "▶";
+  btn.style.width = "60px";
+  btn.style.height = "60px";
+  btn.style.borderRadius = "50%";
+  btn.style.border = "1px solid rgba(255,255,255,0.25)";
+  btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(150,180,255,0.2))"; 
+  btn.style.color = "white";
+  btn.style.fontSize = "28px";
+  btn.style.fontWeight = "bold";
+  btn.style.cursor = "pointer";
+
+  btn.style.boxShadow = "0 8px 16px rgba(0,0,0,0.25), inset 0 1px 4px rgba(255,255,255,0.5)";
+  btn.style.backdropFilter = "blur(12px)";
+  btn.style.webkitBackdropFilter = "blur(12px)";
+  btn.style.textShadow = "0 1px 2px rgba(0,0,0,0.5)";
+  btn.style.transition = "all 0.3s ease";
+  btn.style.marginBottom = "10px";
+
+  btn.addEventListener("mouseenter", () => {
+    btn.style.transform = "scale(1.08)";
+    btn.style.boxShadow = "0 10px 20px rgba(0,0,0,0.35), inset 0 2px 6px rgba(255,255,255,0.6)";
   });
-
-  btn.addEventListener("mouseup", () => {
-    btn.style.transform = "translateY(0)";
-    btn.style.boxShadow = "0 6px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(255,255,255,0.7)";
-  });
-
   btn.addEventListener("mouseleave", () => {
-    btn.style.transform = "translateY(0)";
-    btn.style.boxShadow = "0 6px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(255,255,255,0.7)";
+    btn.style.transform = "scale(1)";
+    btn.style.boxShadow = "0 8px 16px rgba(0,0,0,0.25), inset 0 1px 4px rgba(255,255,255,0.5)";
   });
+  btn.addEventListener("mousedown", () => {
+    btn.style.transform = "scale(0.9)";
+    btn.style.boxShadow = "inset 0 4px 8px rgba(0,0,0,0.5), inset 0 -1px 3px rgba(255,255,255,0.6)";
+  });
+  btn.addEventListener("mouseup", () => {
+    btn.style.transform = "scale(1.05)";
+    btn.style.boxShadow = "0 8px 16px rgba(0,0,0,0.25), inset 0 1px 4px rgba(255,255,255,0.5)";
+  });
+
+  // 下一首
+  const nextBtn = document.createElement("button");
+  nextBtn.innerHTML = "⏭";
+  styleAeroButton(nextBtn);
+
+  // 按钮排成一行
+  btnContainer.appendChild(prevBtn);
+  btnContainer.appendChild(btn);
+  btnContainer.appendChild(nextBtn);
+
 
   // 文字条）
 const label = document.createElement("div");
