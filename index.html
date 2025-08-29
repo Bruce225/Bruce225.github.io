@@ -679,6 +679,7 @@ function loadTrack(index, autoplay = true) {
   audio.src = playlist[currentIndex];
   localStorage.setItem("bgm_index", currentIndex);
   audio.currentTime = 0;
+  localStorage.removeItem("bgm_time");
   if (autoplay) {
     audio.play().then(() => {
       isPlaying = true;
