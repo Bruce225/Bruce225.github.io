@@ -481,11 +481,11 @@ fetch("/music/playlist.json")
     if (currentIndex >= playlist.length) currentIndex = 0;
 
     if (playlist.length > 0) {
-      audio.src = playlist[currentIndex];   //  确保一开始就有歌曲
+      audio.src = playlist[currentIndex];  
     }
   })
   .catch(err => {
-    console.warn("无法加载 playlist.json，使用默认列表");
+    console.warn("无法加载");
     playlist = ["/music/music1.wav", "/music/music2.mp3", "/music/music3.wav"];
     if (playlist.length > 0) {
       audio.src = playlist[currentIndex];
