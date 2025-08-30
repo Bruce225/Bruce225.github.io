@@ -313,25 +313,30 @@
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
-let playlist = []; 
+let playlist = [];
+let currentIndex = parseInt(localStorage.getItem("bgm_index") || "0", 10);
+const audio = document.createElement("audio");
+audio.loop = false;
 
-// 加载 playlist.json
 fetch("/music/playlist.json")
   .then(res => res.json())
   .then(data => {
-        playlist.push(...data.songs.map(name => "/music/" + name));
-  })        // playlist.json 格式 { "songs": ["music1.wav","music2.mp3","music3.wav"] }
+    playlist = data.songs.map(name => "/music/" + name);
+
+    if (currentIndex >= playlist.length) currentIndex = 0;
+
+    if (playlist.length > 0) {
+      audio.src = playlist[currentIndex];   //  确保一开始就有歌曲
+    }
+  })
   .catch(err => {
     console.warn("无法加载 playlist.json，使用默认列表");
-    playlist.push("/music/music1.wav", "/music/music2.mp3", "/music/music3.wav"); // 默认列表
+    playlist = ["/music/music1.wav", "/music/music2.mp3", "/music/music3.wav"];
+    if (playlist.length > 0) {
+      audio.src = playlist[currentIndex];
+    }
   });
 
-let currentIndex = parseInt(localStorage.getItem("bgm_index") || "0", 10);
-if (currentIndex >= playlist.length) currentIndex = 0;
-
-  const audio = document.createElement("audio");
-  audio.src = playlist[currentIndex];
-  audio.loop = false;
 
   // 播放器容器
   const container = document.createElement("div");
