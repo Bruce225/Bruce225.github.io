@@ -495,6 +495,10 @@ label.animate(
   }
 );
 
+function updateLabel() {
+  const songName = playlist[currentIndex].split("/").pop(); // 取文件名
+  label.innerText =  songName.replace(/.[^/.]+$/, ""); // 去掉后缀
+}
 
 
 
@@ -618,14 +622,14 @@ btn.onmouseout = () => {
       audio.play().then(() => {
         isPlaying = true;
         btn.innerHTML = "⏸";
-        label.innerText = "Now Playing";
+        updateLabel();
         localStorage.setItem("bgm_playing", "true");
       });
     } else {
       audio.pause();
       isPlaying = false;
       btn.innerHTML = "▶";
-      label.innerText = "点击播放测试音乐";
+      label.innerText = "Pausing";
       localStorage.setItem("bgm_playing", "false");
     }
   });
@@ -691,6 +695,7 @@ function loadTrack(index, autoplay = true) {
     audio.currentTime = 0;
     audio.removeEventListener("loadedmetadata", resetTime);
   });
+  updateLabel();
   if (autoplay) {
     audio.play().then(() => {
       isPlaying = true;
