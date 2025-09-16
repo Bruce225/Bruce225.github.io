@@ -13,7 +13,7 @@
     
 
     
-        <meta name="description" content="希望更丰富的展示？使用Markdown."/>
+        <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in "/>
     
 
     <!--Author-->
@@ -23,12 +23,12 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="TEsT"/>
+        <meta property="og:title" content="Hello World"/>
     
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="希望更丰富的展示？使用Markdown."/>
+        <meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in "/>
     
 
     <!--Open Graph Site Name-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>TEsT - Actinium&#39;s Blog</title>
+    <title>Hello World - Actinium&#39;s Blog</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -178,13 +178,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>TEsT</h1>
+                    <h1>Hello World</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
                         
-                            2025-08-22
+                            2025-08-23
                         
                     </span>
                 </div>
@@ -206,7 +206,19 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p>希望更丰富的展示？使用Markdown.</p>
+                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
 
                 
@@ -363,6 +375,16 @@ const btnContainer = document.createElement("div");
     b.style.transition = "all 0.25s ease";
 
     b.addEventListener("mouseenter", () => {
+      b.style.background = "linear-gradient(120deg, rgba(255,255,255,0.7), rgba(150,200,255,0.35), rgba(255,255,255,0.7))";
+      b.animate(
+        [
+          { backgroundPosition: "0% 50%" },
+          { backgroundPosition: "200% 50%" }
+        ],
+        { duration: 1200, iterations: 1 }
+      );
+    });
+    b.addEventListener("mouseenter", () => {
       b.style.transform = "translateY(-3px)";
       b.style.boxShadow = "0 8px 18px rgba(0,0,0,0.3), inset 0 2px 6px rgba(255,255,255,0.6)";
     });
@@ -404,6 +426,29 @@ const btnContainer = document.createElement("div");
   btn.style.textShadow = "0 1px 2px rgba(0,0,0,0.5)";
   btn.style.transition = "all 0.3s ease";
   btn.style.marginBottom = "10px";
+
+  const highlight = document.createElement("div");
+highlight.style.position = "absolute";
+highlight.style.top = "10%";
+highlight.style.left = "10%";
+highlight.style.width = "80%";
+highlight.style.height = "25%";
+highlight.style.borderRadius = "50%";
+highlight.style.background = "rgba(255,255,255,0.65)";
+highlight.style.filter = "blur(6px)";
+highlight.style.pointerEvents = "none";
+btn.appendChild(highlight);
+
+btn.addEventListener("mouseenter", () => {
+  btn.style.background = "linear-gradient(120deg, rgba(255,255,255,0.7), rgba(150,200,255,0.35), rgba(255,255,255,0.7))";
+  btn.animate(
+    [
+      { backgroundPosition: "0% 50%" },
+      { backgroundPosition: "200% 50%" }
+    ],
+    { duration: 1200, iterations: 1 }
+  );
+});
 
   btn.addEventListener("mouseenter", () => {
     btn.style.transform = "scale(1.08)";
@@ -524,7 +569,8 @@ function updateLabel() {
   const progressBar = document.createElement("div");
   progressBar.style.width = "0%";
   progressBar.style.height = "100%";
-  progressBar.style.background = "linear-gradient(to right, rgba(100,150,255,0.7), rgba(150,200,255,0.8))";
+  progressBar.style.background = "linear-gradient(to right, #4aa3ff, #92c9ff)";
+  progressBar.style.boxShadow = "0 0 8px rgba(100,180,255,0.9)";
   progressBar.style.transition = "width 0.1s linear, box-shadow 0.5s ease-in-out";
   progressContainer.appendChild(progressBar);
   container.appendChild(progressContainer);

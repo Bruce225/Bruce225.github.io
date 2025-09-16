@@ -188,7 +188,7 @@
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             
                 <div class="post-preview">
-    <a href="/2025/08/22/TEsT/">
+    <a href="/2025/08/23/TEsT/">
         <h2 class="post-title">
             TEsT
         </h2>
@@ -197,13 +197,13 @@
     <p class="post-meta">
         <!-- Date and Author -->
         
-        2025-08-22
+        2025-08-23
     </p>
 </div>
 <hr>
             
                 <div class="post-preview">
-    <a href="/2025/08/22/hello-world/">
+    <a href="/2025/08/23/hello-world/">
         <h2 class="post-title">
             Hello World
         </h2>
@@ -212,7 +212,7 @@
     <p class="post-meta">
         <!-- Date and Author -->
         
-        2025-08-22
+        2025-08-23
     </p>
 </div>
 <hr>
@@ -361,6 +361,16 @@ const btnContainer = document.createElement("div");
     b.style.transition = "all 0.25s ease";
 
     b.addEventListener("mouseenter", () => {
+      b.style.background = "linear-gradient(120deg, rgba(255,255,255,0.7), rgba(150,200,255,0.35), rgba(255,255,255,0.7))";
+      b.animate(
+        [
+          { backgroundPosition: "0% 50%" },
+          { backgroundPosition: "200% 50%" }
+        ],
+        { duration: 1200, iterations: 1 }
+      );
+    });
+    b.addEventListener("mouseenter", () => {
       b.style.transform = "translateY(-3px)";
       b.style.boxShadow = "0 8px 18px rgba(0,0,0,0.3), inset 0 2px 6px rgba(255,255,255,0.6)";
     });
@@ -402,6 +412,29 @@ const btnContainer = document.createElement("div");
   btn.style.textShadow = "0 1px 2px rgba(0,0,0,0.5)";
   btn.style.transition = "all 0.3s ease";
   btn.style.marginBottom = "10px";
+
+  const highlight = document.createElement("div");
+highlight.style.position = "absolute";
+highlight.style.top = "10%";
+highlight.style.left = "10%";
+highlight.style.width = "80%";
+highlight.style.height = "25%";
+highlight.style.borderRadius = "50%";
+highlight.style.background = "rgba(255,255,255,0.65)";
+highlight.style.filter = "blur(6px)";
+highlight.style.pointerEvents = "none";
+btn.appendChild(highlight);
+
+btn.addEventListener("mouseenter", () => {
+  btn.style.background = "linear-gradient(120deg, rgba(255,255,255,0.7), rgba(150,200,255,0.35), rgba(255,255,255,0.7))";
+  btn.animate(
+    [
+      { backgroundPosition: "0% 50%" },
+      { backgroundPosition: "200% 50%" }
+    ],
+    { duration: 1200, iterations: 1 }
+  );
+});
 
   btn.addEventListener("mouseenter", () => {
     btn.style.transform = "scale(1.08)";
@@ -522,7 +555,8 @@ function updateLabel() {
   const progressBar = document.createElement("div");
   progressBar.style.width = "0%";
   progressBar.style.height = "100%";
-  progressBar.style.background = "linear-gradient(to right, rgba(100,150,255,0.7), rgba(150,200,255,0.8))";
+  progressBar.style.background = "linear-gradient(to right, #4aa3ff, #92c9ff)";
+  progressBar.style.boxShadow = "0 0 8px rgba(100,180,255,0.9)";
   progressBar.style.transition = "width 0.1s linear, box-shadow 0.5s ease-in-out";
   progressContainer.appendChild(progressBar);
   container.appendChild(progressContainer);
