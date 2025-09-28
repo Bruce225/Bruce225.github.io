@@ -400,7 +400,11 @@
       gitalk.render('gitalk-container');
     }
 
-    loadGitalk();
+    document.addEventListener('DOMContentLoaded', function () {
+      if (document.getElementById('gitalk-container')) {
+        loadGitalk();
+      }
+    });
 
     document.addEventListener('pjax:complete', function () {
       if(document.getElementById('gitalk-container')){
