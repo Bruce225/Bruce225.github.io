@@ -258,6 +258,7 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
     <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
     <script>
+    function loadGitalk(){
       const gitalk = new Gitalk({
         clientID: 'Ov23liV4Lf99W7zxWMeg',
         clientSecret: '8046bd4bd08fac0ec3d4c12b5511b805e16317cf',
@@ -268,6 +269,17 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
         distractionFreeMode: true
       });
       gitalk.render('gitalk-container');
+    }
+
+    loadGitalk();
+
+    document.addEventListener('pjax:complete', function () {
+      if(document.getElementById('gitalk-container')){
+        document.getElementById('gitalk-container').innerHTML = ''; // 清空旧内容
+        loadGitalk();
+      }
+    });
+
     </script>
   
 
