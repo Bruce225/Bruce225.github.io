@@ -401,23 +401,29 @@ mjx-container[display="true"] + br {
       gitalk.render('gitalk-container');
     }
 
-  function initGitalk(){
-    const container = document.getElementById('gitalk-container');
-    if (container && !container.hasChildNodes()) {
-      loadGitalk();
+    function initGitalk(retry = 0){
+      const container = document.getElementById('gitalk-container');
+      if (container) {
+        if (!container.hasChildNodes()) {
+          loadGitalk();
+        }
+      } else if (retry < 5) {
+  
+        setTimeout(() => initGitalk(retry + 1), 500);
+      }
     }
-  }
 
-  window.addEventListener('load', initGitalk);
 
-  document.addEventListener('pjax:complete', function () {
-    const container = document.getElementById('gitalk-container');
-    if (container) {
-      container.innerHTML = ''; 
-      loadGitalk();
-    }
-  });
+    document.addEventListener('DOMContentLoaded', () => initGitalk());
 
+
+    document.addEventListener('pjax:complete', function () {
+      const container = document.getElementById('gitalk-container');
+      if (container) {
+        container.innerHTML = ''; 
+        initGitalk();
+      }
+    });
     </script>
   
 
@@ -487,6 +493,21 @@ mjx-container[display="true"] + br {
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 <script>
