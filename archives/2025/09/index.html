@@ -736,4 +736,34 @@ audio.addEventListener("ended", () => {
 </script>
 <!-- hexo injector body_end end --></body>
 
+</html>     btn.innerHTML = "⏸";
+      updateLabel();
+      localStorage.setItem("bgm_playing", "true");
+    });
+  }
+}
+
+prevBtn.addEventListener("click", () => {
+  loadTrack(currentIndex - 1);
+});
+
+nextBtn.addEventListener("click", () => {
+  loadTrack(currentIndex + 1);
+});
+
+// 自动播放下一首
+audio.addEventListener("ended", () => {
+  loadTrack(currentIndex + 1);
+});
+
+
+  // PJAX 插件
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#'])",
+    selectors: ["title", ".container"]
+  });
+});
+</script>
+<!-- hexo injector body_end end --></body>
+
 </html>
