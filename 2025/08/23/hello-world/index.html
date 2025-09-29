@@ -190,7 +190,8 @@ answer "/>
                         <!-- Date and Author -->
                         
                         
-                            2025-08-23
+                            2025-08-23&nbsp;&nbsp;02:59:30
+                        
                         
                     </span>
                 </div>
@@ -812,36 +813,6 @@ function loadTrack(index, autoplay = true) {
     audio.play().then(() => {
       isPlaying = true;
       btn.innerHTML = "⏸";
-      updateLabel();
-      localStorage.setItem("bgm_playing", "true");
-    });
-  }
-}
-
-prevBtn.addEventListener("click", () => {
-  loadTrack(currentIndex - 1);
-});
-
-nextBtn.addEventListener("click", () => {
-  loadTrack(currentIndex + 1);
-});
-
-// 自动播放下一首
-audio.addEventListener("ended", () => {
-  loadTrack(currentIndex + 1);
-});
-
-
-  // PJAX 插件
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#'])",
-    selectors: ["title", ".container"]
-  });
-});
-</script>
-<!-- hexo injector body_end end --></body>
-
-</html>     btn.innerHTML = "⏸";
       updateLabel();
       localStorage.setItem("bgm_playing", "true");
     });
