@@ -386,8 +386,6 @@ mjx-container[display="true"] + br {
                     
                 </ul>
                 <p class="copyright text-muted">&copy; 2025 Actinium<br></p>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
             </div>
         </div>
     </div>
@@ -854,6 +852,36 @@ function loadTrack(index, autoplay = true) {
     audio.play().then(() => {
       isPlaying = true;
       btn.innerHTML = "⏸";
+      updateLabel();
+      localStorage.setItem("bgm_playing", "true");
+    });
+  }
+}
+
+prevBtn.addEventListener("click", () => {
+  loadTrack(currentIndex - 1);
+});
+
+nextBtn.addEventListener("click", () => {
+  loadTrack(currentIndex + 1);
+});
+
+// 自动播放下一首
+audio.addEventListener("ended", () => {
+  loadTrack(currentIndex + 1);
+});
+
+
+  // PJAX 插件
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#'])",
+    selectors: ["title", ".container"]
+  });
+});
+</script>
+<!-- hexo injector body_end end --></body>
+
+</html>     btn.innerHTML = "⏸";
       updateLabel();
       localStorage.setItem("bgm_playing", "true");
     });
