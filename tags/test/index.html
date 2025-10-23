@@ -54,15 +54,18 @@
     <title>test - Actinium&#39;s Blog</title>
     
 <style>
-  /* Clean Blog 主题的通用文章容器类 */
-  .post-container img, 
-  .post-content img {
-    max-width: 100% !important; /* 限制图片最大宽度为父容器的 100% */
-    height: auto;            /* 保持图片纵横比 */
-  }
-
-</style>
-    
+      /* 针对 Clean Blog 主题文章内容区域的图片 */
+      .container .row .col-lg-8 img {
+          max-width: 100% !important; 
+          height: auto;
+      }
+      
+      /* 针对 Clean Blog 主题文章内容区域的引用块 */
+      .container .row .col-lg-8 blockquote { 
+          margin-top: 30px !important; /* 强制设置顶部边距，解决空行问题 */
+          margin-bottom: 30px;         /* 顺便设置底部边距，保持版面稳定 */
+      }
+    </style>    
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -272,6 +275,21 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 <script>
