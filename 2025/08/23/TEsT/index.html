@@ -493,7 +493,6 @@ mjx-container[display="true"] + br {
 </script>
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
@@ -956,11 +955,44 @@ audio.addEventListener("ended", () => {
   loadTrack(currentIndex + 1);
 });
 
+});
+</script>
 
-  // PJAX 插件
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Pjax 初始化配置
   new Pjax({
     elements: "a:not([target='_blank']):not([href^='#'])",
     selectors: ["title", ".container"]
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  
+  // 页面过渡动画控制
+  
+  // 监听 Pjax 开始事件，触发淡出动画（给旧内容添加类）
+  document.addEventListener('pjax:send', function() {
+    const pjaxContainer = document.querySelector('.container');
+    if (pjaxContainer) {
+      pjaxContainer.classList.add('is-transitioning');
+    }
+  });
+
+  // 监听 Pjax 成功事件，触发淡入动画（给新内容移除类）
+  document.addEventListener('pjax:success', function() {
+    // Pjax 完成后，再次查找容器，以防 Pjax 替换了整个元素
+    const newPjaxContainer = document.querySelector('.container');
+    
+    // 短暂延迟后移除类，触发 CSS 过渡
+    setTimeout(() => {
+      if (newPjaxContainer) {
+        newPjaxContainer.classList.remove('is-transitioning');
+      }
+    }, 50); 
   });
 });
 </script>

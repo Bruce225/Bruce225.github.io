@@ -184,3 +184,22 @@
       0 0 40px rgba(0,191,255,0.1);
   }
 }
+
+
+/* Pjax 页面过渡动画 */
+
+/* 定义过渡效果 */
+.container { 
+    /* 确保平滑的过渡效果 */
+    transition: 
+        opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+/* 页面离开状态：当手动添加 .is-transitioning 类时，内容淡出并向下移动 */
+.container.is-transitioning { 
+    opacity: 0; 
+    transform: translateY(20px); /* 向下移动 20px */
+}
