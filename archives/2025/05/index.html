@@ -291,6 +291,42 @@
 </script>
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  
+  // 页面过渡动画控制
+  
+  // 监听 Pjax 开始事件，触发淡出动画（给旧内容添加类）
+  document.addEventListener('pjax:send', function() {
+    const pjaxContainer = document.querySelector('.container');
+    if (pjaxContainer) {
+      // 旧内容开始淡出
+      pjaxContainer.classList.add('is-transitioning');
+    }
+  });
+
+  // 监听 Pjax 成功事件（核心修改在这里）
+  document.addEventListener('pjax:success', function() {
+    // 1. 获取新的内容容器
+    const newPjaxContainer = document.querySelector('.container');
+    
+    if (newPjaxContainer) {
+      // ** 关键步骤 1：确保新内容一开始处于消失状态 **
+      // Pjax 替换内容后，新内容会继承旧容器的类，但有时浏览器优化会导致跳过初始状态。
+      // 所以我们强制在替换完成后，确保它拥有 'is-transitioning' 类。
+      newPjaxContainer.classList.add('is-transitioning'); 
+      
+      // ** 关键步骤 2：使用 requestAnimationFrame 强制浏览器渲染和重绘 **
+      // 这一步确保浏览器已经应用了 opacity: 0 的初始状态。
+      window.requestAnimationFrame(function() {
+        // 关键步骤 3：移除类，触发 CSS 过渡淡入动画 (opacity: 0 -> opacity: 1)
+        newPjaxContainer.classList.remove('is-transitioning');
+      });
+    }
+  });
+});
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -764,42 +800,6 @@ audio.addEventListener("ended", () => {
   loadTrack(currentIndex + 1);
 });
 
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  
-  // 页面过渡动画控制
-  
-  // 监听 Pjax 开始事件，触发淡出动画（给旧内容添加类）
-  document.addEventListener('pjax:send', function() {
-    const pjaxContainer = document.querySelector('.container');
-    if (pjaxContainer) {
-      // 旧内容开始淡出
-      pjaxContainer.classList.add('is-transitioning');
-    }
-  });
-
-  // 监听 Pjax 成功事件（核心修改在这里）
-  document.addEventListener('pjax:success', function() {
-    // 1. 获取新的内容容器
-    const newPjaxContainer = document.querySelector('.container');
-    
-    if (newPjaxContainer) {
-      // ** 关键步骤 1：确保新内容一开始处于消失状态 **
-      // Pjax 替换内容后，新内容会继承旧容器的类，但有时浏览器优化会导致跳过初始状态。
-      // 所以我们强制在替换完成后，确保它拥有 'is-transitioning' 类。
-      newPjaxContainer.classList.add('is-transitioning'); 
-      
-      // ** 关键步骤 2：使用 requestAnimationFrame 强制浏览器渲染和重绘 **
-      // 这一步确保浏览器已经应用了 opacity: 0 的初始状态。
-      window.requestAnimationFrame(function() {
-        // 关键步骤 3：移除类，触发 CSS 过渡淡入动画 (opacity: 0 -> opacity: 1)
-        newPjaxContainer.classList.remove('is-transitioning');
-      });
-    }
-  });
 });
 </script>
 <!-- hexo injector body_end end --></body>
