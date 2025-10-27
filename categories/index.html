@@ -293,17 +293,6 @@
 </script>
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  // Pjax 初始化配置
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#'])",
-    selectors: ["title", ".container"]
-  });
-});
-</script>
-
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
@@ -769,39 +758,67 @@ audio.addEventListener("ended", () => {
 });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#'])",
+    selectors: ["title", ".container"]
+  });
+});
+</script>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   
-  // 页面过渡动画控制
-  
-  // 监听 Pjax 开始事件，触发淡出动画（给旧内容添加类）
+  const TRANSITION_SELECTORS = ".container"; // 确保只针对这个元素
+
+  // 监听 Pjax 开始事件：旧内容淡出
   document.addEventListener('pjax:send', function() {
-    const pjaxContainer = document.querySelector('.container');
-    if (pjaxContainer) {
-      // 旧内容开始淡出
-      pjaxContainer.classList.add('is-transitioning');
-    }
+    const elementsToTransition = document.querySelectorAll(TRANSITION_SELECTORS);
+    elementsToTransition.forEach(el => {
+      el.classList.add('is-transitioning');
+    });
   });
 
-  // 监听 Pjax 成功事件（核心修改在这里）
+  // 监听 Pjax 成功事件：新内容淡入（核心逻辑）
   document.addEventListener('pjax:success', function() {
-    // 1. 获取新的内容容器
-    const newPjaxContainer = document.querySelector('.container');
+    const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
     
-    if (newPjaxContainer) {
-      // ** 关键步骤 1：确保新内容一开始处于消失状态 **
-      // Pjax 替换内容后，新内容会继承旧容器的类，但有时浏览器优化会导致跳过初始状态。
-      // 所以我们强制在替换完成后，确保它拥有 'is-transitioning' 类。
-      newPjaxContainer.classList.add('is-transitioning'); 
-      
-      // ** 关键步骤 2：使用 requestAnimationFrame 强制浏览器渲染和重绘 **
-      // 这一步确保浏览器已经应用了 opacity: 0 的初始状态。
-      window.requestAnimationFrame(function() {
-        // 关键步骤 3：移除类，触发 CSS 过渡淡入动画 (opacity: 0 -> opacity: 1)
-        newPjaxContainer.classList.remove('is-transitioning');
-      });
-    }
+    newElements.forEach(el => {
+      // 1. 强制应用过渡类，确保新元素处于隐藏状态
+      el.classList.add('is-transitioning'); 
+    });
+
+    // 2. 强制浏览器进行重绘 (Reflow)
+    // 这一步是关键！它确保浏览器在移除类之前，已经接受了 el.classList.add() 的变化。
+    newElements.forEach(el => {
+      // 访问一个元素的几何属性（如 offsetHeight）会强制浏览器重新计算布局
+      void el.offsetHeight; // 'void' 避免 ESLint 警告，确保代码执行
+    });
+
+    // 3. 移除类，触发 CSS 过渡淡入动画
+    newElements.forEach(el => {
+      el.classList.remove('is-transitioning');
+    });
+
+    // ----------------------------------------------------
+    // 【额外提醒】:
+    // 如果您的播放器在 Pjax 切换后需要更新任何状态或重新绑定事件，
+    // 您需要在 pjax:success 事件中调用一个全局的 music_reinit() 函数。
+    // 这与动画本身无关，但对您的播放器功能很重要。
+    // ----------------------------------------------------
   });
+
+  // 【可选的容错机制】：页面加载完成，确保页面不是处于过渡状态
+  document.addEventListener('pjax:success', function() {
+      // 确保在 Pjax 完成后，所有元素最终都处于正常状态
+      const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
+      newElements.forEach(el => {
+          el.classList.remove('is-transitioning');
+      });
+  });
+
 });
 </script>
 <!-- hexo injector body_end end --></body>
