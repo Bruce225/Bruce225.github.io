@@ -200,17 +200,17 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
                     <div class="post-preview">
-    <a href="/categories/随笔/">
+    <a href="/categories/Mathematics/">
         <h1 class="post-title archive">
-            随笔
+            Mathematics
         </h1>
     </a>
 </div>
                 
                     <div class="post-preview">
-    <a href="/categories/Mathematics/">
+    <a href="/categories/随笔/">
         <h1 class="post-title archive">
-            Mathematics
+            随笔
         </h1>
     </a>
 </div>
@@ -293,16 +293,6 @@
 </script>
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#'])",
-    selectors: ["title", ".container"]
-  });
-});
-</script>
-
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
@@ -765,6 +755,16 @@ audio.addEventListener("ended", () => {
   loadTrack(currentIndex + 1);
 });
 
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
+    selectors: ["title", ".container"]
+  });
 });
 </script>
 

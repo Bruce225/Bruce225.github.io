@@ -276,53 +276,6 @@
 
 
 <!-- hexo injector body_end start -->
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#'])",
-    selectors: ["title", ".container"]
-  });
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  
-  const TRANSITION_SELECTORS = ".container"; 
-  document.addEventListener('pjax:send', function() {
-    const elementsToTransition = document.querySelectorAll(TRANSITION_SELECTORS);
-    elementsToTransition.forEach(el => {
-      el.classList.add('is-transitioning');
-    });
-  });
-
-  document.addEventListener('pjax:success', function() {
-    const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
-    
-    newElements.forEach(el => {
-      el.classList.add('is-transitioning'); 
-    });
-
-    newElements.forEach(el => {
-      void el.offsetHeight; 
-    });
-
-    newElements.forEach(el => {
-      el.classList.remove('is-transitioning');
-    });
-  });
-
-  document.addEventListener('pjax:success', function() {
-      const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
-      newElements.forEach(el => {
-          el.classList.remove('is-transitioning');
-      });
-  });
-
-});
-</script>
-
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
@@ -785,6 +738,53 @@ audio.addEventListener("ended", () => {
   loadTrack(currentIndex + 1);
 });
 
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  
+  const TRANSITION_SELECTORS = ".container"; 
+  document.addEventListener('pjax:send', function() {
+    const elementsToTransition = document.querySelectorAll(TRANSITION_SELECTORS);
+    elementsToTransition.forEach(el => {
+      el.classList.add('is-transitioning');
+    });
+  });
+
+  document.addEventListener('pjax:success', function() {
+    const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
+    
+    newElements.forEach(el => {
+      el.classList.add('is-transitioning'); 
+    });
+
+    newElements.forEach(el => {
+      void el.offsetHeight; 
+    });
+
+    newElements.forEach(el => {
+      el.classList.remove('is-transitioning');
+    });
+  });
+
+  document.addEventListener('pjax:success', function() {
+      const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
+      newElements.forEach(el => {
+          el.classList.remove('is-transitioning');
+      });
+  });
+
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
+    selectors: ["title", ".container"]
+  });
 });
 </script>
 <!-- hexo injector body_end end --></body>
