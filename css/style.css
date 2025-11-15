@@ -445,6 +445,22 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #0085a1;
 }
+article .container .row table {
+  border-collapse: collapse !important;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin: 1em 0;
+}
+article .container .row table th,
+article .container .row table td {
+  border: 1px solid #ccc !important;
+  padding: 8px 12px !important;
+  text-align: left;
+}
+article .container .row table th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
 article .container .row img {
   max-width: 100% !important;
   height: auto;

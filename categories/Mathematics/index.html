@@ -756,16 +756,6 @@ audio.addEventListener("ended", () => {
 });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
-    selectors: ["title", ".container"]
-  });
-});
-</script>
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   
@@ -800,6 +790,16 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   });
 
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
+    selectors: ["title", ".container"]
+  });
 });
 </script>
 <!-- hexo injector body_end end --></body>
