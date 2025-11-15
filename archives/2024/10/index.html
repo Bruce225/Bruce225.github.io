@@ -54,18 +54,28 @@
     <title>归档：2024/10 - Actinium&#39;s Blog</title>
     
 <style>
-      /* 针对 Clean Blog 主题文章内容区域的图片 */
       .container .row .col-lg-8 img {
           max-width: 100% !important; 
           height: auto;
       }
       
-      /* 针对 Clean Blog 主题文章内容区域的引用块 */
       .container .row .col-lg-8 blockquote { 
-          margin-top: 30px !important; /* 强制设置顶部边距，解决空行问题 */
-          margin-bottom: 30px;         /* 顺便设置底部边距，保持版面稳定 */
+          margin-top: 30px !important; 
+          margin-bottom: 30px;        
       }
-    </style>    
+
+    .container .row table {
+        border-collapse: collapse !important;
+        border: 1px solid #ccc; 
+        width: 100%;
+    }
+    .container .row th, 
+    .container .row td {
+        border: 1px solid #ccc !important; 
+        padding: 8px 12px !important; 
+    }
+</style>    
+
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -291,6 +301,43 @@
 </script>
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  
+  const TRANSITION_SELECTORS = ".container"; 
+  document.addEventListener('pjax:send', function() {
+    const elementsToTransition = document.querySelectorAll(TRANSITION_SELECTORS);
+    elementsToTransition.forEach(el => {
+      el.classList.add('is-transitioning');
+    });
+  });
+
+  document.addEventListener('pjax:success', function() {
+    const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
+    
+    newElements.forEach(el => {
+      el.classList.add('is-transitioning'); 
+    });
+
+    newElements.forEach(el => {
+      void el.offsetHeight; 
+    });
+
+    newElements.forEach(el => {
+      el.classList.remove('is-transitioning');
+    });
+  });
+
+  document.addEventListener('pjax:success', function() {
+      const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
+      newElements.forEach(el => {
+          el.classList.remove('is-transitioning');
+      });
+  });
+
+});
+</script>
+
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
@@ -752,43 +799,6 @@ nextBtn.addEventListener("click", () => {
 audio.addEventListener("ended", () => {
   loadTrack(currentIndex + 1);
 });
-
-});
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  
-  const TRANSITION_SELECTORS = ".container"; 
-  document.addEventListener('pjax:send', function() {
-    const elementsToTransition = document.querySelectorAll(TRANSITION_SELECTORS);
-    elementsToTransition.forEach(el => {
-      el.classList.add('is-transitioning');
-    });
-  });
-
-  document.addEventListener('pjax:success', function() {
-    const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
-    
-    newElements.forEach(el => {
-      el.classList.add('is-transitioning'); 
-    });
-
-    newElements.forEach(el => {
-      void el.offsetHeight; 
-    });
-
-    newElements.forEach(el => {
-      el.classList.remove('is-transitioning');
-    });
-  });
-
-  document.addEventListener('pjax:success', function() {
-      const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
-      newElements.forEach(el => {
-          el.classList.remove('is-transitioning');
-      });
-  });
 
 });
 </script>
