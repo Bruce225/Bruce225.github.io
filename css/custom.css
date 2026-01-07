@@ -226,7 +226,38 @@
     border-color: rgba(255, 255, 255, 0.8);
 }
 
-/* 流光伪元素 */
+.post-preview a:active h2.post-title {
+    transform: scale(0.99) translateY(2px);
+    
+    background: linear-gradient(
+        to bottom,
+        rgba(230, 240, 255, 0.9) 0%,  
+        rgba(180, 220, 240, 0.8) 50%, 
+        rgba(160, 210, 230, 0.7) 51%, 
+        rgba(190, 230, 250, 0.8) 100%
+    );
+    
+    border-color: rgba(100, 160, 200, 0.4);
+    box-shadow: 
+        inset 0 2px 6px rgba(0, 50, 100, 0.2), 
+        inset 0 0 10px rgba(0, 100, 200, 0.1),
+        0 0 0 transparent; 
+
+    transition: all 0.1s ease-out;
+}
+
+.post-preview a:active .title-text {
+    color: #003366;
+    text-shadow: none; 
+}
+
+.post-preview a:active .date-badge {
+    border-left-color: rgba(255, 255, 255, 0.4);
+    box-shadow: none;
+    color: #003366;
+}
+
+/* 流光 */
 .post-preview a h2.post-title::before {
   content: "";
   position: absolute;
@@ -293,7 +324,7 @@
 
 .container.is-transitioning { 
     opacity: 0; 
-    transform: translateY(20px); 
+    transform: translateY(30px) scale(0.98);
 }
 
 @media only screen and (max-width: 1100px) {  

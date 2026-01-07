@@ -976,6 +976,10 @@ document.addEventListener('pjax:end', toggleSidebar);
 
 window.addEventListener('popstate', toggleSidebar);
 
+document.addEventListener('pjax:click', function(event) {
+    // 阻止立即跳转
+});
+
 document.addEventListener('pjax:send', function() {
     const container = document.querySelector('.container'); 
     if (container) container.classList.add('is-transitioning');
@@ -992,6 +996,21 @@ document.addEventListener('pjax:complete', function() {
 
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
