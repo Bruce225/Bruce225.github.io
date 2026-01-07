@@ -83,51 +83,147 @@
 }
 
 /*
-   标题  玻璃感
+   标题 
 */
 
 .post-preview a h2.post-title {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  padding: 14px 26px;
-  border-radius: 16px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
 
-  /* 半透明背景渐变玻璃 */
-  background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(0,191,255,0.12));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+    box-sizing: border-box;
+    
+    padding: 10px 18px; 
+    margin-bottom: 12px;
+    
+    color: #0066cc;
+    font-weight: 600;
+    font-size: 30px; 
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+    
+    border-radius: 16px; 
+    border: 1px solid rgba(130, 200, 255, 0.5);
+    
+    background: linear-gradient(
+        to bottom,
+        rgba(240, 250, 255, 0.9) 0%,   
+        rgba(200, 235, 255, 0.7) 50%,  
+        rgba(180, 225, 255, 0.6) 51%,  
+        rgba(200, 235, 255, 0.8) 100%  
+    );
+    
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 1.0), 
+        inset 0 -1px 3px rgba(0, 100, 200, 0.1),
+        0 2px 5px rgba(0, 100, 255, 0.15);     
 
-  /* 边框和内外阴影 */
-  border: 2px solid rgba(0,191,255,0.35);
-  box-shadow:
-    inset 0 2px 10px rgba(255,255,255,0.3),
-    inset 0 -2px 8px rgba(0,0,50,0.15),
-    0 0 12px rgba(0,191,255,0.2),
-    0 0 25px rgba(0,191,255,0.15),
-    0 0 40px rgba(0,191,255,0.08);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
 
-  transition: all 0.4s ease;
-  font-weight: 600;
-  color: #1e90ff;
-  animation: breatheGlass 4s infinite alternate;
+/* 左侧标题文字：防止太长撑爆，超出显示省略号 */
+.title-text {
+    flex: 1;                 /* 占据剩余空间 */
+    min-width: 0;            /* 关键：防止Flex子项溢出 */
+    white-space: nowrap;     /* 不换行 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 超出部分变... */
+    
+    /* 可以在这里微调文字颜色和阴影 */
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+    position: relative;
+    padding-left: 28px;
+}
+
+.title-text::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    width: 12px;
+    height: 12px;
+    border-radius: 50%; 
+    
+    background: radial-gradient(
+        circle at 30% 30%, 
+        rgba(200, 240, 255, 1.0) 0%,   
+        rgba(0, 150, 255, 0.8) 40%,  
+        rgba(0, 80, 180, 0.9) 100%   
+    );
+    
+    border: 1px solid rgba(0, 60, 120, 0.3);
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.2),      
+        inset 0 1px 2px rgba(255,255,255,0.6); 
+}
+
+/* 右侧日期 */
+.date-badge {
+    flex-shrink: 0;
+
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif; 
+    font-size: 18px;
+    color: rgba(80, 110, 130, 0.8);  
+    font-weight: 500;
+    font-variant-numeric: tabular-nums; 
+
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    
+    width: 185px; 
+    text-align: center;
+
+    border-left: 1px solid rgba(255, 255, 255, 0.6); 
+    box-shadow: -1px 0 0 rgba(0, 50, 100, 0.05);   
+    
+    padding-left: 15px;
+    margin-left: 5px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px; 
+}
+
+/* 手机适配 */
+@media only screen and (max-width: 600px) {
+    .date-badge { display: none; }
 }
 
 /* 悬停效果 */
 .post-preview a:hover h2.post-title {
-  color: #00bfff;
-  transform: scale(1.08);
-  text-shadow:
-    0 0 10px rgba(0,191,255,0.65),
-    0 0 22px rgba(0,191,255,0.45),
-    0 0 35px rgba(0,191,255,0.3);
-  box-shadow:
-    inset 0 3px 12px rgba(255,255,255,0.4),
-    inset 0 -3px 10px rgba(0,0,60,0.25),
-    0 0 18px rgba(0,191,255,0.5),
-    0 0 35px rgba(0,191,255,0.35),
-    0 0 50px rgba(0,191,255,0.2);
-  animation: none;
+    color: #0099ff;
+    transform: translateY(-1px); 
+    
+    background: linear-gradient(
+        to bottom,
+        rgba(245, 255, 255, 1.0) 0%,
+        rgba(210, 240, 255, 0.9) 50%,
+        rgba(180, 230, 255, 0.8) 51%,
+        rgba(220, 250, 255, 0.9) 100%
+    );
+    
+    border-color: rgba(100, 220, 255, 0.8);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 1.0),
+        0 0 15px rgba(0, 180, 255, 0.5),
+        0 4px 8px rgba(0, 100, 255, 0.2);
+
+    text-shadow: 0 0 20px rgba(0, 191, 255, 0.8);
+}
+
+.post-preview a:hover .date-badge {
+    color: #003366;
+    background: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    box-shadow: -1px 0 0 rgba(0, 100, 200, 0.1);
+    background: transparent;
+    border-left-color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.8);
 }
 
 /* 流光伪元素 */
@@ -135,62 +231,59 @@
   content: "";
   position: absolute;
   top: 0;
-  left: -90%;
-  width: 70%;
+  left: -150%; 
+  width: 100%; 
   height: 100%;
   background: linear-gradient(
-    120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.4) 40%,
-    rgba(255,255,255,0.7) 50%,
-    rgba(255,255,255,0.4) 60%,
-    rgba(255,255,255,0) 100%
-  );
-  transform: skewX(-25deg);
+        105deg,
+        rgba(255,255,255,0) 20%,
+        rgba(255,255,255,0.4) 40%,
+        rgba(255,255,255,1.0) 50%, 
+        rgba(255,255,255,0.4) 60%,
+        rgba(255,255,255,0) 80%
+    );
+  transform: skewX(-20deg);
   pointer-events: none;
-  animation: shine 2.5s linear infinite;
+  mix-blend-mode: overlay;
+  animation: shine 4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
 
 /* 流光动画 */
 @keyframes shine {
-  0% { left: -90%; }
-  100% { left: 110%; }
+    0% { left: -150%; opacity: 0; }
+    10% { opacity: 1; }
+    50% { left: 150%; opacity: 1; }
+    100% { left: 150%; opacity: 0; }
 }
 
 /* 微光呼吸动画 */
 @keyframes breatheGlass {
-  0% {
-    box-shadow:
-      inset 0 2px 10px rgba(255,255,255,0.3),
-      inset 0 -2px 8px rgba(0,0,50,0.15),
-      0 0 10px rgba(0,191,255,0.2),
-      0 0 20px rgba(0,191,255,0.12),
-      0 0 35px rgba(0,191,255,0.08);
-  }
-  50% {
-    box-shadow:
-      inset 0 3px 12px rgba(255,255,255,0.35),
-      inset 0 -3px 10px rgba(0,0,50,0.2),
-      0 0 14px rgba(0,191,255,0.25),
-      0 0 28px rgba(0,191,255,0.18),
-      0 0 45px rgba(0,191,255,0.12);
-  }
-  100% {
-    box-shadow:
-      inset 0 2px 10px rgba(255,255,255,0.3),
-      inset 0 -2px 8px rgba(0,0,50,0.15),
-      0 0 12px rgba(0,191,255,0.2),
-      0 0 25px rgba(0,191,255,0.15),
-      0 0 40px rgba(0,191,255,0.1);
-  }
+    0% {
+        border-color: rgba(130, 200, 255, 0.5);
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,1.0), 
+            0 0 10px rgba(0,191,255,0.1);   
+    }
+    50% {
+        border-color: rgba(100, 220, 255, 0.9);
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,1.0),
+            0 0 20px rgba(0,191,255,0.4),      
+            0 0 5px rgba(255,255,255,0.5);    
+    }
+    100% {
+        border-color: rgba(130, 200, 255, 0.5);
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,1.0),
+            0 0 10px rgba(0,191,255,0.1);
+    }
 }
 
 
-/* Pjax 页面过渡动画 */
+/* Pjax 页面过渡 */
 
 /* 定义过渡效果 */
 .container { 
-    /* 确保平滑的过渡效果 */
     transition: 
         opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
         transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -198,8 +291,7 @@
     transform: translateY(0); 
 }
 
-/* 页面离开状态：当手动添加 .is-transitioning 类时，内容淡出并向下移动 */
 .container.is-transitioning { 
     opacity: 0; 
-    transform: translateY(20px); /* 向下移动 20px */
+    transform: translateY(20px); 
 }
