@@ -314,6 +314,8 @@
 /* Pjax 页面过渡 */
 
 /* 定义过渡效果 */
+
+/*
 .container { 
     transition: 
         opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
@@ -325,6 +327,24 @@
 .container.is-transitioning { 
     opacity: 0; 
     transform: translateY(30px) scale(0.98);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+*/
+
+/* 定义过渡效果 */
+#main-container {
+    opacity: 1;
+    transform: translateY(0);
+    will-change: opacity, transform;
+    transition: 
+        opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. 过渡状态 (隐藏) */
+#main-container.is-transitioning {
+    opacity: 0;
+    transform: translateY(30px) scale(0.99);
 }
 
 @media only screen and (max-width: 1100px) {  
@@ -332,4 +352,138 @@
         display: none !important; 
     }
     
+}
+
+.post-preview a h2.post-title.archive {
+    color: #008866; 
+    border-color: rgba(100, 255, 200, 0.4); 
+    
+    background: linear-gradient(
+        to bottom,
+        rgba(235, 255, 250, 0.9) 0%,   
+        rgba(200, 255, 235, 0.7) 50%,  
+        rgba(160, 255, 220, 0.6) 51%,  
+        rgba(190, 255, 240, 0.8) 100%  
+    );
+    
+    font-size: 28px; 
+    font-weight: 700;
+
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 1.0), 
+        inset 0 -1px 3px rgba(0, 200, 150, 0.1),
+        0 2px 5px rgba(0, 255, 180, 0.15);     
+}
+
+.post-preview a h2.post-title.archive .title-text::before {
+    background: radial-gradient(
+        circle at 30% 30%, 
+        rgba(220, 255, 240, 1.0) 0%,   
+        rgba(0, 220, 150, 0.8) 40%,    
+        rgba(0, 150, 100, 0.9) 100%    
+    );
+    border-color: rgba(0, 100, 80, 0.3);
+}
+
+.post-preview a:hover h2.post-title.archive {
+    color: #006644; 
+    border-color: rgba(100, 255, 210, 0.8);
+    
+    background: linear-gradient(
+        to bottom,
+        rgba(245, 255, 252, 1.0) 0%,
+        rgba(220, 255, 240, 0.9) 50%,
+        rgba(180, 255, 230, 0.8) 51%,
+        rgba(230, 255, 245, 0.9) 100%
+    );
+    
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 1.0),
+        0 0 15px rgba(0, 255, 180, 0.4), 
+        0 4px 8px rgba(0, 200, 150, 0.2);
+        
+    text-shadow: 0 0 20px rgba(0, 255, 180, 0.6);
+}
+
+.post-preview a:hover h2.post-title.archive .date-badge {
+    color: #004433;
+    border-left-color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+.post-preview a:active h2.post-title.archive {
+    background: linear-gradient(
+        to bottom,
+        rgba(220, 255, 240, 0.9) 0%,   
+        rgba(170, 240, 220, 0.8) 50%, 
+        rgba(140, 220, 200, 0.7) 51%, 
+        rgba(180, 240, 230, 0.8) 100%
+    );
+    border-color: rgba(0, 150, 100, 0.4);
+    box-shadow: 
+        inset 0 2px 6px rgba(0, 100, 80, 0.2), 
+        inset 0 0 10px rgba(0, 150, 100, 0.1),
+        0 0 0 transparent;
+}
+
+/* Tags 与 Categories */
+
+.post-tags, .post-categories {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 15px;
+}
+
+.post-tags a, .post-categories a {
+    display: inline-block;
+    padding: 4px 12px;      
+    margin-right: 8px;     
+    margin-bottom: 8px;
+    
+    text-decoration: none;
+    border-radius: 20px;    
+    
+    color: #005580;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 600;
+    
+    background: linear-gradient(
+        to bottom,
+        rgba(240, 250, 255, 0.9) 0%,
+        rgba(200, 235, 255, 0.6) 50%,
+        rgba(150, 220, 255, 0.5) 51%,  
+        rgba(210, 240, 255, 0.8) 100%
+    );
+    
+    border: 1px solid rgba(130, 200, 255, 0.6);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 1.0),
+        0 1px 2px rgba(0, 0, 0, 0.05);
+        
+    transition: all 0.2s ease;
+}
+
+.post-tags a:hover, .post-categories a:hover {
+    color: #003366;
+    transform: translateY(-2px); 
+    
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1.0) 0%,
+        rgba(220, 245, 255, 0.8) 50%,
+        rgba(180, 230, 255, 0.7) 51%,
+        rgba(230, 250, 255, 0.9) 100%
+    );
+    
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 1.0),
+        0 4px 8px rgba(0, 150, 255, 0.3); 
+    
+    border-color: #55aaff;
+}
+
+.post-tags a:active, .post-categories a:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 4px rgba(0, 50, 100, 0.15);
+    background: #d0efff;
 }

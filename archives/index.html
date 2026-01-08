@@ -389,113 +389,153 @@
 </header>
 
 <!-- Main Content -->
-<div class="container">
+<div class="container" id="main-container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             
                 <div class="post-preview">
     <a href="/2025/11/11/吴语拼音/">
-        <h1 class="post-title archive">
-            上海话拼音方案
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
+        <h2 class="post-title archive">
+            
+            <span class="title-text">
+                上海话拼音方案
+            </span>
+            
+            <span class="date-badge">
+                2025-11-11
+            </span>
+        </h2>
         
-        2025-11-11
-    </p>
+        
+    </a>
 </div>
+<hr>
             
                 <div class="post-preview">
     <a href="/2025/09/28/Picard定理与泛函分析/">
-        <h1 class="post-title archive">
-            Picard定理与泛函分析
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
+        <h2 class="post-title archive">
+            
+            <span class="title-text">
+                Picard定理与泛函分析
+            </span>
+            
+            <span class="date-badge">
+                2025-09-28
+            </span>
+        </h2>
         
-        2025-09-28
-    </p>
+        
+    </a>
 </div>
+<hr>
             
                 <div class="post-preview">
     <a href="/2025/08/23/TEsT/">
-        <h1 class="post-title archive">
-            测试页面
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
+        <h2 class="post-title archive">
+            
+            <span class="title-text">
+                测试页面
+            </span>
+            
+            <span class="date-badge">
+                2025-08-23
+            </span>
+        </h2>
         
-        2025-08-23
-    </p>
+        
+    </a>
 </div>
+<hr>
             
                 <div class="post-preview">
     <a href="/2025/08/23/hello-world/">
-        <h1 class="post-title archive">
-            Hello World
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
+        <h2 class="post-title archive">
+            
+            <span class="title-text">
+                Hello World
+            </span>
+            
+            <span class="date-badge">
+                2025-08-23
+            </span>
+        </h2>
         
-        2025-08-23
-    </p>
+        
+    </a>
 </div>
+<hr>
             
                 <div class="post-preview">
     <a href="/2025/05/11/告诉自己忘了它/">
-        <h1 class="post-title archive">
-            告诉自己忘了它
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
+        <h2 class="post-title archive">
+            
+            <span class="title-text">
+                告诉自己忘了它
+            </span>
+            
+            <span class="date-badge">
+                2025-05-11
+            </span>
+        </h2>
         
-        2025-05-11
-    </p>
+        
+    </a>
 </div>
+<hr>
             
                 <div class="post-preview">
     <a href="/2025/03/02/似春非春/">
-        <h1 class="post-title archive">
-            似春非春
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
+        <h2 class="post-title archive">
+            
+            <span class="title-text">
+                似春非春
+            </span>
+            
+            <span class="date-badge">
+                2025-03-02
+            </span>
+        </h2>
         
-        2025-03-02
-    </p>
+        
+    </a>
 </div>
+<hr>
             
                 <div class="post-preview">
     <a href="/2024/10/24/秋/">
-        <h1 class="post-title archive">
-            秋
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
+        <h2 class="post-title archive">
+            
+            <span class="title-text">
+                秋
+            </span>
+            
+            <span class="date-badge">
+                2024-10-24
+            </span>
+        </h2>
         
-        2024-10-24
-    </p>
+        
+    </a>
 </div>
+<hr>
             
                 <div class="post-preview">
     <a href="/2024/07/30/时间/">
-        <h1 class="post-title archive">
-            时间
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
+        <h2 class="post-title archive">
+            
+            <span class="title-text">
+                时间
+            </span>
+            
+            <span class="date-badge">
+                2024-07-30
+            </span>
+        </h2>
         
-        2024-07-30
-    </p>
+        
+    </a>
 </div>
+<hr>
             
             <div class="archive-before-pagination"></div>
             <ul class="pager">
@@ -576,6 +616,23 @@ function toggleSidebar() {
     }
 }
 
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('.post-preview a');
+    if (!link || link.dataset.isDelayed) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+
+    document.documentElement.classList.add('is-animating');
+
+    setTimeout(() => {
+        link.dataset.isDelayed = "true";
+        link.click();
+    }, 300);
+
+}, true);
+
 document.addEventListener('DOMContentLoaded', toggleSidebar);
 
 document.addEventListener('pjax:complete', toggleSidebar);
@@ -620,40 +677,49 @@ document.addEventListener('pjax:complete', function() {
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  
-  const TRANSITION_SELECTORS = ".container"; 
-  document.addEventListener('pjax:send', function() {
-    const elementsToTransition = document.querySelectorAll(TRANSITION_SELECTORS);
-    elementsToTransition.forEach(el => {
-      el.classList.add('is-transitioning');
-    });
-  });
+(function() {
+    if (window.hasInitializedPjaxTransition) return;
+    window.hasInitializedPjaxTransition = true;
 
-  document.addEventListener('pjax:success', function() {
-    const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
-    
-    newElements.forEach(el => {
-      el.classList.add('is-transitioning'); 
-    });
+    // 唯一指定目标：#main-container
+    // 不需要再去猜是不是 .archive-container 了，因为我们刚才手动统一了 ID
+    const TARGET_ID = "#main-container";
 
-    newElements.forEach(el => {
-      void el.offsetHeight; 
+    // 辅助函数：只抓唯一的那个主角
+    function getTarget() {
+        return document.querySelector(TARGET_ID);
+    }
+
+    // 1. 退场
+    document.addEventListener('pjax:send', function() {
+        const el = getTarget();
+        if (el) el.classList.add('is-transitioning');
     });
 
-    newElements.forEach(el => {
-      el.classList.remove('is-transitioning');
+    // 2. 进场
+    document.addEventListener('pjax:success', function() {
+        const el = getTarget();
+        
+        // 防弹衣：如果没找到（极少情况），就啥也不做，不报错
+        if (!el) return;
+
+        // A. 瞬间隐藏
+        el.style.transition = 'none';
+        el.classList.add('is-transitioning');
+
+        // B. 强制重排 + 恢复动画
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                el.style.transition = ''; 
+                void el.offsetHeight; 
+
+                requestAnimationFrame(() => {
+                    el.classList.remove('is-transitioning');
+                });
+            });
+        }, 10);
     });
-  });
-
-  document.addEventListener('pjax:success', function() {
-      const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
-      newElements.forEach(el => {
-          el.classList.remove('is-transitioning');
-      });
-  });
-
-});
+})();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>

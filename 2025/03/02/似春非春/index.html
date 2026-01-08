@@ -522,7 +522,7 @@ mjx-container[display="true"] + br {
 
 <!-- Post Content -->
 <article>
-    <div class="container">
+    <div class="container" id="main-container">
         <div class="row">
 
             <!-- Tags and categories -->
@@ -719,6 +719,23 @@ function toggleSidebar() {
     }
 }
 
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('.post-preview a');
+    if (!link || link.dataset.isDelayed) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+
+    document.documentElement.classList.add('is-animating');
+
+    setTimeout(() => {
+        link.dataset.isDelayed = "true";
+        link.click();
+    }, 300);
+
+}, true);
+
 document.addEventListener('DOMContentLoaded', toggleSidebar);
 
 document.addEventListener('pjax:complete', toggleSidebar);
@@ -763,40 +780,49 @@ document.addEventListener('pjax:complete', function() {
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  
-  const TRANSITION_SELECTORS = ".container"; 
-  document.addEventListener('pjax:send', function() {
-    const elementsToTransition = document.querySelectorAll(TRANSITION_SELECTORS);
-    elementsToTransition.forEach(el => {
-      el.classList.add('is-transitioning');
-    });
-  });
+(function() {
+    if (window.hasInitializedPjaxTransition) return;
+    window.hasInitializedPjaxTransition = true;
 
-  document.addEventListener('pjax:success', function() {
-    const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
-    
-    newElements.forEach(el => {
-      el.classList.add('is-transitioning'); 
-    });
+    // 唯一指定目标：#main-container
+    // 不需要再去猜是不是 .archive-container 了，因为我们刚才手动统一了 ID
+    const TARGET_ID = "#main-container";
 
-    newElements.forEach(el => {
-      void el.offsetHeight; 
+    // 辅助函数：只抓唯一的那个主角
+    function getTarget() {
+        return document.querySelector(TARGET_ID);
+    }
+
+    // 1. 退场
+    document.addEventListener('pjax:send', function() {
+        const el = getTarget();
+        if (el) el.classList.add('is-transitioning');
     });
 
-    newElements.forEach(el => {
-      el.classList.remove('is-transitioning');
+    // 2. 进场
+    document.addEventListener('pjax:success', function() {
+        const el = getTarget();
+        
+        // 防弹衣：如果没找到（极少情况），就啥也不做，不报错
+        if (!el) return;
+
+        // A. 瞬间隐藏
+        el.style.transition = 'none';
+        el.classList.add('is-transitioning');
+
+        // B. 强制重排 + 恢复动画
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                el.style.transition = ''; 
+                void el.offsetHeight; 
+
+                requestAnimationFrame(() => {
+                    el.classList.remove('is-transitioning');
+                });
+            });
+        }, 10);
     });
-  });
-
-  document.addEventListener('pjax:success', function() {
-      const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
-      newElements.forEach(el => {
-          el.classList.remove('is-transitioning');
-      });
-  });
-
-});
+})();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>

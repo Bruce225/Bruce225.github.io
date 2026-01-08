@@ -538,7 +538,7 @@ mjx-container[display="true"] + br {
 
 <!-- Post Content -->
 <article>
-    <div class="container">
+    <div class="container" id="main-container">
         <div class="row">
 
             <!-- Tags and categories -->
@@ -547,11 +547,18 @@ mjx-container[display="true"] + br {
                     
                         
 
-<a href="/categories/Linguistics/">Linguistics</a>
+
+<a href="/tags/上海闲话杂谈/">#上海闲话杂谈</a>
+
 
                     
                 </div>
                 <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/Linguistics/">Linguistics</a>
+
                     
                 </div>
             
@@ -673,7 +680,7 @@ mjx-container[display="true"] + br {
 <tr>
 <td style="text-align: center;">/e/ - e 海</td>
 <td style="text-align: center;">/ue/ - ue 回</td>
-<td style="text-align: center;">/ie/ - ie 先</td>
+<td style="text-align: center;">/ie/ - ie 先 <span class="math inline"><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0;" xmlns="http://www.w3.org/2000/svg" width="0.988ex" height="1.887ex" role="img" focusable="false" viewBox="0 -833.9 436.6 833.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"></g><g data-mml-node="mn" transform="translate(33,363) scale(0.707)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g></g></g></svg></mjx-container></span></td>
 <td style="text-align: center;">/</td>
 </tr>
 <tr>
@@ -795,7 +802,7 @@ láhe.</p>
 lá?" ghi caon, "á zy ghieuté sagnin le zcincu <u>na</u> <u>vá</u>?"</p>
 <p>「哦呦，爸爸，」渠拉讲，「就刚刚，勿晓得何里𡍲跑过来只大妖怪！迭只妖怪是生得来凶头势，吓人吓个要死。外加渠还特为望阿拉窠里向盯在许，拿阿拉是吓得来！」</p>
 <p>"Óghiau, papa," ghila caon, "zcieu caoncaon, vésciauté ghalitá bau
-cule tsé duiaukua! Dítsé iaukua zy santéle sciondeus, hágnin hágé
+cule tsé duiaucua! Dítsé iaucua zy santéle sciondeus, hágnin hágé
 iausci. Ngaca ghi ghe déghue maon álá chu liscian tin láhe, ne álá zy
 há-téle!"</p>
 <p>「哦，原来是迭能介。」鹪鹩爸爸讲，「个么渠望何里去哉？」小鸟讲，「渠往伊面边去哉！」</p>
@@ -807,7 +814,7 @@ zcin ghi. Álá noenoe viau há <u>lá</u>, ngu mé díthaon hauhauciau chi
 ciauscion-ciauscion ghi!" Zoegheu zcieu fi tshéchi zcin ghi.</p>
 <p>渠转过只弯，看见原来是只狮子在伊面跑来跑去。但是只鹪鹩一点勿吓，渠落到只狮子个背脊骨上，开始骂渠。「侬到我屋里向去做啥体拉侬？」渠讲，「侬为啥体要来吓阿拉囡囡啊？」</p>
 <p>Ghi tsoe cu tsé ue, choeci gnioele zy tsé sytsy lá imi baule-bauchi.
-Dezy tsé ciauliau ínge véhá, ghi lótau tsé sytsygé pecícué laon, ches
+Dezy tsé ciauliau í-nge véhá, ghi lótau tsé sytsygé pecícué laon, ches
 moghi. "Non tau ngu óliscian chi tsusathi la non?" Ghicaon, "non
 ghuesathi iaule há álá noenoe a?"</p>
 <p>只狮子么睬渠也勿睬，只是继续走。迭能一来么，渠只小嘴巴就骂个越加凶哉。</p>
@@ -969,6 +976,23 @@ function toggleSidebar() {
     }
 }
 
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('.post-preview a');
+    if (!link || link.dataset.isDelayed) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+
+    document.documentElement.classList.add('is-animating');
+
+    setTimeout(() => {
+        link.dataset.isDelayed = "true";
+        link.click();
+    }, 300);
+
+}, true);
+
 document.addEventListener('DOMContentLoaded', toggleSidebar);
 
 document.addEventListener('pjax:complete', toggleSidebar);
@@ -1013,40 +1037,49 @@ document.addEventListener('pjax:complete', function() {
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-  
-  const TRANSITION_SELECTORS = ".container"; 
-  document.addEventListener('pjax:send', function() {
-    const elementsToTransition = document.querySelectorAll(TRANSITION_SELECTORS);
-    elementsToTransition.forEach(el => {
-      el.classList.add('is-transitioning');
-    });
-  });
+(function() {
+    if (window.hasInitializedPjaxTransition) return;
+    window.hasInitializedPjaxTransition = true;
 
-  document.addEventListener('pjax:success', function() {
-    const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
-    
-    newElements.forEach(el => {
-      el.classList.add('is-transitioning'); 
-    });
+    // 唯一指定目标：#main-container
+    // 不需要再去猜是不是 .archive-container 了，因为我们刚才手动统一了 ID
+    const TARGET_ID = "#main-container";
 
-    newElements.forEach(el => {
-      void el.offsetHeight; 
+    // 辅助函数：只抓唯一的那个主角
+    function getTarget() {
+        return document.querySelector(TARGET_ID);
+    }
+
+    // 1. 退场
+    document.addEventListener('pjax:send', function() {
+        const el = getTarget();
+        if (el) el.classList.add('is-transitioning');
     });
 
-    newElements.forEach(el => {
-      el.classList.remove('is-transitioning');
+    // 2. 进场
+    document.addEventListener('pjax:success', function() {
+        const el = getTarget();
+        
+        // 防弹衣：如果没找到（极少情况），就啥也不做，不报错
+        if (!el) return;
+
+        // A. 瞬间隐藏
+        el.style.transition = 'none';
+        el.classList.add('is-transitioning');
+
+        // B. 强制重排 + 恢复动画
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                el.style.transition = ''; 
+                void el.offsetHeight; 
+
+                requestAnimationFrame(() => {
+                    el.classList.remove('is-transitioning');
+                });
+            });
+        }, 10);
     });
-  });
-
-  document.addEventListener('pjax:success', function() {
-      const newElements = document.querySelectorAll(TRANSITION_SELECTORS);
-      newElements.forEach(el => {
-          el.classList.remove('is-transitioning');
-      });
-  });
-
-});
+})();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
