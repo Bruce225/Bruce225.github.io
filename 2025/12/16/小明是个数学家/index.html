@@ -15,10 +15,11 @@
     
         <meta name="description" content="此篇文章转载自个人公众号。
 
+
   小明是个数学家，但是他并不喜欢数学。
 
   小明从小就喜欢数学，他的世界很简单。
-  对他而言，数字会飞，常常在一个又一个梦境中粉饰开阔的、没有方向感的空间。数字是神秘的，充满金属光泽。当然，未经磨砂的金属始终不会失去独特的光泽。数字就在紫红色的空间中四处"/>
+  对他而言，数字会飞，常常在一个又一个梦境中粉饰开阔的、没有方向感的空间。数字是神秘的，充满金属光泽。当然，未经磨砂的金属始终不会失去独特的光泽。数字就在紫红色的空间中"/>
     
 
     <!--Author-->
@@ -35,10 +36,11 @@
     
         <meta property="og:description" content="此篇文章转载自个人公众号。
 
+
   小明是个数学家，但是他并不喜欢数学。
 
   小明从小就喜欢数学，他的世界很简单。
-  对他而言，数字会飞，常常在一个又一个梦境中粉饰开阔的、没有方向感的空间。数字是神秘的，充满金属光泽。当然，未经磨砂的金属始终不会失去独特的光泽。数字就在紫红色的空间中四处"/>
+  对他而言，数字会飞，常常在一个又一个梦境中粉饰开阔的、没有方向感的空间。数字是神秘的，充满金属光泽。当然，未经磨砂的金属始终不会失去独特的光泽。数字就在紫红色的空间中"/>
     
 
     <!--Open Graph Site Name-->
@@ -213,14 +215,14 @@
             		<span class="cat-count">1</span>
         	</a>
     	
-        	<a href="/categories/%E9%9A%8F%E7%AC%94/" class="sidebar-item">
-            		<span class="cat-name">随笔</span>
-            		<span class="cat-count">5</span>
-        	</a>
-    	
         	<a href="/categories/Linguistics/" class="sidebar-item">
             		<span class="cat-name">Linguistics</span>
             		<span class="cat-count">1</span>
+        	</a>
+    	
+        	<a href="/categories/Essays/" class="sidebar-item">
+            		<span class="cat-name">Essays</span>
+            		<span class="cat-count">5</span>
         	</a>
     	
     
@@ -423,11 +425,18 @@
                     
                         
 
-<a href="/categories/随笔/">随笔</a>
+
+<a href="/tags/随笔/">#随笔</a>
+
 
                     
                 </div>
                 <div class="col-lg-4 col-md-5 post-categories">
+                    
+                        
+
+<a href="/categories/Essays/">Essays</a>
+
                     
                 </div>
             
@@ -440,6 +449,7 @@
                 <blockquote>
 <p><em>此篇文章转载自个人公众号。</em></p>
 </blockquote>
+<hr />
 <p>  小明是个数学家，但是他并不喜欢数学。</p>
 <hr />
 <p>  小明从小就喜欢数学，他的世界很简单。</p>
@@ -667,62 +677,6 @@ document.addEventListener('pjax:complete', function() {
 </script>
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
-<script>
-(function() {
-    if (window.hasInitializedPjaxTransition) return;
-    window.hasInitializedPjaxTransition = true;
-
-    // 唯一指定目标：#main-container
-    // 不需要再去猜是不是 .archive-container 了，因为我们刚才手动统一了 ID
-    const TARGET_ID = "#main-container";
-
-    // 辅助函数：只抓唯一的那个主角
-    function getTarget() {
-        return document.querySelector(TARGET_ID);
-    }
-
-    // 1. 退场
-    document.addEventListener('pjax:send', function() {
-        const el = getTarget();
-        if (el) el.classList.add('is-transitioning');
-    });
-
-    // 2. 进场
-    document.addEventListener('pjax:success', function() {
-        const el = getTarget();
-        
-        // 防弹衣：如果没找到（极少情况），就啥也不做，不报错
-        if (!el) return;
-
-        // A. 瞬间隐藏
-        el.style.transition = 'none';
-        el.classList.add('is-transitioning');
-
-        // B. 强制重排 + 恢复动画
-        setTimeout(() => {
-            requestAnimationFrame(() => {
-                el.style.transition = ''; 
-                void el.offsetHeight; 
-
-                requestAnimationFrame(() => {
-                    el.classList.remove('is-transitioning');
-                });
-            });
-        }, 10);
-    });
-})();
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
-    selectors: ["title", ".container"]
-  });
-});
-</script>
-
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
@@ -1205,6 +1159,62 @@ audio.addEventListener("ended", () => {
   loadTrack(currentIndex + 1);
 });
 
+});
+</script>
+
+<script>
+(function() {
+    if (window.hasInitializedPjaxTransition) return;
+    window.hasInitializedPjaxTransition = true;
+
+    // 唯一指定目标：#main-container
+    // 不需要再去猜是不是 .archive-container 了，因为我们刚才手动统一了 ID
+    const TARGET_ID = "#main-container";
+
+    // 辅助函数：只抓唯一的那个主角
+    function getTarget() {
+        return document.querySelector(TARGET_ID);
+    }
+
+    // 1. 退场
+    document.addEventListener('pjax:send', function() {
+        const el = getTarget();
+        if (el) el.classList.add('is-transitioning');
+    });
+
+    // 2. 进场
+    document.addEventListener('pjax:success', function() {
+        const el = getTarget();
+        
+        // 防弹衣：如果没找到（极少情况），就啥也不做，不报错
+        if (!el) return;
+
+        // A. 瞬间隐藏
+        el.style.transition = 'none';
+        el.classList.add('is-transitioning');
+
+        // B. 强制重排 + 恢复动画
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                el.style.transition = ''; 
+                void el.offsetHeight; 
+
+                requestAnimationFrame(() => {
+                    el.classList.remove('is-transitioning');
+                });
+            });
+        }, 10);
+    });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
+    selectors: ["title", ".container"]
+  });
 });
 </script>
 <!-- hexo injector body_end end --></body>
