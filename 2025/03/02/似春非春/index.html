@@ -313,16 +313,17 @@ mjx-container[display="true"] + br {
     
 
     <div id="aero-sidebar" class="aero-sidebar" style="display: none;">
-    	<div class="sidebar-title">Categories</div>
+
+        <div class="sidebar-title">Categories</div>
     
-    	
-        	<a href="/categories/Mathematics/" class="sidebar-item">
-            		<span class="cat-name">Mathematics</span>
-            		<span class="cat-count">1</span>
-        	</a>
     	
         	<a href="/categories/Linguistics/" class="sidebar-item">
             		<span class="cat-name">Linguistics</span>
+            		<span class="cat-count">1</span>
+        	</a>
+    	
+        	<a href="/categories/Mathematics/" class="sidebar-item">
+            		<span class="cat-name">Mathematics</span>
             		<span class="cat-count">1</span>
         	</a>
     	
@@ -335,163 +336,180 @@ mjx-container[display="true"] + br {
     	<a href="/" class="sidebar-item all-posts">
         	<span class="cat-name">All Posts</span>
     	</a>
+
     </div>
 
-<style>
+    <style>
 
-@media only screen and (max-width: 1200px) {
-    .aero-sidebar { display: none; }
-}
+    @media only screen and (max-width: 1200px) {
+        .aero-sidebar { display: none; }
+    }
 
-.aero-sidebar {
-    position: absolute;
-    left: 70px;
-    top: 490px; /* 50%; */
-    /* transform: translateY(-50%); */
-    width: 270px;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    gap: 12px; 
-    padding: 20px;
-    
-    background: linear-gradient(
-        to bottom, 
-        rgba(20, 50, 70, 0.7) 0%, 
-        rgba(30, 70, 90, 0.5) 40%, 
-        rgba(20, 50, 70, 0.7) 100%
-    );
-    
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-top: 1px solid rgba(255, 255, 255, 0.8); 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    
-    box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.6),
-        inset 0 0 20px rgba(0, 200, 255, 0.1), 
-        0 20px 50px rgba(0, 0, 0, 0.5),
-        0 5px 15px rgba(0, 0, 0, 0.3);
-}
+    .aero-sidebar {
+        position: absolute;
+        left: 70px;
+        top: 490px; /* 50%; */
+        /* transform: translateY(-50%); */
+        width: 270px;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        gap: 12px; 
+        padding: 20px;
+        
+        background: linear-gradient(
+            to bottom, 
+            rgba(20, 50, 70, 0.7) 0%, 
+            rgba(30, 70, 90, 0.5) 40%, 
+            rgba(20, 50, 70, 0.7) 100%
+        );
+        
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-top: 1px solid rgba(255, 255, 255, 0.8); 
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        
+        box-shadow: 
+            inset 0 1px 0 rgba(255, 255, 255, 0.6),
+            inset 0 0 20px rgba(0, 200, 255, 0.1), 
+            0 20px 50px rgba(0, 0, 0, 0.5),
+            0 5px 15px rgba(0, 0, 0, 0.3);
+    }
 
-.sidebar-title {
-    font-size: 14px;
-    font-weight: 800;
-    color: rgba(255, 255, 255, 0.9);
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
-    text-align: center;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
-}
+    .sidebar-title {
+        font-size: 14px;
+        font-weight: 800;
+        color: rgba(255, 255, 255, 0.9);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+        text-align: center;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
 
-.sidebar-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
-    text-decoration: none !important;
-    color: #ffffff !important;
-    
-    background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.15) 0%,
-        rgba(255, 255, 255, 0.05) 50%,
-        rgba(255, 255, 255, 0.0) 51%,
-        rgba(255, 255, 255, 0.05) 100%
-    );
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 5px rgba(0,0,0,0.1);
-    border-radius: 18px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    
-    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-}
+    .sidebar-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 20px;
+        text-decoration: none !important;
+        color: #ffffff !important;
+        
+        background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0.0) 51%,
+            rgba(255, 255, 255, 0.05) 100%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 5px rgba(0,0,0,0.1);
+        border-radius: 18px;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
 
-/* 边栏按钮悬浮&反馈 */
-.sidebar-item:hover {
-    background: linear-gradient(
-        to bottom,
-        rgba(200, 240, 255, 0.5) 0%,
-        rgba(100, 200, 255, 0.2) 50%,
-        rgba(50, 150, 255, 0.1) 51%,
-        rgba(100, 200, 255, 0.3) 100%
-    );
-    transform: scale(1.05) translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.7);
-    box-shadow: 
-        inset 0 1px 0 rgba(255, 255, 255, 0.8), 
-        0 0 15px rgba(0, 190, 255, 0.6);       
-}
+    /* 边栏按钮悬浮&反馈 */
+    .sidebar-item:hover {
+        background: linear-gradient(
+            to bottom,
+            rgba(200, 240, 255, 0.5) 0%,
+            rgba(100, 200, 255, 0.2) 50%,
+            rgba(50, 150, 255, 0.1) 51%,
+            rgba(100, 200, 255, 0.3) 100%
+        );
+        transform: scale(1.05) translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.7);
+        box-shadow: 
+            inset 0 1px 0 rgba(255, 255, 255, 0.8), 
+            0 0 15px rgba(0, 190, 255, 0.6);       
+    }
 
-.sidebar-item:active {
-    background: linear-gradient(
-        to bottom, 
-        rgba(0, 0, 0, 0.2) 0%, 
-        rgba(0, 0, 0, 0.1) 100%
-    );
-    
-    transform: scale(0.998) translateY(1px);
-    box-shadow: 
-        inset 0 3px 8px rgba(0, 0, 0, 0.5),         
-	0 0 0 rgba(255, 255, 255, 0);   
-    border-color: rgba(255, 255, 255, 0.05); 
-    transition: all 0.1s ease-out; 
-}
+    .sidebar-item:active {
+        background: linear-gradient(
+            to bottom, 
+            rgba(0, 0, 0, 0.2) 0%, 
+            rgba(0, 0, 0, 0.1) 100%
+        );
+        
+        transform: scale(0.998) translateY(1px);
+        box-shadow: 
+            inset 0 3px 8px rgba(0, 0, 0, 0.5),         
+        0 0 0 rgba(255, 255, 255, 0);   
+        border-color: rgba(255, 255, 255, 0.05); 
+        transition: all 0.1s ease-out; 
+    }
 
-.cat-name { 
-    font-size: 15px; 
-    font-weight: 600;
-    letter-spacing: 0.7px; 
-}
+    .cat-name { 
+        font-size: 15px; 
+        font-weight: 600;
+        letter-spacing: 0.7px; 
+    }
 
-.cat-count {
-    font-size: 11px;
-    font-weight: bold;
-    background: rgba(0, 20, 40, 0.4);
-    color: rgba(255,255,255,0.9);
-    padding: 2px 8px; 
-    border-radius: 10px;
-    width: 20px;
-    text-align: center;
+    .cat-count {
+        font-size: 11px;
+        font-weight: bold;
+        background: rgba(0, 20, 40, 0.4);
+        color: rgba(255,255,255,0.9);
+        padding: 2px 8px; 
+        border-radius: 10px;
+        width: 20px;
+        text-align: center;
 
-    box-shadow: 
-        inset 0 2px 4px rgba(0,0,0,0.6), 
-        0 1px 0 rgba(255,255,255,0.2);
-    text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
-}
+        box-shadow: 
+            inset 0 2px 4px rgba(0,0,0,0.6), 
+            0 1px 0 rgba(255,255,255,0.2);
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.5);
+    }
 
-.all-posts {
-    margin-top: 8px;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 160, 200, 0.6) 0%,
-        rgba(0, 120, 160, 0.4) 50%,
-        rgba(0, 100, 140, 0.3) 51%,
-        rgba(0, 120, 160, 0.5) 100%
-    );
-    border: 1px solid rgba(100, 200, 255, 0.4);
-}
-.all-posts:hover {
-    background: linear-gradient(
-        to bottom,
-        rgba(50, 200, 255, 0.8) 0%,
-        rgba(0, 160, 220, 0.6) 50%,
-        rgba(0, 140, 200, 0.5) 51%,
-        rgba(0, 160, 220, 0.7) 100%
-    );
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-}
+    .all-posts {
+        margin-top: 8px;
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 160, 200, 0.6) 0%,
+            rgba(0, 120, 160, 0.4) 50%,
+            rgba(0, 100, 140, 0.3) 51%,
+            rgba(0, 120, 160, 0.5) 100%
+        );
+        border: 1px solid rgba(100, 200, 255, 0.4);
+    }
+    .all-posts:hover {
+        background: linear-gradient(
+            to bottom,
+            rgba(50, 200, 255, 0.8) 0%,
+            rgba(0, 160, 220, 0.6) 50%,
+            rgba(0, 140, 200, 0.5) 51%,
+            rgba(0, 160, 220, 0.7) 100%
+        );
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+    }
 
-@media screen and (max-width: 1000px) {
-    .aero-sidebar { display: none; }
-}
-</style>
+    @media screen and (max-width: 1000px) {
+        .aero-sidebar { display: none; }
+    }
+    </style>
 
-
+    <div id="desktop-clock" class="clock-widget-fixed">
+        <div class="aero-clock">
+            <div class="clock-face">
+                <div class="clock-mark mark-12"></div>
+                <div class="clock-mark mark-3"></div>
+                <div class="clock-mark mark-6"></div>
+                <div class="clock-mark mark-9"></div>
+                    
+                <div class="hand hour-hand" id="hourHand"></div>
+                <div class="hand minute-hand" id="minuteHand"></div>
+                <div class="hand second-hand" id="secondHand"></div>
+                    
+                <div class="center-nut"></div>
+            </div>
+            <div class="glass-reflection"></div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <!-- Page Header -->
@@ -770,21 +788,42 @@ document.addEventListener('pjax:complete', function() {
 
 </script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
+
+<script>  // 时钟脚本
+(function() {
+    const hourHand = document.getElementById('hourHand');
+    const minuteHand = document.getElementById('minuteHand');
+    const secondHand = document.getElementById('secondHand');
+
+    function updateClock() {
+        const now = new Date();
+        const seconds = now.getSeconds();
+        const minutes = now.getMinutes();
+        const hours = now.getHours();
+
+        // 计算角度
+        // 秒针：一圈60秒，每秒6度
+        const secondDeg = ((seconds / 60) * 360);
+        
+        // 分针：加上秒针的偏移量，让移动更平滑
+        const minuteDeg = ((minutes / 60) * 360) + ((seconds/60)*6);
+        
+        // 时针：加上分针的偏移量
+        const hourDeg = ((hours / 12) * 360) + ((minutes/60)*30);
+
+        // 应用旋转
+        secondHand.style.transform = `rotate(${secondDeg}deg)`;
+        minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+        hourHand.style.transform = `rotate(${hourDeg}deg)`;
+    }
+
+    // 立即运行一次，避免闪烁
+    updateClock();
+    // 每秒刷新
+    setInterval(updateClock, 1000);
+})();
 </script>
-<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 <!-- hexo injector body_end start -->
 <script>
 window.addEventListener("DOMContentLoaded", function () {
@@ -839,19 +878,37 @@ const btnContainer = document.createElement("div");
     b.style.width = "52px";
     b.style.height = "52px";
     b.style.borderRadius = "50%";
-    b.style.border = "1px solid rgba(255,255,255,0.25)";
-    b.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(150,180,255,0.2))";
+    
+    // 【修改1】边框：加一点点黑，不再是纯白，防止背景白的时候消失
+    b.style.border = "1px solid rgba(0,0,0,0.15)";
+    
+    // 【修改2】背景：稍微加深一点点，模拟“烟熏玻璃”
+    b.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(180,200,230,0.3))";
+    
     b.style.color = "white";
     b.style.fontSize = "28px"; 
     b.style.cursor = "pointer";
-    b.style.boxShadow = "0 6px 12px rgba(0,0,0,0.2), inset 0 1px 4px rgba(255,255,255,0.5)";
+    
+    // 【修改3】投影：加深阴影浓度(0.2 -> 0.35)，让它浮得更高
+    b.style.boxShadow = "0 8px 16px rgba(0,0,0,0.35), inset 0 1px 4px rgba(255,255,255,0.9)";
+    
     b.style.backdropFilter = "blur(12px)";
     b.style.webkitBackdropFilter = "blur(12px)";
-    b.style.textShadow = "0 1px 2px rgba(0,0,0,0.5)";
+    
+    // 【修改4】文字阴影：加重黑影，保证白色图标在任何背景都清晰
+    b.style.textShadow = "0 2px 4px rgba(0,0,0,0.6)";
+    
     b.style.transition = "all 0.25s ease";
 
+    // 鼠标放上去的效果
     b.addEventListener("mouseenter", () => {
-      b.style.background = "linear-gradient(120deg, rgba(255,255,255,0.7), rgba(150,200,255,0.35), rgba(255,255,255,0.7))";
+      // 悬停时变亮
+      b.style.background = "linear-gradient(120deg, rgba(255,255,255,0.8), rgba(180,220,255,0.5), rgba(255,255,255,0.8))";
+      b.style.border = "1px solid rgba(255,255,255,0.6)"; // 悬停时边框发光
+      b.style.transform = "translateY(-3px)";
+      b.style.boxShadow = "0 10px 20px rgba(0,0,0,0.4), inset 0 2px 6px rgba(255,255,255,0.8)";
+      
+      // 简单的流光动画
       b.animate(
         [
           { backgroundPosition: "0% 50%" },
@@ -860,21 +917,23 @@ const btnContainer = document.createElement("div");
         { duration: 1200, iterations: 1 }
       );
     });
-    b.addEventListener("mouseenter", () => {
-      b.style.transform = "translateY(-3px)";
-      b.style.boxShadow = "0 8px 18px rgba(0,0,0,0.3), inset 0 2px 6px rgba(255,255,255,0.6)";
-    });
+
     b.addEventListener("mouseleave", () => {
+      // 离开时恢复
+      b.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(180,200,230,0.3))";
+      b.style.border = "1px solid rgba(0,0,0,0.15)"; // 恢复深色边框
       b.style.transform = "translateY(0)";
-      b.style.boxShadow = "0 6px 12px rgba(0,0,0,0.2), inset 0 1px 4px rgba(255,255,255,0.5)";
+      b.style.boxShadow = "0 8px 16px rgba(0,0,0,0.35), inset 0 1px 4px rgba(255,255,255,0.9)";
     });
+
     b.addEventListener("mousedown", () => {
       b.style.transform = "translateY(2px) scale(0.95)";
       b.style.boxShadow = "inset 0 3px 6px rgba(0,0,0,0.5), inset 0 -1px 3px rgba(255,255,255,0.6)";
     });
+
     b.addEventListener("mouseup", () => {
       b.style.transform = "translateY(-2px)";
-      b.style.boxShadow = "0 6px 12px rgba(0,0,0,0.2), inset 0 1px 4px rgba(255,255,255,0.5)";
+      b.style.boxShadow = "0 8px 16px rgba(0,0,0,0.35), inset 0 1px 4px rgba(255,255,255,0.9)";
     });
   }
 
@@ -889,17 +948,17 @@ const btnContainer = document.createElement("div");
   btn.style.width = "60px";
   btn.style.height = "60px";
   btn.style.borderRadius = "50%";
-  btn.style.border = "1px solid rgba(255,255,255,0.25)";
-  btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(150,180,255,0.2))"; 
+  btn.style.border = "1px solid rgba(0,0,0,0.15)";
+  btn.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(180,200,230,0.3))";
   btn.style.color = "white";
   btn.style.fontSize = "28px";
   btn.style.fontWeight = "bold";
   btn.style.cursor = "pointer";
 
-  btn.style.boxShadow = "0 8px 16px rgba(0,0,0,0.25), inset 0 1px 4px rgba(255,255,255,0.5)";
+  btn.style.boxShadow = "0 8px 16px rgba(0,0,0,0.35), inset 0 1px 4px rgba(255,255,255,0.9)";
   btn.style.backdropFilter = "blur(12px)";
   btn.style.webkitBackdropFilter = "blur(12px)";
-  btn.style.textShadow = "0 1px 2px rgba(0,0,0,0.5)";
+  btn.style.textShadow = "0 2px 4px rgba(0,0,0,0.6)";
   btn.style.transition = "all 0.3s ease";
   btn.style.marginBottom = "10px";
 
@@ -916,7 +975,9 @@ highlight.style.pointerEvents = "none";
 btn.appendChild(highlight);
 
 btn.addEventListener("mouseenter", () => {
+  // 悬停变亮
   btn.style.background = "linear-gradient(120deg, rgba(255,255,255,0.7), rgba(150,200,255,0.35), rgba(255,255,255,0.7))";
+  btn.style.border = "1px solid rgba(255,255,255,0.6)";
   btn.animate(
     [
       { backgroundPosition: "0% 50%" },
@@ -959,31 +1020,27 @@ const label = document.createElement("div");
 label.innerText = "点击播放测试音乐";
 label.style.padding = "10px 20px";
 label.style.borderRadius = "20px";
-label.style.background = "rgba(200,220,255,0.25)";
+
+label.style.background = "rgba(0, 0, 0, 0.2)"; 
+label.style.border = "1px solid rgba(255, 255, 255, 0.3)";
+
 label.style.color = "white";
 label.style.fontSize = "17px"; // 字体
 label.style.fontFamily = "'Microsoft YaHei UI', 'Microsoft YaHei', sans-serif";
 label.style.fontWeight = "500"; // 笔画宽
 label.style.letterSpacing = "0.8px"; // 字距
-label.style.boxShadow =
-  "0 4px 12px rgba(0,0,0,0.25), " +
-  "inset 0 2px 6px rgba(255,255,255,0.45), " +
-  "inset 0 -2px 6px rgba(0,120,255,0.25)";
+
+label.style.boxShadow = "0 4px 12px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.3)";
+
 label.style.backdropFilter = "blur(8px)";
 label.style.webkitBackdropFilter = "blur(8px)";
-label.style.textShadow =
-  "0 0 3px rgba(180,220,255,0.9), " +
-  "0 0 6px rgba(140,200,255,0.7)";
+
+label.style.textShadow = "0 1px 3px rgba(0,0,0,0.9)";
+
 label.style.transition = "all 0.4s ease";
 label.style.width = "220px"; // 宽度
 label.style.textAlign = "center";
 label.style.cursor = "move";
-
-// 渐变文字
-label.style.backgroundImage = "linear-gradient(to top, #dff6ff, #ffffff)";
-label.style.webkitBackgroundClip = "text";
-label.style.backgroundClip = "text";
-label.style.webkitTextFillColor = "transparent";
 
 // 初始淡入效果
 label.style.opacity = "0";
@@ -1035,7 +1092,10 @@ function updateLabel() {
   progressContainer.style.width = "220px";
   progressContainer.style.height = "8px";
   progressContainer.style.borderRadius = "4px";
-  progressContainer.style.background = "rgba(255,255,255,0.2)";
+
+  progressContainer.style.background = "rgba(0,0,0,0.2)"; 
+  progressContainer.style.border = "1px solid rgba(255,255,255,0.2)";
+
   progressContainer.style.marginTop = "8px";
   progressContainer.style.overflow = "hidden";
   progressContainer.style.backdropFilter = "blur(6px)";
@@ -1056,7 +1116,10 @@ function updateLabel() {
   volumeContainer.style.width = "220px";
   volumeContainer.style.height = "8px";
   volumeContainer.style.borderRadius = "4px";
-  volumeContainer.style.background = "rgba(255,255,255,0.25)";
+
+  volumeContainer.style.background = "rgba(0,0,0,0.2)"; 
+  volumeContainer.style.border = "1px solid rgba(255,255,255,0.2)";
+
   volumeContainer.style.marginTop = "8px";
   volumeContainer.style.display = "flex";
   volumeContainer.style.alignItems = "center";
@@ -1271,6 +1334,16 @@ audio.addEventListener("ended", () => {
 });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
+    selectors: ["title", ".container"]
+  });
+});
+</script>
+
 <script>
 (function() {
     if (window.hasInitializedPjaxTransition) return;
@@ -1315,16 +1388,6 @@ audio.addEventListener("ended", () => {
         }, 10);
     });
 })();
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
-    selectors: ["title", ".container"]
-  });
-});
 </script>
 <!-- hexo injector body_end end --></body>
 

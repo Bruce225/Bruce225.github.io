@@ -1,8 +1,105 @@
 
-/* 导航按钮（脉冲 + 光边）*/
+/* 
+    指针 (箭头) 部分
+*/
+
+body, html {
+    cursor: url('/cursors/arrow.cur'), auto !important; 
+}
+
+/* 点击 */
+a, 
+button, 
+.btn,
+.sidebar-item, 
+.post-preview, 
+.post-tags a, 
+.post-categories a,
+.pagination .page-number,
+.pagination .extend {
+    cursor: url('/cursors/link.cur'), pointer !important;
+}
+
+/* ---------------------------------------------------------------------------------------------------------- */
+
+/* 
+    标题部分 
+*/
+
+/* 修改 header 类 */
+header.intro-header {
+    background-attachment: fixed !important;
+    
+    background-position: center center;
+    background-size: cover;
+    
+    position: relative;
+    z-index: 1;
+    overflow: hidden; 
+}
+
+/* 背景和文字之间的光斑 */
+header.intro-header::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    mix-blend-mode: screen; 
+    
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.12) 0%, transparent 30%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+        
+    z-index: -1; 
+    pointer-events: none; 
+}
+
+/* 主标题 */
+.site-heading h1 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;
+    
+    text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.4),        
+        0 0 20px rgba(255, 255, 255, 0.6),    
+        0 0 40px rgba(100, 200, 255, 0.4);   
+        
+    animation: floatIn 1.5s ease-out;
+}
+
+/* 副标题 */
+.site-heading .subheading {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.95);
+    background: rgba(0, 0, 0, 0.2); 
+    padding: 5px 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(2px); 
+    display: inline-block; 
+    margin-top: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* 简单的浮入动画 */
+@keyframes floatIn {
+    0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ---------------------------------------------------------------------------------------------------------- */
+
+/* 
+    导航按钮部分 
+*/
 
 
-/* 基础样式 */
+/* 基础样式 - 作废 */ 
+/*
 .navbar-nav > li > a {
   position: relative;
   display: inline-block;
@@ -19,10 +116,57 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 1px 2px rgba(0,0,0,0.3);
   overflow: hidden;
 }
+*/
+
+/* 导航栏基础样式  */
+.navbar-nav > li > a {
+  position: relative;
+  display: inline-block;
+  padding: 8px 20px; 
+  color: #ffffff;
+  font-weight: 700; 
+  font-family: "Segoe UI", sans-serif;
+  
+  border-radius: 30px; 
+  margin: 0 6px; 
+  
+  background: rgba(255, 255, 255, 0.15);
+  
+  border: 1px solid rgba(255, 255, 255, 0.4); 
+  
+  box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.8), 
+      inset 0 -1px 2px rgba(0, 0, 0, 0.1),    
+      0 2px 5px rgba(0, 0, 0, 0.15);         
+  
+  backdrop-filter: blur(4px); 
+
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* 悬停状态 */
+.navbar-nav > li > a:hover {
+  background: rgba(255, 255, 255, 0.35); 
+  border-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  
+  box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 1.0),
+      0 0 15px rgba(255, 255, 255, 0.5), 
+      0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 点击/激活状态 */
+.navbar-nav > li > a:active {
+  transform: translateY(1px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); 
+}
 
 /* 光晕 */
 .navbar-nav > li > a:hover {
-  background: linear-gradient(to bottom, rgba(100,180,255,0.5), rgba(70,140,255,0.4));
+  /*background: linear-gradient(to bottom, rgba(100,180,255,0.5), rgba(70,140,255,0.4));*/
   color: #fff;
   text-shadow: 0 0 8px rgba(255,255,255,0.9);
   transform: translateY(-3px) scale(1.02);
@@ -36,6 +180,9 @@
     0 0 0 2px rgba(100,150,255,0.2); /* 半透明边缘光 */
 
   animation: glowPulse 1.5s infinite alternate;
+
+  border-color: rgba(255, 255, 255, 0.6);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
 }
 
 /* 点击凹陷效果 */
@@ -82,8 +229,10 @@
   }
 }
 
+/* ---------------------------------------------------------------------------------------------------------- */
+
 /*
-   标题 
+    文章标题部分
 */
 
 .post-preview a h2.post-title {
@@ -310,10 +459,13 @@
     }
 }
 
+/* ---------------------------------------------------------------------------------------------------------- */
 
-/* Pjax 页面过渡 */
+/* 
+    Pjax 页面过渡 
+*/
 
-/* 定义过渡效果 */
+/* 定义过渡效果 - 作废 */
 
 /*
 .container { 
@@ -341,7 +493,7 @@
         transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 2. 过渡状态 (隐藏) */
+/* 过渡状态  */
 #main-container.is-transitioning {
     opacity: 0;
     transform: translateY(30px) scale(0.99);
@@ -426,7 +578,11 @@
         0 0 0 transparent;
 }
 
-/* Tags 与 Categories */
+/* ---------------------------------------------------------------------------------------------------------- */
+
+/* 
+    Tags 与 Categories 特殊部分
+*/
 
 .post-tags, .post-categories {
     margin-top: 2px;
@@ -487,3 +643,286 @@
     box-shadow: inset 0 2px 4px rgba(0, 50, 100, 0.15);
     background: #d0efff;
 }
+
+/* ---------------------------------------------------------------------------------------------------------- */
+
+/* 
+   Scrollbar
+   适用于 Chrome, Edge, Safari
+*/
+
+
+/* 定义整体尺寸 */
+::-webkit-scrollbar {
+    width: 16px;  
+    height: 16px; 
+}
+
+/* 轨道 */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05); 
+    border-left: 1px solid rgba(255, 255, 255, 0.15); 
+}
+
+/* 滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    
+    border: 4px solid transparent; 
+    background-clip: content-box; 
+    
+    background-color: rgba(150, 220, 255, 0.5); 
+    
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+/* 鼠标悬停 */
+::-webkit-scrollbar-thumb:hover {
+    border: 2px solid rgba(255, 255, 255, 0.5); 
+    background-clip: padding-box; 
+    
+    /* 高亮渐变 */
+    background: linear-gradient(
+        90deg, 
+        rgba(255, 255, 255, 0.9) 0%,   
+        rgba(160, 230, 255, 0.9) 20%,  
+        rgba(100, 200, 255, 0.8) 50%,  
+        rgba(160, 230, 255, 0.9) 80%,  
+        rgba(255, 255, 255, 0.7) 100%  
+    );
+    
+    box-shadow: 
+        inset 0 0 3px rgba(255, 255, 255, 1.0),
+        0 0 8px rgba(100, 200, 255, 0.6);
+}
+
+/* 点击拖拽 */
+::-webkit-scrollbar-thumb:active {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    
+    background: linear-gradient(
+        90deg, 
+        rgba(130, 220, 255, 0.9) 0%,  
+        rgba(60, 170, 240, 0.9) 50%,   
+        rgba(130, 220, 255, 0.9) 100%  
+    );
+    
+    box-shadow: 
+        inset 2px 2px 6px rgba(0, 80, 150, 0.4),  
+        inset -1px -1px 3px rgba(255, 255, 255, 0.4); 
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* ---------------------------------------------------------------------------------------------------------- */
+
+/* 
+   Vista Aero Clock
+*/
+
+.clock-widget-fixed {
+    position: fixed; /* 绝对定位，不随页面滚动 */
+    top: 260px;      /* 距离顶部的高度（避开导航栏） */
+    right: 50px;     /* 距离右侧的距离 */
+    z-index: 99;     /* 确保在极光背景之上 */
+    
+    /* 增加一个入场动画，像开机加载小工具一样 */
+    animation: fadeSlideIn 1s ease-out;
+    
+    /* 给整个组件加一点透视，显得更立体 */
+    transform: perspective(500px) rotateY(-5deg);
+}
+
+/* =========================================
+   Vista Aero Clock V7 (Crystal Rim Edition)
+   ========================================= */
+
+/* 1. 时钟容器：从“轮胎”升级为“水晶环” */
+.aero-clock {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    
+    /* 背景色：极深的半透明灰，融合背景 */
+    background: rgba(20, 20, 20, 0.6);
+    
+    /* 【核心魔法】用投影代替边框，制造层级感 */
+    box-shadow: 
+        /* 第1层：外部深阴影，制造悬浮 */
+        0 10px 25px rgba(0,0,0,0.7),
+        
+        /* 第2层：外圈极细白光，模拟玻璃切割边缘 */
+        0 0 0 1px rgba(255,255,255,0.3),
+        
+        /* 第3层：厚重的熏黑玻璃外壳 (替代了原来的border) */
+        0 0 0 4px rgba(40, 40, 40, 0.8),
+        
+        /* 第4层：内圈顶部高光，模拟光照 */
+        inset 0 1px 2px rgba(255,255,255,0.9),
+        
+        /* 第5层：内圈深邃阴影，把表盘压进去 */
+        inset 0 0 10px rgba(0,0,0,0.9);
+        
+    overflow: hidden; 
+    
+    /* 增加一点模糊滤镜，让边框和背景融合得更柔和（可选） */
+    backdrop-filter: blur(5px);
+}
+
+/* 2. 钟面：修剪射线，只留刻度 */
+.clock-face {
+    position: absolute;
+    top: 6px; left: 6px; right: 6px; bottom: 6px;
+    border-radius: 50%;
+    
+    background: 
+        /* 层1：中心遮罩 (Mask) - 关键！ */
+        /* 把中间的射线挡住，只露边缘，这才是真正的刻度盘 */
+        radial-gradient(circle at center, #f5f5f5 55%, transparent 60%),
+        
+        /* 层2：射线刻度 (保持你的爆赞设计) */
+        repeating-conic-gradient(
+            from 0deg, 
+            rgba(0,0,0,0.15) 0deg 0.5deg, 
+            transparent 0.5deg 6deg
+        ),
+        
+        /* 层3：底色 */
+        radial-gradient(circle at center, #ffffff 0%, #e0e0e0 100%);
+    
+    /* 强烈的内阴影，压住刻度 */
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+
+/* 3. 主要刻度 (12, 3, 6, 9)：稍微细一点，优雅一点 */
+.clock-mark {
+    position: absolute;
+    background: linear-gradient(to bottom, #555, #222);
+    border-radius: 1px;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    z-index: 5;
+}
+.mark-12 { top: 5px; left: 50%; width: 4px; height: 10px; transform: translateX(-50%); }
+.mark-6  { bottom: 5px; left: 50%; width: 4px; height: 10px; transform: translateX(-50%); }
+.mark-3  { right: 5px; top: 50%; width: 10px; height: 4px; transform: translateY(-50%); }
+.mark-9  { left: 5px; top: 50%; width: 10px; height: 4px; transform: translateY(-50%); }
+
+/* 4. 指针系统：保持 V6 的完美比例 */
+.hand {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform-origin: bottom center;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    will-change: transform;
+    border-radius: 2px;
+}
+
+/* 时针 */
+.hour-hand {
+    width: 6px; 
+    height: 36px;
+    margin-left: -3px;
+    background: linear-gradient(90deg, #222 0%, #777 50%, #222 100%);
+    clip-path: polygon(25% 0, 75% 0, 100% 100%, 0% 100%);
+}
+
+/* 分针 */
+.minute-hand {
+    width: 4px; 
+    height: 52px;
+    margin-left: -2px;
+    background: linear-gradient(90deg, #666 0%, #fff 50%, #666 100%);
+    clip-path: polygon(30% 0, 70% 0, 100% 100%, 0% 100%);
+}
+
+/* 秒针 */
+.second-hand {
+    width: 1.5px; 
+    height: 58px;
+    background: #cc0000;
+    margin-left: -0.75px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+.second-hand::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    width: 6px; height: 6px;
+    background: #cc0000;
+    border-radius: 50%;
+    transform: translate(-50%, -2px);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* 5. 中心轴帽：增加金属拉丝感 */
+.center-nut {
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 12px; height: 12px;
+    /* 模拟CD纹 */
+    background: repeating-radial-gradient(#ddd 0, #ddd 1px, #999 2px); 
+    border: 1px solid #555;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.center-nut::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 3px; height: 3px;
+    background: #a00;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,1);
+}
+
+/* 6. 玻璃反光罩：更薄、更透 */
+.glass-reflection {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(
+        to bottom, 
+        rgba(255,255,255,0.6) 0%,   
+        rgba(255,255,255,0.05) 35%, /* 高光区域缩小，露出更多表盘细节 */
+        rgba(255,255,255,0.0) 48%,  
+        rgba(255,255,255,0.0) 50%,  
+        rgba(255,255,255,0.15) 100% 
+    );
+    pointer-events: none;
+    z-index: 20;
+    mix-blend-mode: overlay; 
+    /* 顶部边缘增加一点点锐利反光 */
+    box-shadow: inset 0 1px 3px rgba(255,255,255,0.5);
+}
+
+/* 在手机或平板上隐藏 */
+/* 屏幕太窄时，右侧放不下 */
+@media only screen and (max-width: 1400px) {
+    .clock-widget-fixed {
+        display: none;
+    }
+}
+
+/* 入场动画 */
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px) rotateY(0deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) rotateY(-5deg);
+    }
+}
+
+/* ---------------------------------------------------------------------------------------------------------- */
