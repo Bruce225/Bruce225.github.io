@@ -322,14 +322,14 @@ mjx-container[display="true"] + br {
             		<span class="cat-count">1</span>
         	</a>
     	
-        	<a href="/categories/Linguistics/" class="sidebar-item">
-            		<span class="cat-name">Linguistics</span>
-            		<span class="cat-count">1</span>
-        	</a>
-    	
         	<a href="/categories/Essays/" class="sidebar-item">
             		<span class="cat-name">Essays</span>
             		<span class="cat-count">5</span>
+        	</a>
+    	
+        	<a href="/categories/Linguistics/" class="sidebar-item">
+            		<span class="cat-name">Linguistics</span>
+            		<span class="cat-count">1</span>
         	</a>
     	
     
@@ -625,7 +625,7 @@ mjx-container[display="true"] + br {
         repo: 'Bruce225.github.io',
         owner: 'Bruce225',
         admin: ['Bruce225'],
-        id: '似春非春', 
+        id: '似春非春',
         distractionFreeMode: true
       });
       gitalk.render('gitalk-container');
@@ -849,52 +849,6 @@ document.addEventListener("DOMContentLoaded", function() {
     selectors: ["title", ".container"]
   });
 });
-</script>
-
-<script>
-(function() {
-    if (window.hasInitializedPjaxTransition) return;
-    window.hasInitializedPjaxTransition = true;
-
-    // 唯一指定目标：#main-container
-    // 不需要再去猜是不是 .archive-container 了，因为我们刚才手动统一了 ID
-    const TARGET_ID = "#main-container";
-
-    // 辅助函数：只抓唯一的那个主角
-    function getTarget() {
-        return document.querySelector(TARGET_ID);
-    }
-
-    // 1. 退场
-    document.addEventListener('pjax:send', function() {
-        const el = getTarget();
-        if (el) el.classList.add('is-transitioning');
-    });
-
-    // 2. 进场
-    document.addEventListener('pjax:success', function() {
-        const el = getTarget();
-        
-        // 防弹衣：如果没找到（极少情况），就啥也不做，不报错
-        if (!el) return;
-
-        // A. 瞬间隐藏
-        el.style.transition = 'none';
-        el.classList.add('is-transitioning');
-
-        // B. 强制重排 + 恢复动画
-        setTimeout(() => {
-            requestAnimationFrame(() => {
-                el.style.transition = ''; 
-                void el.offsetHeight; 
-
-                requestAnimationFrame(() => {
-                    el.classList.remove('is-transitioning');
-                });
-            });
-        }, 10);
-    });
-})();
 </script>
 
 <script>
@@ -1404,6 +1358,52 @@ audio.addEventListener("ended", () => {
 });
 
 });
+</script>
+
+<script>
+(function() {
+    if (window.hasInitializedPjaxTransition) return;
+    window.hasInitializedPjaxTransition = true;
+
+    // 唯一指定目标：#main-container
+    // 不需要再去猜是不是 .archive-container 了，因为我们刚才手动统一了 ID
+    const TARGET_ID = "#main-container";
+
+    // 辅助函数：只抓唯一的那个主角
+    function getTarget() {
+        return document.querySelector(TARGET_ID);
+    }
+
+    // 1. 退场
+    document.addEventListener('pjax:send', function() {
+        const el = getTarget();
+        if (el) el.classList.add('is-transitioning');
+    });
+
+    // 2. 进场
+    document.addEventListener('pjax:success', function() {
+        const el = getTarget();
+        
+        // 防弹衣：如果没找到（极少情况），就啥也不做，不报错
+        if (!el) return;
+
+        // A. 瞬间隐藏
+        el.style.transition = 'none';
+        el.classList.add('is-transitioning');
+
+        // B. 强制重排 + 恢复动画
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                el.style.transition = ''; 
+                void el.offsetHeight; 
+
+                requestAnimationFrame(() => {
+                    el.classList.remove('is-transitioning');
+                });
+            });
+        }, 10);
+    });
+})();
 </script>
 <!-- hexo injector body_end end --></body>
 
