@@ -59,7 +59,13 @@ header.intro-header::after {
 }
 
 /* 主标题 */
-.site-heading h1 {
+.site-heading h1,
+.post-heading h1 {
+    text-align: center !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
     font-weight: 700;
     letter-spacing: 1px;
     color: #ffffff;
@@ -72,24 +78,56 @@ header.intro-header::after {
     animation: floatIn 1.5s ease-out;
 }
 
-/* 副标题 */
+/* 主页副标题 */
 .site-heading .subheading {
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.95);
-    background: rgba(0, 0, 0, 0.2); 
-    padding: 5px 15px;
-    border-radius: 20px;
-    backdrop-filter: blur(2px); 
-    display: inline-block; 
-    margin-top: 10px;
-    border: 1px solid rgba(255,255,255,0.1);
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif !important;
+    font-weight: 400 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    
+    /* 背景 */
+    background: rgba(0, 0, 0, 0.2) !important; 
+    padding: 5px 20px !important;
+    border-radius: 20px !important;
+    backdrop-filter: blur(4px) !important; 
+    display: inline-block !important; 
+    margin-top: 15px !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    
+    /* 居中 */
+    text-align: center !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
 }
 
-/* 简单的浮入动画 */
+/* 文章页副标题 */
+.post-heading .post-subheading,
+.post-heading .meta {
+    background: none !important; 
+    border: none !important;     
+    backdrop-filter: none !important;
+    
+    display: block !important;
+    margin-top: 10px !important;
+    
+    /* 字体样式 */
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    letter-spacing: 1px !important;
+    
+    /* 居中 */
+    text-align: center !important;
+    
+    /* 日期文字投影 */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 浮入动画 */
 @keyframes floatIn {
     0% { opacity: 0; transform: translateY(20px) scale(0.95); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+
 
 /* ---------------------------------------------------------------------------------------------------------- */
 
@@ -723,81 +761,64 @@ header.intro-header::after {
 */
 
 .clock-widget-fixed {
-    position: fixed; /* 绝对定位，不随页面滚动 */
-    top: 260px;      /* 距离顶部的高度（避开导航栏） */
-    right: 50px;     /* 距离右侧的距离 */
-    z-index: 99;     /* 确保在极光背景之上 */
+    position: fixed; 
+    top: 260px;   
+    right: 50px;    
+    z-index: 99;    
     
-    /* 增加一个入场动画，像开机加载小工具一样 */
     animation: fadeSlideIn 1s ease-out;
     
-    /* 给整个组件加一点透视，显得更立体 */
     transform: perspective(500px) rotateY(-5deg);
 }
 
-/* =========================================
-   Vista Aero Clock V7 (Crystal Rim Edition)
-   ========================================= */
+/* Clock V7 */
 
-/* 1. 时钟容器：从“轮胎”升级为“水晶环” */
+/* 时钟容器 */
 .aero-clock {
     position: relative;
     width: 140px;
     height: 140px;
     border-radius: 50%;
     
-    /* 背景色：极深的半透明灰，融合背景 */
     background: rgba(20, 20, 20, 0.6);
     
-    /* 【核心魔法】用投影代替边框，制造层级感 */
     box-shadow: 
-        /* 第1层：外部深阴影，制造悬浮 */
         0 10px 25px rgba(0,0,0,0.7),
         
-        /* 第2层：外圈极细白光，模拟玻璃切割边缘 */
         0 0 0 1px rgba(255,255,255,0.3),
         
-        /* 第3层：厚重的熏黑玻璃外壳 (替代了原来的border) */
         0 0 0 4px rgba(40, 40, 40, 0.8),
         
-        /* 第4层：内圈顶部高光，模拟光照 */
         inset 0 1px 2px rgba(255,255,255,0.9),
         
-        /* 第5层：内圈深邃阴影，把表盘压进去 */
         inset 0 0 10px rgba(0,0,0,0.9);
         
     overflow: hidden; 
     
-    /* 增加一点模糊滤镜，让边框和背景融合得更柔和（可选） */
     backdrop-filter: blur(5px);
 }
 
-/* 2. 钟面：修剪射线，只留刻度 */
+/* 钟面 */
 .clock-face {
     position: absolute;
     top: 6px; left: 6px; right: 6px; bottom: 6px;
     border-radius: 50%;
     
     background: 
-        /* 层1：中心遮罩 (Mask) - 关键！ */
-        /* 把中间的射线挡住，只露边缘，这才是真正的刻度盘 */
         radial-gradient(circle at center, #f5f5f5 55%, transparent 60%),
         
-        /* 层2：射线刻度 (保持你的爆赞设计) */
         repeating-conic-gradient(
             from 0deg, 
             rgba(0,0,0,0.15) 0deg 0.5deg, 
             transparent 0.5deg 6deg
         ),
         
-        /* 层3：底色 */
         radial-gradient(circle at center, #ffffff 0%, #e0e0e0 100%);
     
-    /* 强烈的内阴影，压住刻度 */
     box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
 }
 
-/* 3. 主要刻度 (12, 3, 6, 9)：稍微细一点，优雅一点 */
+/* 刻度 (12, 3, 6, 9) */
 .clock-mark {
     position: absolute;
     background: linear-gradient(to bottom, #555, #222);
@@ -810,7 +831,7 @@ header.intro-header::after {
 .mark-3  { right: 5px; top: 50%; width: 10px; height: 4px; transform: translateY(-50%); }
 .mark-9  { left: 5px; top: 50%; width: 10px; height: 4px; transform: translateY(-50%); }
 
-/* 4. 指针系统：保持 V6 的完美比例 */
+/* 指针系统 */
 .hand {
     position: absolute;
     left: 50%;
@@ -859,7 +880,7 @@ header.intro-header::after {
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
 }
 
-/* 5. 中心轴帽：增加金属拉丝感 */
+/* 中心轴 */
 .center-nut {
     position: absolute;
     top: 50%; left: 50%;
@@ -883,7 +904,7 @@ header.intro-header::after {
     box-shadow: inset 0 1px 1px rgba(255,255,255,1);
 }
 
-/* 6. 玻璃反光罩：更薄、更透 */
+/* 玻璃反光罩 */
 .glass-reflection {
     position: absolute;
     top: 0; left: 0;
@@ -893,7 +914,7 @@ header.intro-header::after {
     background: linear-gradient(
         to bottom, 
         rgba(255,255,255,0.6) 0%,   
-        rgba(255,255,255,0.05) 35%, /* 高光区域缩小，露出更多表盘细节 */
+        rgba(255,255,255,0.05) 35%, 
         rgba(255,255,255,0.0) 48%,  
         rgba(255,255,255,0.0) 50%,  
         rgba(255,255,255,0.15) 100% 
@@ -901,7 +922,7 @@ header.intro-header::after {
     pointer-events: none;
     z-index: 20;
     mix-blend-mode: overlay; 
-    /* 顶部边缘增加一点点锐利反光 */
+
     box-shadow: inset 0 1px 3px rgba(255,255,255,0.5);
 }
 
@@ -923,6 +944,90 @@ header.intro-header::after {
         opacity: 1;
         transform: translateX(0) rotateY(-5deg);
     }
+}
+
+/* ---------------------------------------------------------------------------------------------------------- */
+
+/* 
+   页脚部分效果
+*/
+
+/* 页脚容器深色底座 */
+footer {
+    position: relative;
+    margin-top: 50px; 
+    padding: 40px 0; 
+    
+    background: linear-gradient(
+        to bottom, 
+        rgba(40, 50, 60, 0.85) 0%, 
+        rgba(20, 30, 40, 0.95) 50%, 
+        rgba(0, 0, 0, 0.95) 100%
+    ) !important;
+    
+    /* 顶部高光 */
+    border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+    
+    /* 磨砂效果 + 阴影 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 
+        0 -10px 20px rgba(0, 0, 0, 0.1), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.2); 
+}
+
+/* 社交图标 (GitHub等)从黑色变成发光水晶 */
+footer .fa-stack {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 圆底 */
+footer .fa-circle {
+    color: rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.3s ease;
+}
+
+/* 图标本身 */
+footer .fa-github, footer .fa-stack-1x {
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+
+/* 鼠标悬停特效：点亮图标  */
+footer a:hover .fa-stack {
+    transform: translateY(-5px) scale(1.1); 
+}
+
+footer a:hover .fa-circle {
+    color: rgba(100, 200, 255, 0.6) !important; 
+    filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.8)); 
+}
+
+footer a:hover .fa-github {
+    color: #fff !important;
+}
+
+/* 版权文字倒影感 */
+footer .copyright {
+    color: #ccc !important;
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    
+    /* 文字阴影 */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+footer .copyright a {
+    color: #fff !important;
+    border-bottom: 1px dotted rgba(255,255,255,0.5);
+}
+footer .copyright a:hover {
+    color: #00eaff !important; /* 链接悬停变青色 */
+    text-shadow: 0 0 10px rgba(0, 234, 255, 0.8);
+    text-decoration: none;
+    border-bottom: 1px solid #00eaff;
 }
 
 /* ---------------------------------------------------------------------------------------------------------- */

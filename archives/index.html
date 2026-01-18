@@ -195,11 +195,6 @@
         <div class="sidebar-title">Categories</div>
     
     	
-        	<a href="/categories/Linguistics/" class="sidebar-item">
-            		<span class="cat-name">Linguistics</span>
-            		<span class="cat-count">1</span>
-        	</a>
-    	
         	<a href="/categories/Mathematics/" class="sidebar-item">
             		<span class="cat-name">Mathematics</span>
             		<span class="cat-count">1</span>
@@ -208,6 +203,11 @@
         	<a href="/categories/Essays/" class="sidebar-item">
             		<span class="cat-name">Essays</span>
             		<span class="cat-count">5</span>
+        	</a>
+    	
+        	<a href="/categories/Linguistics/" class="sidebar-item">
+            		<span class="cat-name">Linguistics</span>
+            		<span class="cat-count">1</span>
         	</a>
     	
     
@@ -696,7 +696,6 @@ document.addEventListener('pjax:complete', function() {
 
 </script>
 
-
 <script>  // 时钟脚本
 (function() {
     const hourHand = document.getElementById('hourHand');
@@ -732,6 +731,23 @@ document.addEventListener('pjax:complete', function() {
 })();
 </script>
 
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
 <script>
 window.addEventListener("DOMContentLoaded", function () {
@@ -1242,16 +1258,6 @@ audio.addEventListener("ended", () => {
 });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
-    selectors: ["title", ".container"]
-  });
-});
-</script>
-
 <script>
 (function() {
     if (window.hasInitializedPjaxTransition) return;
@@ -1296,6 +1302,16 @@ document.addEventListener("DOMContentLoaded", function() {
         }, 10);
     });
 })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
+    selectors: ["title", ".container"]
+  });
+});
 </script>
 <!-- hexo injector body_end end --></body>
 
