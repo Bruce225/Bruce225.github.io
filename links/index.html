@@ -13,11 +13,12 @@
     
 
     
-        <meta name="description" content="/* --- 1. 分组标题：精致化 --- */
+        <meta name="description" content="/* 分组标题 */
 .links-group h2 {
   font-family: &#34;Segoe UI&#34;, &#34;Microsoft YaHei&#34;, sans-serif;
   font-size: 24px; /* 回归正常大小 */
-  font-weight: 7"/>
+  font-weight: 700;
+  color: #2"/>
     
 
     <!--Author-->
@@ -32,11 +33,12 @@
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="/* --- 1. 分组标题：精致化 --- */
+        <meta property="og:description" content="/* 分组标题 */
 .links-group h2 {
   font-family: &#34;Segoe UI&#34;, &#34;Microsoft YaHei&#34;, sans-serif;
   font-size: 24px; /* 回归正常大小 */
-  font-weight: 7"/>
+  font-weight: 700;
+  color: #2"/>
     
 
     <!--Open Graph Site Name-->
@@ -207,6 +209,11 @@
         <div class="sidebar-title">Categories</div>
     
     	
+        	<a href="/categories/Linguistics/" class="sidebar-item">
+            		<span class="cat-name">Linguistics</span>
+            		<span class="cat-count">1</span>
+        	</a>
+    	
         	<a href="/categories/Mathematics/" class="sidebar-item">
             		<span class="cat-name">Mathematics</span>
             		<span class="cat-count">1</span>
@@ -215,11 +222,6 @@
         	<a href="/categories/Essays/" class="sidebar-item">
             		<span class="cat-name">Essays</span>
             		<span class="cat-count">5</span>
-        	</a>
-    	
-        	<a href="/categories/Linguistics/" class="sidebar-item">
-            		<span class="cat-name">Linguistics</span>
-            		<span class="cat-count">1</span>
         	</a>
     	
     
@@ -435,18 +437,29 @@
     <div class="container" id="main-container">
         <div class="row">
 
-            <!-- Tags and categories -->
-           
+            
 
             <!-- Gallery -->
             
 
             <!-- Post Main Content -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 aero-reading-glass">
+
+                <!-- Tags and categories -->
+                <div class="post-metadata-header">
+                    
+                    <!-- 1. 检查并输出 Categories -->
+                    
+                    
+                    <!-- 2. 检查并输出 Tags -->
+                    
+                    
+                </div>
+
                 
 
 <style>
-/* --- 1. 分组标题：精致化 --- */
+/* 分组标题 */
 .links-group h2 {
   font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
   font-size: 24px; /* 回归正常大小 */
@@ -474,29 +487,27 @@
     border-radius: 2px;
 }
 
-/* --- 2. 容器布局：Tile View (磁贴视图) --- */
+/* 容器布局 */
 .links-container {
-  /* 核心：越狱撑开屏幕，但内容居中 */
   width: 90vw; 
   margin-left: -45vw;
   left: 50%;
   position: relative;
   
-  display: flex; /* 改用 Flex 布局，更容易控制居中 */
-  flex-wrap: wrap; /* 自动换行 */
-  justify-content: center; /* 整体居中 */
-  gap: 30px; /* 卡片间距 */
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 30px; 
   margin-top: 40px;
   
-  /* 限制最大宽度，防止在大屏幕上太散 */
+  /* 限制最大宽度 */
   max-width: 1400px; 
 }
 
-/* --- 3. 卡片本体：锁定黄金比例 --- */
+/* 卡片本体 */
 .link-item {
-  /* 关键：锁定宽度！不再拉伸！ */
   width: 280px; 
-  height: 320px; /* 固定高度，整齐划一 */
+  height: 320px; 
   
   background: linear-gradient(to bottom, #ffffff 0%, #f4f8fb 100%);
   border: 1px solid #c8d3e0; 
@@ -512,7 +523,7 @@
   overflow: hidden;
 }
 
-/* --- 4. 悬停状态 --- */
+/* 悬停状态 */
 .link-item:hover {
   transform: translateY(-8px); 
   z-index: 10;
@@ -525,7 +536,7 @@
       inset 0 0 0 1px rgba(255, 255, 255, 0.8);
 }
 
-/* --- 5. 内部排版 --- */
+/* 内部排版 */
 .link-card {
   display: flex;
   flex-direction: column;
@@ -537,9 +548,9 @@
   height: 100%;
 }
 
-/* --- 6. 头像：精致尺寸 --- */
+/* 头像尺寸 */
 .link-icon img {
-  width: 90px; /* 90px 是最舒服的大小 */
+  width: 90px; 
   height: 90px;
   margin-bottom: 20px;
   border-radius: 50%;
@@ -554,25 +565,24 @@
   box-shadow: 0 8px 20px rgba(0, 100, 200, 0.25);
 }
 
-/* --- 7. 文字信息：优化字体 --- */
+/* 文字信息字体 */
 .link-info h3 {
   margin: 0 0 10px 0;
-  font-size: 20px; /* 20px 刚刚好 */
-  font-weight: 600; /* 半粗体，比800清秀，比400显眼 */
+  font-size: 20px; 
+  font-weight: 600; /* 半粗体 */
   color: #005bb5; 
   text-align: center;
-  font-family: "Segoe UI", "Microsoft YaHei", sans-serif; /* 强制字体 */
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif; 
   line-height: 1.3;
 }
 
 .link-info p {
   margin: 0;
   font-size: 15px;
-  color: #64748b; /* 蓝灰色，很有高级感 */
+  color: #64748b; 
   text-align: center;
   line-height: 1.5;
   
-  /* 限制描述文字只显示两行，防止太长破坏布局 */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -580,18 +590,18 @@
   padding: 0 10px;
 }
 
-/* --- 8. 响应式适配 --- */
+/* 响应式 */
 @media (max-width: 768px) {
   .links-container {
-    width: 100%; /* 手机上回归正常宽度 */
+    width: 100%; /* 手机回归宽度 */
     margin-left: 0;
     left: 0;
     gap: 15px;
   }
   .link-item {
-    width: 100%; /* 手机上卡片撑满屏幕 */
-    max-width: 320px; /* 但别太大 */
-    height: auto; /* 高度自适应 */
+    width: 100%;
+    max-width: 320px; 
+    height: auto; 
     padding-bottom: 20px;
   }
 }
@@ -826,45 +836,29 @@ document.addEventListener('pjax:complete', function() {
         const hours = now.getHours();
 
         // 计算角度
-        // 秒针：一圈60秒，每秒6度
+        // 秒针
         const secondDeg = ((seconds / 60) * 360);
         
-        // 分针：加上秒针的偏移量，让移动更平滑
+        // 分针
         const minuteDeg = ((minutes / 60) * 360) + ((seconds/60)*6);
         
-        // 时针：加上分针的偏移量
+        // 时针
         const hourDeg = ((hours / 12) * 360) + ((minutes/60)*30);
 
-        // 应用旋转
+        
         secondHand.style.transform = `rotate(${secondDeg}deg)`;
         minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
         hourHand.style.transform = `rotate(${hourDeg}deg)`;
     }
 
-    // 立即运行一次，避免闪烁
+    
     updateClock();
-    // 每秒刷新
     setInterval(updateClock, 1000);
 })();
 </script>
 
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 <script>
@@ -874,6 +868,51 @@ document.addEventListener("DOMContentLoaded", function() {
     selectors: ["title", ".container"]
   });
 });
+</script>
+
+<script>
+(function() {
+    if (window.hasInitializedPjaxTransition) return;
+    window.hasInitializedPjaxTransition = true;
+
+    // 目标：#main-container
+    const TARGET_ID = "#main-container";
+
+    // 辅助函数
+    function getTarget() {
+        return document.querySelector(TARGET_ID);
+    }
+
+    // 退场
+    document.addEventListener('pjax:send', function() {
+        const el = getTarget();
+        if (el) el.classList.add('is-transitioning');
+    });
+
+    // 进场
+    document.addEventListener('pjax:success', function() {
+        const el = getTarget();
+        
+        // 如果没找到
+        if (!el) return;
+
+        // 隐藏
+        el.style.transition = 'none';
+        el.classList.add('is-transitioning');
+
+        // 重排 + 恢复动画
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                el.style.transition = ''; 
+                void el.offsetHeight; 
+
+                requestAnimationFrame(() => {
+                    el.classList.remove('is-transitioning');
+                });
+            });
+        }, 10);
+    });
+})();
 </script>
 
 <script>
@@ -930,23 +969,23 @@ const btnContainer = document.createElement("div");
     b.style.height = "52px";
     b.style.borderRadius = "50%";
     
-    // 【修改1】边框：加一点点黑，不再是纯白，防止背景白的时候消失
+    // 边框
     b.style.border = "1px solid rgba(0,0,0,0.15)";
-    
-    // 【修改2】背景：稍微加深一点点，模拟“烟熏玻璃”
+
+    // 背景
     b.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(180,200,230,0.3))";
     
     b.style.color = "white";
     b.style.fontSize = "28px"; 
     b.style.cursor = "pointer";
     
-    // 【修改3】投影：加深阴影浓度(0.2 -> 0.35)，让它浮得更高
+    // 投影
     b.style.boxShadow = "0 8px 16px rgba(0,0,0,0.35), inset 0 1px 4px rgba(255,255,255,0.9)";
     
     b.style.backdropFilter = "blur(12px)";
     b.style.webkitBackdropFilter = "blur(12px)";
     
-    // 【修改4】文字阴影：加重黑影，保证白色图标在任何背景都清晰
+    // 文字阴影
     b.style.textShadow = "0 2px 4px rgba(0,0,0,0.6)";
     
     b.style.transition = "all 0.25s ease";
@@ -1383,52 +1422,6 @@ audio.addEventListener("ended", () => {
 });
 
 });
-</script>
-
-<script>
-(function() {
-    if (window.hasInitializedPjaxTransition) return;
-    window.hasInitializedPjaxTransition = true;
-
-    // 唯一指定目标：#main-container
-    // 不需要再去猜是不是 .archive-container 了，因为我们刚才手动统一了 ID
-    const TARGET_ID = "#main-container";
-
-    // 辅助函数：只抓唯一的那个主角
-    function getTarget() {
-        return document.querySelector(TARGET_ID);
-    }
-
-    // 1. 退场
-    document.addEventListener('pjax:send', function() {
-        const el = getTarget();
-        if (el) el.classList.add('is-transitioning');
-    });
-
-    // 2. 进场
-    document.addEventListener('pjax:success', function() {
-        const el = getTarget();
-        
-        // 防弹衣：如果没找到（极少情况），就啥也不做，不报错
-        if (!el) return;
-
-        // A. 瞬间隐藏
-        el.style.transition = 'none';
-        el.classList.add('is-transitioning');
-
-        // B. 强制重排 + 恢复动画
-        setTimeout(() => {
-            requestAnimationFrame(() => {
-                el.style.transition = ''; 
-                void el.offsetHeight; 
-
-                requestAnimationFrame(() => {
-                    el.classList.remove('is-transitioning');
-                });
-            });
-        }, 10);
-    });
-})();
 </script>
 <!-- hexo injector body_end end --></body>
 

@@ -333,6 +333,11 @@ mjx-container[display="true"] + br {
         <div class="sidebar-title">Categories</div>
     
     	
+        	<a href="/categories/Linguistics/" class="sidebar-item">
+            		<span class="cat-name">Linguistics</span>
+            		<span class="cat-count">1</span>
+        	</a>
+    	
         	<a href="/categories/Mathematics/" class="sidebar-item">
             		<span class="cat-name">Mathematics</span>
             		<span class="cat-count">1</span>
@@ -341,11 +346,6 @@ mjx-container[display="true"] + br {
         	<a href="/categories/Essays/" class="sidebar-item">
             		<span class="cat-name">Essays</span>
             		<span class="cat-count">5</span>
-        	</a>
-    	
-        	<a href="/categories/Linguistics/" class="sidebar-item">
-            		<span class="cat-name">Linguistics</span>
-            		<span class="cat-count">1</span>
         	</a>
     	
     
@@ -559,33 +559,41 @@ mjx-container[display="true"] + br {
     <div class="container" id="main-container">
         <div class="row">
 
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
-                    
-                        
-
-
-<a href="/tags/上海闲话杂谈/">#上海闲话杂谈</a>
-
-
-                    
-                </div>
-                <div class="col-lg-4 col-md-5 post-categories">
-                    
-                        
-
-<a href="/categories/Linguistics/">Linguistics</a>
-
-                    
-                </div>
             
 
             <!-- Gallery -->
             
 
             <!-- Post Main Content -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 aero-reading-glass">
+
+                <!-- Tags and categories -->
+                <div class="post-metadata-header">
+                    
+                    <!-- 1. 检查并输出 Categories -->
+                    
+                        <div class="post-categories" style="display:inline-block; margin:5px;">
+                            
+
+<a href="/categories/Linguistics/">Linguistics</a>
+
+                        </div>
+                    
+                    
+                    <!-- 2. 检查并输出 Tags -->
+                    
+                        <div class="post-tags" style="display:inline-block; margin:5px;">
+                            
+
+
+<a href="/tags/上海闲话杂谈/">#上海闲话杂谈</a>
+
+
+                        </div>
+                    
+                    
+                </div>
+
                 <p>本拼音方案参考了 <a target="_blank" rel="noopener" href="https://wu-chinese.com/">吴语协会</a>
 的拼音方案，基于中派上海话（通行于1920年至今的上海市区方言）。</p>
 <p>下列表格中，每个单元格内依次展示了相应发音的 IPA
@@ -856,7 +864,7 @@ ghicaon, "ngu chi tághi caoncu lé! Nemé ghi tsegha véghue lelé."</p>
 
             <!-- Comments -->
             
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 aero-reading-glass">
                      <!-- Gitalk 评论 -->
 
   <hr />
@@ -1051,45 +1059,29 @@ document.addEventListener('pjax:complete', function() {
         const hours = now.getHours();
 
         // 计算角度
-        // 秒针：一圈60秒，每秒6度
+        // 秒针
         const secondDeg = ((seconds / 60) * 360);
         
-        // 分针：加上秒针的偏移量，让移动更平滑
+        // 分针
         const minuteDeg = ((minutes / 60) * 360) + ((seconds/60)*6);
         
-        // 时针：加上分针的偏移量
+        // 时针
         const hourDeg = ((hours / 12) * 360) + ((minutes/60)*30);
 
-        // 应用旋转
+        
         secondHand.style.transform = `rotate(${secondDeg}deg)`;
         minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
         hourHand.style.transform = `rotate(${hourDeg}deg)`;
     }
 
-    // 立即运行一次，避免闪烁
+    
     updateClock();
-    // 每秒刷新
     setInterval(updateClock, 1000);
 })();
 </script>
 
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
 <script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
 <script>
@@ -1099,6 +1091,51 @@ document.addEventListener("DOMContentLoaded", function() {
     selectors: ["title", ".container"]
   });
 });
+</script>
+
+<script>
+(function() {
+    if (window.hasInitializedPjaxTransition) return;
+    window.hasInitializedPjaxTransition = true;
+
+    // 目标：#main-container
+    const TARGET_ID = "#main-container";
+
+    // 辅助函数
+    function getTarget() {
+        return document.querySelector(TARGET_ID);
+    }
+
+    // 退场
+    document.addEventListener('pjax:send', function() {
+        const el = getTarget();
+        if (el) el.classList.add('is-transitioning');
+    });
+
+    // 进场
+    document.addEventListener('pjax:success', function() {
+        const el = getTarget();
+        
+        // 如果没找到
+        if (!el) return;
+
+        // 隐藏
+        el.style.transition = 'none';
+        el.classList.add('is-transitioning');
+
+        // 重排 + 恢复动画
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                el.style.transition = ''; 
+                void el.offsetHeight; 
+
+                requestAnimationFrame(() => {
+                    el.classList.remove('is-transitioning');
+                });
+            });
+        }, 10);
+    });
+})();
 </script>
 
 <script>
@@ -1155,23 +1192,23 @@ const btnContainer = document.createElement("div");
     b.style.height = "52px";
     b.style.borderRadius = "50%";
     
-    // 【修改1】边框：加一点点黑，不再是纯白，防止背景白的时候消失
+    // 边框
     b.style.border = "1px solid rgba(0,0,0,0.15)";
-    
-    // 【修改2】背景：稍微加深一点点，模拟“烟熏玻璃”
+
+    // 背景
     b.style.background = "linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(180,200,230,0.3))";
     
     b.style.color = "white";
     b.style.fontSize = "28px"; 
     b.style.cursor = "pointer";
     
-    // 【修改3】投影：加深阴影浓度(0.2 -> 0.35)，让它浮得更高
+    // 投影
     b.style.boxShadow = "0 8px 16px rgba(0,0,0,0.35), inset 0 1px 4px rgba(255,255,255,0.9)";
     
     b.style.backdropFilter = "blur(12px)";
     b.style.webkitBackdropFilter = "blur(12px)";
     
-    // 【修改4】文字阴影：加重黑影，保证白色图标在任何背景都清晰
+    // 文字阴影
     b.style.textShadow = "0 2px 4px rgba(0,0,0,0.6)";
     
     b.style.transition = "all 0.25s ease";
@@ -1608,52 +1645,6 @@ audio.addEventListener("ended", () => {
 });
 
 });
-</script>
-
-<script>
-(function() {
-    if (window.hasInitializedPjaxTransition) return;
-    window.hasInitializedPjaxTransition = true;
-
-    // 唯一指定目标：#main-container
-    // 不需要再去猜是不是 .archive-container 了，因为我们刚才手动统一了 ID
-    const TARGET_ID = "#main-container";
-
-    // 辅助函数：只抓唯一的那个主角
-    function getTarget() {
-        return document.querySelector(TARGET_ID);
-    }
-
-    // 1. 退场
-    document.addEventListener('pjax:send', function() {
-        const el = getTarget();
-        if (el) el.classList.add('is-transitioning');
-    });
-
-    // 2. 进场
-    document.addEventListener('pjax:success', function() {
-        const el = getTarget();
-        
-        // 防弹衣：如果没找到（极少情况），就啥也不做，不报错
-        if (!el) return;
-
-        // A. 瞬间隐藏
-        el.style.transition = 'none';
-        el.classList.add('is-transitioning');
-
-        // B. 强制重排 + 恢复动画
-        setTimeout(() => {
-            requestAnimationFrame(() => {
-                el.style.transition = ''; 
-                void el.offsetHeight; 
-
-                requestAnimationFrame(() => {
-                    el.classList.remove('is-transitioning');
-                });
-            });
-        }, 10);
-    });
-})();
 </script>
 <!-- hexo injector body_end end --></body>
 

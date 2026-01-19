@@ -1,6 +1,7 @@
+/* ---------------------------------------------------------------------------------------------------------- */
 
 /* 
-    指针 (箭头) 部分
+    1. 指针 (箭头) 部分
 */
 
 body, html {
@@ -23,7 +24,7 @@ button,
 /* ---------------------------------------------------------------------------------------------------------- */
 
 /* 
-    标题部分 
+    2. 标题部分 
 */
 
 /* 修改 header 类 */
@@ -132,7 +133,7 @@ header.intro-header::after {
 /* ---------------------------------------------------------------------------------------------------------- */
 
 /* 
-    导航按钮部分 
+    3. 导航按钮部分 
 */
 
 
@@ -270,7 +271,7 @@ header.intro-header::after {
 /* ---------------------------------------------------------------------------------------------------------- */
 
 /*
-    文章标题部分
+    4. 文章标题部分
 */
 
 .post-preview a h2.post-title {
@@ -500,7 +501,7 @@ header.intro-header::after {
 /* ---------------------------------------------------------------------------------------------------------- */
 
 /* 
-    Pjax 页面过渡 
+    5. Pjax 页面过渡 
 */
 
 /* 定义过渡效果 - 作废 */
@@ -619,7 +620,7 @@ header.intro-header::after {
 /* ---------------------------------------------------------------------------------------------------------- */
 
 /* 
-    Tags 与 Categories 特殊部分
+    6. Tags 与 Categories 特殊元素
 */
 
 .post-tags, .post-categories {
@@ -685,7 +686,7 @@ header.intro-header::after {
 /* ---------------------------------------------------------------------------------------------------------- */
 
 /* 
-   Scrollbar
+   7. 滚动条样式
    适用于 Chrome, Edge, Safari
 */
 
@@ -757,7 +758,7 @@ header.intro-header::after {
 /* ---------------------------------------------------------------------------------------------------------- */
 
 /* 
-   Vista Aero Clock
+   8. Vista Aero Clock
 */
 
 .clock-widget-fixed {
@@ -949,10 +950,10 @@ header.intro-header::after {
 /* ---------------------------------------------------------------------------------------------------------- */
 
 /* 
-   页脚部分效果
+   9. 页脚部分效果
 */
 
-/* 页脚容器深色底座 */
+/* 深色底座 */
 footer {
     position: relative;
     margin-top: 50px; 
@@ -976,7 +977,7 @@ footer {
         inset 0 1px 0 rgba(255, 255, 255, 0.2); 
 }
 
-/* 社交图标 (GitHub等)从黑色变成发光水晶 */
+/* 社交图标发光 */
 footer .fa-stack {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -993,7 +994,7 @@ footer .fa-github, footer .fa-stack-1x {
     text-shadow: 0 1px 2px rgba(0,0,0,0.8);
 }
 
-/* 鼠标悬停特效：点亮图标  */
+/* 悬停特效  */
 footer a:hover .fa-stack {
     transform: translateY(-5px) scale(1.1); 
 }
@@ -1007,7 +1008,7 @@ footer a:hover .fa-github {
     color: #fff !important;
 }
 
-/* 版权文字倒影感 */
+/* 版权文字倒影 */
 footer .copyright {
     color: #ccc !important;
     font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
@@ -1028,6 +1029,255 @@ footer .copyright a:hover {
     text-shadow: 0 0 10px rgba(0, 234, 255, 0.8);
     text-decoration: none;
     border-bottom: 1px solid #00eaff;
+}
+
+/* ---------------------------------------------------------------------------------------------------------- */
+
+/* 
+   10. 去白底 + 卡片重构
+*/
+
+/* body 背景覆盖 */
+body {
+    background: url('/img/vista.jpg') no-repeat center center fixed !important; 
+    
+    background-size: cover !important;
+    
+    background-color: transparent !important; 
+}
+
+header.intro-header {
+    /* 去除背景图，只保留高度和布局 */
+    background-image: none !important; 
+    background-color: transparent !important;
+    background: transparent !important;
+    
+    /* Header 太高 */
+    margin-bottom: 0px !important;
+}
+
+
+.container, 
+.row, 
+.col-lg-8, 
+.col-lg-offset-2, 
+.col-md-10, 
+.col-md-offset-1 {
+    background-color: transparent !important;
+}
+
+/* post-preview 玻璃底座 */
+.post-preview {
+    background: rgba(255, 255, 255, 0.3) !important; 
+    
+    /* 磨砂 */
+    backdrop-filter: blur(15px) !important; 
+    -webkit-backdrop-filter: blur(15px) !important;
+    
+    border: 1px solid rgba(255, 255, 255, 0.5); /* 玻璃边缘的高光 */
+    border-top: 1px solid rgba(255, 255, 255, 0.7); /* 顶部亮光增强立体感 */
+    border-radius: 18px; 
+    
+    padding: 18px 14px !important; 
+    margin-bottom: 18px !important; 
+    
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.post-preview + hr, 
+.post-preview hr {
+    display: none !important;
+    border: none !important;
+    margin: 0 !important;
+}
+
+/* 整体悬停 */
+.post-preview:hover {
+    transform: translateY(-5px); 
+    background: rgba(255, 255, 255, 0.65); 
+    
+    box-shadow: 
+        0 15px 30px rgba(0, 0, 0, 0.1),
+        0 0 20px rgba(130, 200, 255, 0.3), 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+        
+    border-color: rgba(255, 255, 255, 0.9);
+}
+
+.archive-post .post-preview {
+    padding: 15px 15px;
+    margin-bottom: 20px !important;
+}
+
+/* ---------------------------------------------------------------------------------------------------------- */
+
+/* 
+   11. 正文页背景窗口
+*/
+
+/* 带 "aero-reading-glass" 标记的容器变成窗口 */
+.aero-reading-glass {
+    background: rgba(255, 255, 255, 0.8) !important; 
+    
+    /* 磨砂公式 */
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    
+    /* 边框 */
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 8px; 
+    
+    /* 投影 */
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.15), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.9); 
+        
+    /* 内边距 */
+    padding: 40px 35px !important; 
+    
+    /* 上下间距 */
+    margin-top: 20px; 
+    margin-bottom: 50px;
+}
+
+/* 文字加深 */
+.aero-reading-glass p,
+.aero-reading-glass li {
+    color: #111; 
+    
+    line-height: 1.8;
+}
+
+/* Blockquote */
+.aero-reading-glass blockquote {
+    border-left: 5px solid #0078d7; 
+    background: rgba(230, 240, 255, 0.5); 
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 16px;
+    color: #003366;
+}
+
+/* 解决标题过大 */
+.post-heading h1 {
+    /*font-size: 40px !important; */
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3); 
+    margin-bottom: 10px;
+}
+
+
+
+.aero-reading-glass img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+/* 移动端适配 */
+@media only screen and (max-width: 768px) {
+    .aero-reading-glass {
+        padding: 20px 20px !important; 
+    }
+    .post-heading h1 {
+        font-size: 30px !important;
+    }
+}
+
+/* 
+   代码块样式修改
+*/
+
+/* 代码块外层容器 */
+figure.highlight, 
+pre {
+    background: #ffffff !important; 
+    /* 暗色模式，可以用 background: #1e1e1e !important; */
+    
+    border: 1px solid rgba(130, 200, 255, 0.4); /* 蓝框 */
+    border-radius: 6px; /* 圆角 */
+    
+    /* 内阴影 */
+    box-shadow: 
+        inset 0 0 15px rgba(0, 100, 255, 0.05), 
+        0 4px 10px rgba(0, 0, 0, 0.05);
+        
+    margin: 25px 0 !important;
+    padding: 15px !important;
+    
+    overflow-x: auto; /* 横向滚动 */
+}
+
+/* 编程字体 */
+figure.highlight *, 
+pre, 
+code {
+    font-family: "Consolas", "Monaco", "Courier New", monospace !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+}
+
+/* 滚动条 */
+figure.highlight::-webkit-scrollbar,
+pre::-webkit-scrollbar {
+    height: 8px; /* 横向高度 */
+    background: transparent;
+}
+
+figure.highlight::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb {
+    background: rgba(0, 100, 200, 0.2);
+    border-radius: 4px;
+}
+
+figure.highlight::-webkit-scrollbar-thumb:hover,
+pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 100, 200, 0.5);
+}
+
+/* 代码块加顶部条 */
+/* 加一个顶部边框焦点 */
+figure.highlight {
+    border-top: 3px solid #0078d7 !important;
+}
+
+/* 行内代码 */
+p code, 
+li code {
+    background: rgba(230, 245, 255, 0.6); 
+    color: #c7254e; /* 默认 */
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 100, 255, 0.1);
+    font-family: "Consolas", monospace !important;
+}
+
+/* ---------------------------------------------------------------------------------------------------------- */
+
+/* 
+   12. 全局清理
+*/
+
+/* 隐藏分割线 */
+hr {
+    display: none !important;
+    border: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+}
+
+/* 页脚的衔接 */
+footer {
+    margin-top: 30px !important; 
+    
+    box-shadow: 
+        0 -5px 15px rgba(0, 0, 0, 0.3), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important; 
 }
 
 /* ---------------------------------------------------------------------------------------------------------- */
