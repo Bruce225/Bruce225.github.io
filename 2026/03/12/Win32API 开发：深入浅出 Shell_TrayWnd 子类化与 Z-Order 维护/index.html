@@ -13,6 +13,13 @@
     
 
     
+        <meta name="description" content="当
+WS_POPUP 遇上 Win+D：为什么置顶窗口会在 “显示桌面”
+时离奇失踪？
+近日我在开发一款美化软件，以实现覆盖 StartIsBack / StartAllBack
+的功能。目前已完成低级钩子的注入与任务栏的子类化。仓库如下：
+https://github.com/Bruce"/>
+    
 
     <!--Author-->
     
@@ -21,10 +28,17 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Actinium&#39;s Blog"/>
+        <meta property="og:title" content="Win32API开发：深入浅出 Shell_TrayWnd 子类化与 Z-Order 维护"/>
     
 
     <!--Open Graph Description-->
+    
+        <meta property="og:description" content="当
+WS_POPUP 遇上 Win+D：为什么置顶窗口会在 “显示桌面”
+时离奇失踪？
+近日我在开发一款美化软件，以实现覆盖 StartIsBack / StartAllBack
+的功能。目前已完成低级钩子的注入与任务栏的子类化。仓库如下：
+https://github.com/Bruce"/>
     
 
     <!--Open Graph Site Name-->
@@ -32,7 +46,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website"/>
+        <meta property="og:type" content="article"/>
     
 
     <!--Page Cover-->
@@ -51,7 +65,7 @@
 
     <!-- Title -->
     
-    <title>归档：2025/5 - Actinium&#39;s Blog</title>
+    <title>Win32API开发：深入浅出 Shell_TrayWnd 子类化与 Z-Order 维护 - Actinium&#39;s Blog</title>
     
 <style>
       .container .row .col-lg-8 img {
@@ -395,54 +409,220 @@
     </div>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/vista.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>2025/5</h1>
+                <div class="post-heading">
+                    <h1>Win32API开发：深入浅出 Shell_TrayWnd 子类化与 Z-Order 维护</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2026-03-12&nbsp;&nbsp;13:09:50
+                        
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container" id="main-container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container" id="main-container">
+        <div class="row">
+
             
-                <div class="post-preview">
-    <a href="/2025/05/11/告诉自己忘了它/">
-        <h2 class="post-title archive">
+
+            <!-- Gallery -->
             
-            <span class="title-text">
-                告诉自己忘了它
-            </span>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 aero-reading-glass">
+
+                <!-- Tags and categories -->
+                <div class="post-metadata-header">
+                    
+                    <!-- 1. 检查并输出 Categories -->
+                    
+                        <div class="post-categories" style="display:inline-block; margin:5px;">
+                            
+
+<a href="/categories/Software-Development/">Software Development</a>
+
+                        </div>
+                    
+                    
+                    <!-- 2. 检查并输出 Tags -->
+                    
+                        <div class="post-tags" style="display:inline-block; margin:5px;">
+                            
+
+
+<a href="/tags/Win32API/">#Win32API</a> <a href="/tags/StartIsBack/">#StartIsBack</a>
+
+
+                        </div>
+                    
+                    
+                </div>
+
+                <p><span style="color: RoyalBlue; font-family: 'Source Han Serif', serif"><em><strong>当
+WS_POPUP 遇上 Win+D：为什么置顶窗口会在 “显示桌面”
+时离奇失踪？</strong></em></span></p>
+<p>近日我在开发一款美化软件，以实现覆盖 StartIsBack / StartAllBack
+的功能。目前已完成低级钩子的注入与任务栏的子类化。仓库如下：</p>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/Bruce225/anabiosis">https://github.com/Bruce225/anabiosis</a></p>
+<p>开发途中遇到一个我自昨日下午起开始着手解决的 Bug;
+在历经数小时令人烦躁的修改与调试后，终得以于深更半夜修复。下简要分享思路与调试过程。</p>
+<h2 id="前情提要">前情提要</h2>
+<p>想要在 Windows 11 上实现类似 StartAllBack
+的开始按钮与开始菜单修改，大多数人的第一想法应该是在获取开始按钮的句柄
+hStartBtn 后，使用 ShowWindow(hStartBtn, SW_HIDE)
+语句隐藏它，并在任务栏中 “嵌入” 自己的开始按钮。</p>
+<p>然而 Windows 11 将许多的任务栏窗口组件使用了 XAML 重绘。即使在 Spy++
+等软件上能够看到 Shell_TrayWnd 下存在 "Start"
+类，但他已实质上变成不受属性控制的 “代理句柄” ，导致操作 hStartBtn
+对开始按钮不构成任何影响。故开发时，选择「覆盖」而不是「隐藏并添加」是更好的思路。关于「覆盖」部分，我的代码如下：</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">HWND</span> CreateOrbWindow(<span class="keyword">HINSTANCE</span> <span class="keyword">hInstance</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 此处略去一些类定义 */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">HWND</span> hTaskbar = FindWindow(L<span class="string">&quot;Shell_TrayWnd&quot;</span>, NULL)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取原 Start 按钮坐标以覆盖</span></span><br><span class="line">    RECT r = &#123;&#125;<span class="comment">;</span></span><br><span class="line">    <span class="keyword">if</span> (g_hStartBtn) GetWindowRect(g_hStartBtn, &amp;r)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> w = r.right - r.left<span class="comment">;</span></span><br><span class="line">    <span class="keyword">int</span> h = r.bottom - r.top<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">HWND</span> <span class="keyword">hWnd</span> = CreateWindowExW(</span><br><span class="line">        WS_EX_TOPMOST | WS_EX_TOOLWINDOW,  <span class="comment">// 置顶 &amp; 不进任务栏</span></span><br><span class="line">        className, L<span class="string">&quot;Orb&quot;</span>,</span><br><span class="line">        WS_POPUP,</span><br><span class="line">        r.left, r.top, w, h,</span><br><span class="line">        hTaskbar,</span><br><span class="line">        NULL, <span class="keyword">hInstance</span>, NULL</span><br><span class="line">    )<span class="comment">;</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">hWnd</span>) ShowWindow(<span class="keyword">hWnd</span>, SW_SHOW)<span class="comment">;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">hWnd</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这相当于在原开始按钮的位置上覆盖了一个自定义 Orb 按钮。其中，指定
+hTaskbar 为其父窗口是为了防止点按任务栏时自定义按钮消失。</p>
+<h2 id="bug-的发现">Bug 的发现</h2>
+<p>如上的逻辑在 90%
+的测试情况下都没有任何问题。快速点按开始按钮、不间断敲打 Win
+键或在各种情形下点按任务栏。然而当点击任务栏最右侧 “显示桌面”
+按钮，或按下 Win+D 组合键时，该 Orb 按钮会突然消失；再次单击 “显示桌面”
+，当左键按下时 (WM_LBUTTONDOWN) 该 Orb 按钮重新显现，松开时
+(WM_LBUTTONUP) Orb 按钮仍然消失。若继续点击 “显示桌面”
+，上述过程循环往复。</p>
+<p>我起初的解决方案是在该 Orb 按钮窗口的过程中，判定 uMsg
+时加入如下定时刷新器：</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">LRESULT CALLBACK OrbWndProc(<span class="keyword">HWND</span> <span class="keyword">hwnd</span>, UINT uMsg, <span class="keyword">WPARAM</span> <span class="keyword">wParam</span>, <span class="keyword">LPARAM</span> <span class="keyword">lParam</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">switch</span> (uMsg)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">case</span> WM_CREATE:</span><br><span class="line">            SetTimer(<span class="keyword">hwnd</span>, <span class="number">1</span>, <span class="number">50</span>, NULL)<span class="comment">;  // 50ms 响应</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">case</span> WM_TIMER:</span><br><span class="line">            SetWindowPos(<span class="keyword">hwnd</span>, HWND_TOPMOST, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">                SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE | SWP_SHOWWINDOW)<span class="comment">;</span></span><br><span class="line">            <span class="keyword">break</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">/* 其他 case 略去 */</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> DefWindowProcW(<span class="keyword">hwnd</span>, uMsg, <span class="keyword">wParam</span>, <span class="keyword">lParam</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当快速点按 “显示桌面” 时，虽然 Orb
+按钮不断重绘并显现，但仍然会在极短的间隙内闪过原版开始按钮，即使将设定的
+50ms 减小也无济于事。况且，该种 Timer 轮询的方法极为消耗 CPU 性能。</p>
+<h2 id="调试过程">调试过程</h2>
+<p>使用定时器显然不是一个好方法，于是我将他移除了。我试图通过将
+CreateWindowExW 中的 WS_POPUP 改为 WS_CHILD 来防止 Orb 按钮随 hTaskbar
+一起隐藏，又试图通过拦截 Win+D 可能在执行 “显示桌面” 逻辑时向我的 Orb
+按钮窗口发送的隐藏信号。</p>
+<p>这两个方法都没有解决 Bug.</p>
+<p>偶然间，我关注到了 CreateWindowExW 中的 r.left, r.top, w, h
+这些坐标与大小参数，于是将 r.left 与 r.top 修改为了 (0, 0) 以及 (0,
+1000) 分别进行调试 (我使用的是 1920 x 1080 的显示器)。最终发现，当按下
+“显示桌面” 时，我的 Orb 按钮完全不会被它隐藏！</p>
+<p>尤其是 (0, 1000), 我注意到按下 “显示桌面”
+时它位于任务栏上方的部分未被隐藏，本身覆盖在开始按钮的那部分消失了。也就是说，这个
+Bug 本质上是一个 Z-Order 排列竞争的问题。</p>
+<p>我猜测是如下的逻辑：在 Windows 11 中，所有置顶窗口 (WM_EX_TOPMOST
+属性) 都在同一个平面的 Z 轴序列里。由于任务栏是系统的核心组件，点击
+“显示桌面” 时，Explorer.exe 会为了确保任务栏不被其他窗口
+(比如可能存在的全屏置顶广告或工具栏) 遮挡，强制刷新一次自己的 Z
+轴排序。于是，刚好把我的 Orb 按钮压在了下面。</p>
+<h2 id="彻底修复">彻底修复</h2>
+<p>我的思路是检测按下 “显示桌面” 后窗口的位置变化 (WM_WINDOWPOSCHANGED).
+原本的想法是监控开始按钮
+(因为我本身代码中对任务栏进行过子类化并寻过开始菜单的句柄 hStartBtn)。
+事实上，通过向 DbgView
+输出调试字符串的验证方式后，我发现此时开始按钮并没有发生
+WM_WINDOWPOSCHANGED. 因此需要转向检测任务栏的位置变化。</p>
+<p>首先是在 dll 劫持函数中将劫持目标选为任务栏类 Shell_TrayWnd,
+对其进行子类化，并让其处理函数变为我们编写的 NewTaskbarProc.
+代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">StartHijack</span><span class="params">(HMODULE hModule)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">HWND</span> <span class="variable">hTaskbar</span> <span class="operator">=</span> FindWindow(L<span class="string">&quot;Shell_TrayWnd&quot;</span>, NULL);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 调试信息略去 */</span></span><br><span class="line"></span><br><span class="line">    <span class="type">LONG_PTR</span> <span class="variable">oldProc</span> <span class="operator">=</span> SetWindowLongPtr(hTaskbar, GWLP_WNDPROC, (LONG_PTR)NewTaskbarProc);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 子类化</span></span><br><span class="line">    <span class="keyword">if</span> (oldProc)</span><br><span class="line">    &#123;</span><br><span class="line">        OldTaskbarProc = (WNDPROC)oldProc;</span><br><span class="line">        g_hookedWnd = hTaskbar;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 启动线程略去 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 hModule 与专用线程相关，与本文内容无关。接着在新逻辑
+NewTaskbarProc 函数中，拦截任务栏的位置变化消息 WM_WINDOWPOSCHANGED
+并通过 SetWindowPos 函数将自定义 Orb 提前。代码如下：</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">LRESULT CALLBACK NewTaskbarProc(<span class="keyword">HWND</span> <span class="keyword">hwnd</span>, UINT uMsg, <span class="keyword">WPARAM</span> <span class="keyword">wParam</span>, <span class="keyword">LPARAM</span> <span class="keyword">lParam</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 拦截窗口位置变化消息</span></span><br><span class="line">    <span class="keyword">if</span> (uMsg == WM_WINDOWPOSCHANGED)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 置顶任务栏</span></span><br><span class="line">        LRESULT ret = CallWindowProc(OldTaskbarProc, <span class="keyword">hwnd</span>, uMsg, <span class="keyword">wParam</span>, <span class="keyword">lParam</span>)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将 Orb 提到最顶层</span></span><br><span class="line">        <span class="keyword">if</span> (g_hOrbWnd)</span><br><span class="line">        &#123;</span><br><span class="line">            RECT r = &#123; <span class="number">0</span> &#125;<span class="comment">;</span></span><br><span class="line">            <span class="keyword">if</span> (g_hStartBtn) GetWindowRect(g_hStartBtn, &amp;r)<span class="comment">;</span></span><br><span class="line">            SetWindowPos(g_hOrbWnd, HWND_TOPMOST, r.left, r.top, <span class="number">0</span>, <span class="number">0</span>,</span><br><span class="line">                SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE)<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> CallWindowProc(OldTaskbarProc, <span class="keyword">hwnd</span>, uMsg, <span class="keyword">wParam</span>, <span class="keyword">lParam</span>)<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，每次点按 “显示桌面” 或 Win+D 时，我们的任务栏行为都能使得自定义
+Orb 窗口被提到顶层，中间没有任何间隙 (或极小，肉眼无法察觉),
+达到目的。由此 Bug 修复。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-            <span class="date-badge">
-                2025-05-11
-            </span>
-        </h2>
-        
-        
-    </a>
-</div>
-<hr>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
+                <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 aero-reading-glass">
+                     <!-- Gitalk 评论 -->
+
+  <hr />
+  <h3>留言:</h3>
+  <div id="gitalk-container"></div>
+
+  <!-- 引入 Gitalk 样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script>
     
-    
-</ul>
+    function renderGitalk(){
+      const gitalk = new Gitalk({
+        clientID: 'Ov23liV4Lf99W7zxWMeg',
+        clientSecret: '8046bd4bd08fac0ec3d4c12b5511b805e16317cf',
+        repo: 'Bruce225.github.io',
+        owner: 'Bruce225',
+        admin: ['Bruce225'],
+        id: 'Win32API_1',
+        distractionFreeMode: true
+      });
+      gitalk.render('gitalk-container');
+    }
+
+   
+    function loadGitalkScript(callback){
+      if (typeof Gitalk !== 'undefined') {
+        callback();
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/gitalk/dist/gitalk.min.js';
+      script.onload = callback;
+      document.body.appendChild(script);
+    }
+
+
+    function initGitalk(retry = 0){
+      const container = document.getElementById('gitalk-container');
+      if (container) {
+        container.innerHTML = ''; 
+        loadGitalkScript(renderGitalk);
+      } else if (retry < 5) {
+        setTimeout(() => initGitalk(retry + 1), 500);
+      }
+    }
+
+
+    window.addEventListener('load', () => initGitalk());
+
+
+    document.addEventListener('pjax:complete', () => initGitalk());
+  </script>
+
+
+
+
+  <!-- 现有 Disqus 评论（可保留或删除） -->
+  
+
+  <!-- 现有 Facebook 评论（可保留或删除） -->
+  
+                </div>
+            
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr />

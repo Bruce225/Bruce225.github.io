@@ -307,13 +307,18 @@ mjx-container[display="true"] + br {
         <div class="sidebar-title">Categories</div>
     
     	
+        	<a href="/categories/Mathematics/" class="sidebar-item">
+            		<span class="cat-name">Mathematics</span>
+            		<span class="cat-count">1</span>
+        	</a>
+    	
         	<a href="/categories/Linguistics/" class="sidebar-item">
             		<span class="cat-name">Linguistics</span>
             		<span class="cat-count">1</span>
         	</a>
     	
-        	<a href="/categories/Mathematics/" class="sidebar-item">
-            		<span class="cat-name">Mathematics</span>
+        	<a href="/categories/Software-Development/" class="sidebar-item">
+            		<span class="cat-name">Software Development</span>
             		<span class="cat-count">1</span>
         	</a>
     	
@@ -522,6 +527,24 @@ mjx-container[display="true"] + br {
 <div class="container" id="main-container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            
+                <div class="post-preview">
+    <a href="/2026/03/12/Win32API 开发：深入浅出 Shell_TrayWnd 子类化与 Z-Order 维护/">
+        <h2 class="post-title">
+            <span class="title-text">
+                Win32API开发：深入浅出 Shell_TrayWnd 子类化与 Z-Order 维护
+            </span>
+            
+            <span class="date-badge">
+                2026-03-12
+            </span>
+        </h2>
+        
+        
+    </a>
+    
+    </div>
+<hr>
             
                 <div class="post-preview">
     <a href="/2025/12/16/小明是个数学家/">
@@ -809,62 +832,22 @@ document.addEventListener('pjax:complete', function() {
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
-    selectors: ["title", ".container"]
-  });
-});
-</script>
-
-<script>
-(function() {
-    if (window.hasInitializedPjaxTransition) return;
-    window.hasInitializedPjaxTransition = true;
-
-    // 目标：#main-container
-    const TARGET_ID = "#main-container";
-
-    // 辅助函数
-    function getTarget() {
-        return document.querySelector(TARGET_ID);
-    }
-
-    // 退场
-    document.addEventListener('pjax:send', function() {
-        const el = getTarget();
-        if (el) el.classList.add('is-transitioning');
-    });
-
-    // 进场
-    document.addEventListener('pjax:success', function() {
-        const el = getTarget();
-        
-        // 如果没找到
-        if (!el) return;
-
-        // 隐藏
-        el.style.transition = 'none';
-        el.classList.add('is-transitioning');
-
-        // 重排 + 恢复动画
-        setTimeout(() => {
-            requestAnimationFrame(() => {
-                el.style.transition = ''; 
-                void el.offsetHeight; 
-
-                requestAnimationFrame(() => {
-                    el.classList.remove('is-transitioning');
-                });
-            });
-        }, 10);
-    });
-})();
-</script>
-
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
@@ -1371,6 +1354,61 @@ audio.addEventListener("ended", () => {
   loadTrack(currentIndex + 1);
 });
 
+});
+</script>
+
+<script>
+(function() {
+    if (window.hasInitializedPjaxTransition) return;
+    window.hasInitializedPjaxTransition = true;
+
+    // 目标：#main-container
+    const TARGET_ID = "#main-container";
+
+    // 辅助函数
+    function getTarget() {
+        return document.querySelector(TARGET_ID);
+    }
+
+    // 退场
+    document.addEventListener('pjax:send', function() {
+        const el = getTarget();
+        if (el) el.classList.add('is-transitioning');
+    });
+
+    // 进场
+    document.addEventListener('pjax:success', function() {
+        const el = getTarget();
+        
+        // 如果没找到
+        if (!el) return;
+
+        // 隐藏
+        el.style.transition = 'none';
+        el.classList.add('is-transitioning');
+
+        // 重排 + 恢复动画
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                el.style.transition = ''; 
+                void el.offsetHeight; 
+
+                requestAnimationFrame(() => {
+                    el.classList.remove('is-transitioning');
+                });
+            });
+        }, 10);
+    });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
+    selectors: ["title", ".container"]
+  });
 });
 </script>
 <!-- hexo injector body_end end --></body>
