@@ -200,13 +200,13 @@
             		<span class="cat-count">1</span>
         	</a>
     	
-        	<a href="/categories/Linguistics/" class="sidebar-item">
-            		<span class="cat-name">Linguistics</span>
+        	<a href="/categories/Software-Development/" class="sidebar-item">
+            		<span class="cat-name">Software Development</span>
             		<span class="cat-count">1</span>
         	</a>
     	
-        	<a href="/categories/Software-Development/" class="sidebar-item">
-            		<span class="cat-name">Software Development</span>
+        	<a href="/categories/Linguistics/" class="sidebar-item">
+            		<span class="cat-name">Linguistics</span>
             		<span class="cat-count">1</span>
         	</a>
     	
@@ -424,17 +424,17 @@
 </div>
                 
                     <div class="post-preview">
-    <a href="/categories/Linguistics/">
+    <a href="/categories/Software-Development/">
         <h1 class="post-title archive">
-            Linguistics
+            Software Development
         </h1>
     </a>
 </div>
                 
                     <div class="post-preview">
-    <a href="/categories/Software-Development/">
+    <a href="/categories/Linguistics/">
         <h1 class="post-title archive">
-            Software Development
+            Linguistics
         </h1>
     </a>
 </div>
@@ -622,6 +622,16 @@ document.addEventListener('pjax:complete', function() {
 </script>
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
+    selectors: ["title", ".container"]
+  });
+});
+</script>
+
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
@@ -1174,16 +1184,6 @@ audio.addEventListener("ended", () => {
         }, 10);
     });
 })();
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
-    selectors: ["title", ".container"]
-  });
-});
 </script>
 <!-- hexo injector body_end end --></body>
 
