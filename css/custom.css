@@ -956,7 +956,7 @@ header.intro-header::after {
 /* 深色底座 */
 footer {
     position: relative;
-    margin-top: 50px; 
+    margin-top: auto !important; 
     padding: 40px 0; 
     
     background: linear-gradient(
@@ -1031,6 +1031,10 @@ footer .copyright a:hover {
     border-bottom: 1px solid #00eaff;
 }
 
+/* 主容器撑满剩余高度避免页脚悬空 */
+#main-container {
+    min-height: calc(100vh - 420px) !important;
+}
 /* ---------------------------------------------------------------------------------------------------------- */
 
 /* 

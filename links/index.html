@@ -13,12 +13,11 @@
     
 
     
-        <meta name="description" content="/* 分组标题 */
-.links-group h2 {
-  font-family: &#34;Segoe UI&#34;, &#34;Microsoft YaHei&#34;, sans-serif;
-  font-size: 24px; /* 回归正常大小 */
-  font-weight: 700;
-  color: #2"/>
+        <meta name="description" content="/* 友链页去除文章白块 */
+.aero-reading-glass {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !impor"/>
     
 
     <!--Author-->
@@ -33,12 +32,11 @@
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="/* 分组标题 */
-.links-group h2 {
-  font-family: &#34;Segoe UI&#34;, &#34;Microsoft YaHei&#34;, sans-serif;
-  font-size: 24px; /* 回归正常大小 */
-  font-weight: 700;
-  color: #2"/>
+        <meta property="og:description" content="/* 友链页去除文章白块 */
+.aero-reading-glass {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !impor"/>
     
 
     <!--Open Graph Site Name-->
@@ -464,17 +462,28 @@
                 
 
 <style>
+
+/* 友链页去除文章白块 */
+.aero-reading-glass {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
 /* 分组标题 */
 .links-group h2 {
   font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
-  font-size: 24px; /* 回归正常大小 */
+  font-size: 24px;
   font-weight: 700;
-  color: #2c3e50; 
+  color: #ffffff !important; 
   margin-top: 60px;
   margin-bottom: 30px;
   padding-bottom: 15px;
-  border-bottom: 2px solid #eef2f5; /* 线条细一点更精致 */
-  text-shadow: 0 1px 0 #fff; 
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4) !important; /* 细半透明白线 */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important; /* 加阴影 */
   text-align: center;
   position: relative;
   letter-spacing: 0.5px;
@@ -904,6 +913,16 @@ document.addEventListener('pjax:complete', function() {
 </script>
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
+    selectors: ["title", ".container"]
+  });
+});
+</script>
+
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
@@ -1410,16 +1429,6 @@ audio.addEventListener("ended", () => {
   loadTrack(currentIndex + 1);
 });
 
-});
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
-    selectors: ["title", ".container"]
-  });
 });
 </script>
 
