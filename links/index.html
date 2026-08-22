@@ -204,7 +204,7 @@
 
     <div id="aero-sidebar" class="aero-sidebar" style="display: none;">
 
-        <div class="sidebar-title">Categories</div>
+        <div class="sidebar-title" data-i18n="sidebar.categories">Categories</div>
     
     	
         	<a href="/categories/Mathematics/" class="sidebar-item">
@@ -217,19 +217,19 @@
             		<span class="cat-count">1</span>
         	</a>
     	
-        	<a href="/categories/Essays/" class="sidebar-item">
-            		<span class="cat-name">Essays</span>
-            		<span class="cat-count">5</span>
-        	</a>
-    	
         	<a href="/categories/Linguistics/" class="sidebar-item">
             		<span class="cat-name">Linguistics</span>
             		<span class="cat-count">1</span>
         	</a>
     	
+        	<a href="/categories/Essays/" class="sidebar-item">
+            		<span class="cat-name">Essays</span>
+            		<span class="cat-count">5</span>
+        	</a>
+    	
     
     	<a href="/" class="sidebar-item all-posts">
-        	<span class="cat-name">All Posts</span>
+        	<span class="cat-name" data-i18n="sidebar.all-posts">All Posts</span>
     	</a>
 
     </div>
@@ -403,6 +403,27 @@
                 <div class="center-nut"></div>
             </div>
             <div class="glass-reflection"></div>
+        </div>
+    </div>
+
+    <div id="lang-switcher" class="lang-switcher">
+        <button type="button"
+                class="lang-btn lang-toggle"
+                aria-label="language switch"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="lang-menu">
+            <span class="lang-globe" aria-hidden="true">🌏</span>
+            <span class="lang-divider" aria-hidden="true">|</span>
+            <span class="lang-btn-text" data-lang-code>ZH</span>
+            <span class="lang-caret" aria-hidden="true"></span>
+        </button>
+
+        <div id="lang-menu" class="lang-menu" role="menu" hidden>
+            <button type="button" class="lang-menu-item" role="menuitem" data-lang="zh-CN">中文(中国)</button>
+            <button type="button" class="lang-menu-item" role="menuitem" data-lang="en">English</button>
+            <button type="button" class="lang-menu-item" role="menuitem" data-lang="de">Deutsch</button>
+            <button type="button" class="lang-menu-item" role="menuitem" data-lang="fr">Français</button>
         </div>
     </div>
 
@@ -895,7 +916,162 @@ document.addEventListener('pjax:complete', function() {
 })();
 </script>
 
+<!-- <script>  // 语言菜单脚本
+(function() {
+    const switcher = document.getElementById('lang-switcher');
+    const toggle = document.querySelector('.lang-toggle');
+    const menu = document.getElementById('lang-menu');
 
+    if (!switcher || !toggle || !menu) return;
+
+    function closeMenu() {
+        switcher.classList.remove('is-open');
+        menu.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function openMenu() {
+        switcher.classList.add('is-open');
+        menu.hidden = false;
+        toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function toggleMenu() {
+        if (menu.hidden) {
+            openMenu();
+        } else {
+            closeMenu();
+        }
+    }
+
+    toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMenu();
+    });
+
+    menu.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+    document.addEventListener('click', function() {
+        closeMenu();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeMenu();
+    });
+})();
+</script> -->
+
+<script>  // 语言菜单脚本
+(function () {
+  const I18N = {
+        'zh-CN': {
+            'sidebar.categories': '分类',
+            'sidebar.all-posts': '全部文章',
+            'lang.code': 'ZH'
+        },
+        en: {
+            'sidebar.categories': 'Categories',
+            'sidebar.all-posts': 'All Posts',
+            'lang.code': 'EN'
+        },
+        de: {
+            'sidebar.categories': 'Kategorien',
+            'sidebar.all-posts': 'Alle Beiträge',
+            'lang.code': 'DE'
+        },
+        fr: {
+            'sidebar.categories': 'Catégories',
+            'sidebar.all-posts': 'Tous les articles',
+            'lang.code': 'FR'
+        }
+  };
+
+  function getLang() {
+    return localStorage.getItem('blog-lang') || 'zh-CN';
+  }
+
+  function closeMenu(switcher, menu, toggle) {
+    if (!switcher || !menu || !toggle) return;
+    switcher.classList.remove('is-open');
+    menu.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  function openMenu(switcher, menu, toggle) {
+    if (!switcher || !menu || !toggle) return;
+    switcher.classList.add('is-open');
+    menu.hidden = false;
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+
+  function toggleMenu(switcher, menu, toggle) {
+    if (menu.hidden) {
+      openMenu(switcher, menu, toggle);
+    } else {
+      closeMenu(switcher, menu, toggle);
+    }
+  }
+
+  function applyLanguage(lang) {
+    const dict = I18N[lang] || I18N['zh-CN'];
+
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+
+    const currentText = document.querySelector('.lang-btn-text');
+    if (currentText && dict['lang.code']) {
+      currentText.textContent = dict['lang.code'];
+    }
+  }
+
+  function initLanguageSwitcher() {
+    const switcher = document.getElementById('lang-switcher');
+    const toggle = document.querySelector('.lang-toggle');
+    const menu = document.getElementById('lang-menu');
+
+    if (!switcher || !toggle || !menu) return;
+
+    applyLanguage(getLang());
+    closeMenu(switcher, menu, toggle);
+
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleMenu(switcher, menu, toggle);
+    });
+
+    menu.addEventListener('click', function (e) {
+      const item = e.target.closest('.lang-menu-item[data-lang]');
+      if (!item) return;
+
+      e.stopPropagation();
+
+      const nextLang = item.dataset.lang;
+      localStorage.setItem('blog-lang', nextLang);
+      window.location.reload();
+    });
+
+    document.addEventListener('click', function () {
+      closeMenu(switcher, menu, toggle);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu(switcher, menu, toggle);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initLanguageSwitcher);
+  document.addEventListener('pjax:complete', function () {
+    applyLanguage(getLang());
+    initLanguageSwitcher();
+  });
+})();
+</script>
 
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
@@ -913,16 +1089,6 @@ document.addEventListener('pjax:complete', function() {
 </script>
 <script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <!-- hexo injector body_end start -->
-<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  new Pjax({
-    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
-    selectors: ["title", ".container"]
-  });
-});
-</script>
-
 <script>
 window.addEventListener("DOMContentLoaded", function () {
   
@@ -1475,6 +1641,16 @@ audio.addEventListener("ended", () => {
         }, 10);
     });
 })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  new Pjax({
+    elements: "a:not([target='_blank']):not([href^='#']):not([href*='/tags/'])",
+    selectors: ["title", ".container"]
+  });
+});
 </script>
 <!-- hexo injector body_end end --></body>
 
